@@ -78,8 +78,8 @@ public class LevelEditor {
         TileSet bgTileSet2 = createTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 56, this.scaledTileWidth, this.scaledTileHeight, 0, 20 + 6 * 54 + 27);
         bgTileSetArr.add(bgTileSet2);
 
-        TileSet bgTileSet3 = createTileSet("Assets/tilesheets/black_tiles.png", 1, 1, 140, 120, scaledTileWidth, scaledTileHeight, 370, 10);
-        bgTileSetArr.add(bgTileSet3);
+        // TileSet bgTileSet3 = createTileSet("Assets/tilesheets/black_tiles.png", 1, 1, 140, 120, scaledTileWidth, scaledTileHeight, 370, 10);
+        // bgTileSetArr.add(bgTileSet3);
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
