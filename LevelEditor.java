@@ -55,6 +55,8 @@ public class LevelEditor {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         this.tileSetName = "Sewer";
+        //createTileSet(String filePath, int tileSetRows, int tileSetCols, int width, int height, int scaledWidth, 
+            //int scaledHeight, int offSetX, int offSetY)
 
         TileSet fgTileSet1 = createTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 54, this.scaledTileWidth, this.scaledTileHeight, 0, 20);
         fgTileSetArr.add(fgTileSet1);
@@ -71,6 +73,29 @@ public class LevelEditor {
         TileSet fgTileSet5 = createTileSet("Assets/tilesheets/light_wooden_beams_rotated.png", 5, 1, 81, 91, scaledTileWidth, scaledTileHeight, 6, 4);
         fgTileSetArr.add(fgTileSet5);
 
+        // sewer pipes
+        TileSet fgTileSet6 = createTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 105, 120, scaledTileWidth, scaledTileHeight, 52, 870);
+        fgTileSetArr.add(fgTileSet6);
+
+        TileSet fgTileSet7 = createTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 364);
+        fgTileSetArr.add(fgTileSet7);
+
+        TileSet fgTileSet8 = createTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 438);
+        fgTileSetArr.add(fgTileSet8);
+
+        TileSet fgTileSet9 = createTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 490);
+        fgTileSetArr.add(fgTileSet9);
+
+        TileSet fgTileSet10 = createTileSet("Assets/tilesheets/sewer_pipes_sheet_horizontal_flip.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 756, 65);
+        fgTileSetArr.add(fgTileSet10);
+
+        TileSet fgTileSet11 = createTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 157, 65);
+        fgTileSetArr.add(fgTileSet11);
+
+        TileSet fgTileSet12 = createTileSet("Assets/tilesheets/sewer_pipes_sheet_horizontal_flip.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 586, 65);
+        fgTileSetArr.add(fgTileSet12);
+
+        // background tilesets
         TileSet bgTileSet1 = createTileSet("Assets/tilesheets/sewer_bricks.png", 3, 6, 52, 54, this.scaledTileWidth,
         this.scaledTileHeight, 11 * 52, 2 * 54);
         bgTileSetArr.add(bgTileSet1);
