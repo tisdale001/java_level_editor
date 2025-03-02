@@ -17,3 +17,7 @@
 /.cache/
 
 /*.tmp  # Ignore temporary files
+
+# Ignore IntelliJ/Android Studio-specific files
+.idea/
+*.iml
