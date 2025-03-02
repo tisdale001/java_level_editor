@@ -1,0 +1,19 @@
+# Ignore compiled Java class files
+*.class
+*.jar
+
+# Ignore Visual Studio Code workspace settings
+.vscode/
+*.code-workspace
+
+# Ignore build directories
+/bin/
+*/bin/
+*/obj/
+*/out/
+
+# Ignore logs and cache files
+*.log
+/.cache/
+
+/*.tmp  # Ignore temporary files
