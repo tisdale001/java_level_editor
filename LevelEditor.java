@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.text.AbstractDocument;
 
-// compile: javac LevelEditor.java LevelFileWriter.java
+// compile: javac *.java
+// OR
+// compile: javac LevelEditor.java LevelFileWriter.java TilemapOverview.java
 
 
 
@@ -30,6 +32,7 @@ public class LevelEditor {
     private LevelTileGridPanel levelTileGridPanel;
     private String tileSetName = "None";
     private JComboBox<String> levelSelector;
+    private TilemapOverview overview = TilemapOverview.getInstance();
 
     public LevelEditor() {
         createTileSetArrays();
@@ -245,7 +248,7 @@ public class LevelEditor {
             this.rowTextField.setText(Integer.toString(this.levelNumRows));
             this.colTextField.setText(Integer.toString(this.levelNumCols));
         }
-        
+        this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
     private void chooseHowToSaveContent() {
@@ -433,12 +436,11 @@ public class LevelEditor {
         gameLevelScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         gameLevelScrollPane.setBounds(100, 200, 1400, 500);
         canvasPanel.add(gameLevelScrollPane);
-
         
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);  // Padding around components
-        buttonPanel.setBounds(600, 650, 400, 200);
+        buttonPanel.setBounds(550, 650, 500, 200);
 
         // Add JLabel
         gbc.gridx = 0; // Column 0
@@ -485,6 +487,31 @@ public class LevelEditor {
                 chooseHowToRefresh();
             }
         });
+
+        JButton overviewButton = new JButton("Overview");
+        // GridBagConstraints for overviewButton (Larger, 2-row tall)
+        gbc.gridx = 5;  // Column position
+        gbc.gridy = 0;  // Start at row 0
+        gbc.gridheight = 2;  // Span 2 vertical grid positions
+        gbc.fill = GridBagConstraints.BOTH;  // Allow resizing in both directions
+        gbc.weighty = 0;  // Allow vertical expansion only for this button
+        gbc.weightx = 0;  // Do not affect horizontal distribution
+        gbc.ipady = 30;  // Increase internal padding for height
+        buttonPanel.add(overviewButton, gbc);
+        // Add an ActionListener to the button
+        overviewButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Call the method when the button is clicked
+                overview.openNewWindow();
+                overview.refresh();
+            }
+        });
+
+        // Reset constraints for other buttons
+        gbc.gridheight = 1;  // Ensure other buttons stay in 1 row
+        gbc.weighty = 0;  // Prevent affecting their height
+        gbc.ipady = 0;  // Remove extra padding
 
         // Row 1 - Add JComboBox (Dropdown Menu)
         gbc.gridx = 0; // Start from the first column

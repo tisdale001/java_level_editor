@@ -27,6 +27,7 @@ public class LevelTileGridPanel extends JPanel {
     private ArrayList<ArrayList<Integer>> levelArr = new ArrayList<>();
     private boolean fastEntryMode = false;
     private boolean fastEraseMode = false;
+    private TilemapOverview overview = TilemapOverview.getInstance();
     
 
     public LevelTileGridPanel(LevelEditor levelEditor, int numRows, int numCols, int tileWidth, int tileHeight) {
@@ -38,6 +39,7 @@ public class LevelTileGridPanel extends JPanel {
         createLevelArr();
 
         setPreferredSize(new Dimension(this.numCols * this.tileWidth, this.numRows * this.tileHeight));
+        overview.setPreferredSize();
 
         // Add a mouse listener to handle click events
         addMouseListener(new MouseAdapter() {
@@ -84,6 +86,7 @@ public class LevelTileGridPanel extends JPanel {
 
                 // Optionally, you can trigger a repaint or other actions based on the click
                 repaint();
+                overview.repaint();
             }
         });
 
@@ -98,9 +101,11 @@ public class LevelTileGridPanel extends JPanel {
                     int tileID = LevelTileGridPanel.this.levelEditor.getCurTile();
                     LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
                     repaint();
+                    overview.repaint();
                 } else if (fastEraseMode) {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
                     repaint();
+                    overview.repaint();
                 }
             }
         });
@@ -112,6 +117,7 @@ public class LevelTileGridPanel extends JPanel {
         if (row >= 0 && row < this.levelArr.size() && col >= 0 && col < this.levelArr.get(row).size()) {
             this.levelArr.get(row).set(col, tileID);
         }
+        overview.placeTileInLevel(x, y, tileID);
     }
 
     private void createLevelArr() {
@@ -122,6 +128,7 @@ public class LevelTileGridPanel extends JPanel {
             }
             this.levelArr.add(innerList);
         }
+        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
     }
 
     public void refreshRowsCols(String topBottomSelection, String leftRightSelection, int deltaRows, int deltaCols) {
@@ -213,6 +220,10 @@ public class LevelTileGridPanel extends JPanel {
         setPreferredSize(new Dimension(this.numCols * this.tileWidth, this.numRows * this.tileHeight));
         revalidate();
         repaint();
+        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
+        overview.setPreferredSize();
+        overview.revalidate();
+        overview.repaint();
     }
 
     public void saveGridAsLevel(String filePath, String fileName, String tileSetFolderName) {
@@ -269,6 +280,11 @@ public class LevelTileGridPanel extends JPanel {
             this.numCols = numC;
             revalidate();
             repaint();
+            // set TilemapOverview
+            overview.initiateOverviewMap(this.levelEditor, levelArr, numRows, numCols, tileWidth, tileHeight);
+            overview.setPreferredSize();
+            overview.revalidate();
+            overview.repaint();
             // Return the loaded level data
             return new LevelData(numR, numC, tileSetFolderName);
 
