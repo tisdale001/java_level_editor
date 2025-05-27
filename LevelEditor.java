@@ -98,6 +98,9 @@ public class LevelEditor {
         TileSet fgTileSet12 = createTileSet("Assets/tilesheets/sewer_pipes_sheet_horizontal_flip.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 586, 65);
         fgTileSetArr.add(fgTileSet12);
 
+        TileSet fgTileSet13 = createTileSet("Assets/tilesheets/coral_ground_tiles.png", 1, 9, 48, 48, scaledTileWidth, scaledTileHeight, 0, 0);
+        fgTileSetArr.add(fgTileSet13);
+
         // background tilesets
         TileSet bgTileSet1 = createTileSet("Assets/tilesheets/sewer_bricks.png", 3, 6, 52, 54, this.scaledTileWidth,
         this.scaledTileHeight, 11 * 52, 2 * 54);
