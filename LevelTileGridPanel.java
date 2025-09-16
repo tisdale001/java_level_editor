@@ -28,6 +28,8 @@ public class LevelTileGridPanel extends JPanel {
     private boolean fastEntryMode = false;
     private boolean fastEraseMode = false;
     private TilemapOverview overview = TilemapOverview.getInstance();
+    private int curRow = 0;
+    private int curCol = 0;
     
 
     public LevelTileGridPanel(LevelEditor levelEditor, int numRows, int numCols, int tileWidth, int tileHeight) {
@@ -106,6 +108,15 @@ public class LevelTileGridPanel extends JPanel {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
                     repaint();
                     overview.repaint();
+                } else {
+                    // Show tile row, col if new
+                    int newRow = y / LevelTileGridPanel.this.tileHeight;
+                    int newCol = x / LevelTileGridPanel.this.tileWidth;
+                    if (newRow != LevelTileGridPanel.this.curRow || newCol != LevelTileGridPanel.this.curCol) {
+                        System.out.println("(Row, Column) = (" + newRow + ", " + newCol + ")");
+                        LevelTileGridPanel.this.curRow = newRow;
+                        LevelTileGridPanel.this.curCol = newCol;
+                    }
                 }
             }
         });
