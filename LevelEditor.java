@@ -73,13 +73,13 @@ public class LevelEditor {
         //     int scaledHeight, int offSetX, int offSetY)
 
         // Anemones
-        BeastieTileSet beastieTileSet1 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_floor.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 163);
+        BeastieTileSet beastieTileSet1 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_floor_labeled.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 163);
         beastieTileSetArr.add(beastieTileSet1);
-        BeastieTileSet beastieTileSet2 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_left_wall.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
+        BeastieTileSet beastieTileSet2 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_left_wall_labeled.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
         beastieTileSetArr.add(beastieTileSet2);
-        BeastieTileSet beastieTileSet3 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_ceiling.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 213);
+        BeastieTileSet beastieTileSet3 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_ceiling_labeled.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 213);
         beastieTileSetArr.add(beastieTileSet3);
-        BeastieTileSet beastieTileSet4 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_right_wall.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
+        BeastieTileSet beastieTileSet4 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_right_wall_labeled.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
         beastieTileSetArr.add(beastieTileSet4);
         // Piranha
         BeastieTileSet beastieTileSet5 = createBeastieTileSet("Assets/Beasties/SpriteSheets/piranha_left_snapshot.png", 1, 1, 130, 125, scaledTileWidth, scaledTileHeight, 3, 3);
