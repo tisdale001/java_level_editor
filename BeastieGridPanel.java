@@ -8,19 +8,23 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.event.MouseMotionAdapter;
 
 
 
-public class TileGridPanel extends JPanel {
+
+public class BeastieGridPanel extends JPanel {
     private int tileWidth;
     private int tileHeight;
     private int numRows;
     private int numCols;
-    private ArrayList<Tile> tileArr;
-    private LevelEditor levelEditor;
+    public ArrayList<BeastieTile> tileArr;
+    private final LevelEditor levelEditor;
+    private final LevelTileGridPanel levelTileGridPanel;
 
-    public TileGridPanel(LevelEditor levelEditor, ArrayList<Tile> tileArr, int numCols, int tileWidth, int tileHeight) {
+    public BeastieGridPanel(LevelEditor levelEditor, LevelTileGridPanel levelTileGridPanel, ArrayList<BeastieTile> tileArr, int numCols, int tileWidth, int tileHeight) {
         this.levelEditor = levelEditor;
+        this.levelTileGridPanel = levelTileGridPanel;
         this.tileArr = tileArr;
         this.numCols = numCols;
         this.numRows = calculateNumRows();
@@ -40,16 +44,37 @@ public class TileGridPanel extends JPanel {
                 // Display the coordinates
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     System.out.println("Left clicked at: (" + x + ", " + y + ")");
-                    int tileID = getTileID(x, y);
-                    TileGridPanel.this.levelEditor.setCurTile(tileID);
-                    System.out.println(String.format("current tile = %d", tileID));
+                    int tileId = getTileID(x, y);
+                    Image tileImage = BeastieGridPanel.this.levelEditor.getImageFromTileID(tileId);
+                    // TODO: HERE, tell the levelEditor to "startDragging"
+                    if (tileImage != null) {
+                        BeastieGridPanel.this.levelEditor.startDragging(tileImage, e.getPoint(), tileId);
+                    }
+                    // TileGridPanel.this.levelEditor.setCurTile(tileID);
+                    System.out.println(String.format("current tile = %d", tileId));
                 }
 
                 // Optionally, you can trigger a repaint or other actions based on the click
                 // repaint();
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    Point p = SwingUtilities.convertPoint(
+                        e.getComponent(), e.getPoint(), BeastieGridPanel.this.levelTileGridPanel
+                    );
+                    BeastieGridPanel.this.levelEditor.stopDragging(p);
+                }
+            }
         });
 
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                BeastieGridPanel.this.levelEditor.updateDragLocation(e.getComponent(), e.getPoint());
+            }
+        });
     }
 
     private int getTileID(int x, int y) {

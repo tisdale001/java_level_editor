@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.text.AbstractDocument;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.SwingUtilities;
 
 // compile: javac *.java
 // OR
 // compile: javac LevelEditor.java LevelFileWriter.java TilemapOverview.java
-
 
 
 public class LevelEditor {
@@ -20,24 +23,82 @@ public class LevelEditor {
     private final int scaledTileHeight = 32;
     private ArrayList<TileSet> fgTileSetArr = new ArrayList<>();
     private ArrayList<TileSet> bgTileSetArr = new ArrayList<>();
+    private ArrayList<BeastieTileSet> beastieTileSetArr = new ArrayList<>();
     private ArrayList<Tile> fgTileArr = new ArrayList<>();
     private ArrayList<Tile> bgTileArr = new ArrayList<>();
+    private ArrayList<BeastieTile> beastieTileArr = new ArrayList<>();
     private int fgNumCols = 21;
-    private int bgNumCols = 21;
+    private int bgNumCols = 10;
+    private int beastieNumCols = 10;
     private int levelNumRows = 20;
     private int levelNumCols = 50;
     private int curTileID = -1;
     private JTextField rowTextField;
     private JTextField colTextField;
     private LevelTileGridPanel levelTileGridPanel;
+    public BeastieGridPanel beastieGridPanel;
     private String tileSetName = "None";
     private JComboBox<String> levelSelector;
+    // Beastie variables
     private TilemapOverview overview = TilemapOverview.getInstance();
+    public static final int BEASTIE_PREFIX = 10000; // access tish LevelEditor.BEASTIE_PREFIX
+    private DragOverlayPane dragOverlay;
+    private Image curBeastieImage = null;
+    private int curBeastieTileId = -1;
+    // Beastie constants
+    public static final int ANEMONE_FLOOR = 0;
+    public static final int ANEMONE_LEFT_WALL = 1;
+    public static final int ANEMONE_CEILING = 2;
+    public static final int ANEMONE_RIGHT_WALL = 3;
+    public static final int PIRANHA_RIGHT = 4;
+    public static final int PIRANHA_LEFT = 5;
+    public static final int ALLIGATOR_RIGHT = 6;
+    public static final int ALLIGATOR_LEFT = 7;
+    public static final int MAGIC_FISH_RIGHT = 8;
+    public static final int MAGIC_FISH_LEFT = 9;
+    public static final int PUFFERFISH = 10;
+    private ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL));
+    private ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
 
     public LevelEditor() {
         createTileSetArrays();
+        createBeastieTileSetArrays();
         createForeGroundSet();
         createBackGroundSet();
+        createBeastieSet();
+    }
+
+    private void createBeastieTileSetArrays() {
+        // private BeastieTileSet createBeastieTileSet(String filePath, int tileSetRows, int tileSetCols, int width, int height, int scaledWidth, 
+        //     int scaledHeight, int offSetX, int offSetY)
+
+        // Anemones
+        BeastieTileSet beastieTileSet1 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_floor.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 163);
+        beastieTileSetArr.add(beastieTileSet1);
+        BeastieTileSet beastieTileSet2 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_left_wall.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
+        beastieTileSetArr.add(beastieTileSet2);
+        BeastieTileSet beastieTileSet3 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_ceiling.png", 1, 1, 850, 625, scaledTileWidth, scaledTileHeight, 70, 213);
+        beastieTileSetArr.add(beastieTileSet3);
+        BeastieTileSet beastieTileSet4 = createBeastieTileSet("Assets/Beasties/SpriteSheets/anemone_right_wall.png", 1, 1, 625, 850, scaledTileWidth, scaledTileHeight, 163, 70);
+        beastieTileSetArr.add(beastieTileSet4);
+        // Piranha
+        BeastieTileSet beastieTileSet5 = createBeastieTileSet("Assets/Beasties/SpriteSheets/piranha_left_snapshot.png", 1, 1, 130, 125, scaledTileWidth, scaledTileHeight, 3, 3);
+        beastieTileSetArr.add(beastieTileSet5);
+        BeastieTileSet beastieTileSet6 = createBeastieTileSet("Assets/Beasties/SpriteSheets/piranha_right_snapshot.png", 1, 1, 130, 125, scaledTileWidth, scaledTileHeight, 3, 3);
+        beastieTileSetArr.add(beastieTileSet6);
+        // Alligators
+        BeastieTileSet beastieTileSet7 = createBeastieTileSet("Assets/Beasties/SpriteSheets/alligator_left_tile.png", 1, 1, 59, 59, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet7);
+        BeastieTileSet beastieTileSet8 = createBeastieTileSet("Assets/Beasties/SpriteSheets/alligator_right_tile.png", 1, 1, 59, 59, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet8);
+        // Magic Fish
+        BeastieTileSet beastieTileSet9 = createBeastieTileSet("Assets/Beasties/SpriteSheets/magic_fish_left_tile.png", 1, 1, 110, 78, scaledTileWidth, scaledTileHeight, 4, 0);
+        beastieTileSetArr.add(beastieTileSet9);
+        BeastieTileSet beastieTileSet10 = createBeastieTileSet("Assets/Beasties/SpriteSheets/magic_fish_right_tile.png", 1, 1, 113, 84, scaledTileWidth, scaledTileHeight, 0, 2);
+        beastieTileSetArr.add(beastieTileSet10);
+        // Pufferfish
+        BeastieTileSet beastieTileSet11 = createBeastieTileSet("Assets/Beasties/SpriteSheets/pufferfish_tile.png", 1, 1, 194, 180, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet11);
     }
 
     private void createTileSetArrays() {
@@ -112,6 +173,7 @@ public class LevelEditor {
         TileSet bgTileSet2 = createTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 56, this.scaledTileWidth, this.scaledTileHeight, 0, 20 + 6 * 54 + 27);
         bgTileSetArr.add(bgTileSet2);
 
+
         // TileSet bgTileSet3 = createTileSet("Assets/tilesheets/black_tiles.png", 1, 1, 140, 120, scaledTileWidth, scaledTileHeight, 370, 10);
         // bgTileSetArr.add(bgTileSet3);
 
@@ -144,6 +206,17 @@ public class LevelEditor {
                 tile.setID(counter);
                 bgTileArr.add(tile);
                 counter--;
+            }
+        }
+    }
+
+    private void createBeastieSet() {
+        int counter = 100;
+        for (BeastieTileSet tileSet : beastieTileSetArr) {
+            for (BeastieTile tile : tileSet.getBeastieTileArr()) {
+                tile.setID(BEASTIE_PREFIX + counter);
+                beastieTileArr.add(tile);
+                counter++;
             }
         }
     }
@@ -254,6 +327,8 @@ public class LevelEditor {
             this.rowTextField.setText(Integer.toString(this.levelNumRows));
             this.colTextField.setText(Integer.toString(this.levelNumCols));
         }
+        String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
+        this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -387,6 +462,7 @@ public class LevelEditor {
     private void saveContent(String filePath, String fileName, String tileSetFolderName) {
         System.out.println("saveContent()");
         this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveBeastiesToLevel(fileName);
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -413,10 +489,13 @@ public class LevelEditor {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1600, 850);
 
+        dragOverlay = new DragOverlayPane();
+        frame.setGlassPane(dragOverlay);
+        dragOverlay.setVisible(true);
+
         // Create a JPanel to act as a canvas for drawing and adding buttons
         JPanel canvasPanel = new JPanel();
         canvasPanel.setLayout(null);  // Using null layout for absolute positioning
-
 
         // JPanel fgTilePanel = new JPanel();
         // fgTilePanel.setPreferredSize(new Dimension(800, 600));
@@ -433,7 +512,7 @@ public class LevelEditor {
         JScrollPane bgTileScrollPane = new JScrollPane(bgTilePanel);
         bgTileScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         bgTileScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        bgTileScrollPane.setBounds(800, 50, 700, 150);
+        bgTileScrollPane.setBounds(800, 50, 350, 150);
         canvasPanel.add(bgTileScrollPane);
 
         this.levelTileGridPanel = new LevelTileGridPanel(this, this.levelNumRows, this.levelNumCols, this.scaledTileWidth, this.scaledTileHeight);
@@ -441,7 +520,33 @@ public class LevelEditor {
         gameLevelScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         gameLevelScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         gameLevelScrollPane.setBounds(100, 200, 1400, 500);
+
+        this.beastieGridPanel = new BeastieGridPanel(this, this.levelTileGridPanel, this.beastieTileArr, this.beastieNumCols, this.scaledTileWidth, this.scaledTileHeight);
+        JScrollPane beastieScrollPane = new JScrollPane(beastieGridPanel);
+        beastieScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        beastieScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        beastieScrollPane.setBounds(1150, 50, 350, 150);
+
+        canvasPanel.add(beastieScrollPane);
         canvasPanel.add(gameLevelScrollPane);
+
+        this.levelTileGridPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    int tileId = getCurBeastieTileId();
+                    Image tileImage = LevelEditor.this.getImageFromTileID(tileId);
+        
+                    if (tileImage != null) {
+                        int gridX = e.getX();
+                        int gridY = e.getY();
+        
+                        LevelEditor.this.levelTileGridPanel.placeBeastieTile(gridX, gridY, tileId, tileImage);
+                        System.out.printf("Placed BeastieTile at grid (%d, %d)%n", gridX / scaledTileWidth, gridY / scaledTileHeight);
+                    }
+                }
+            }
+        });
         
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -577,6 +682,34 @@ public class LevelEditor {
         frame.setVisible(true);
     }
 
+    private int getCurBeastieTileId() {
+        return this.curBeastieTileId;
+    }
+
+    private BeastieTileSet createBeastieTileSet(String filePath, int tileSetRows, int tileSetCols, int width, int height, int scaledWidth, 
+    int scaledHeight, int offSetX, int offSetY) {
+        BeastieTileSet tileSet = new BeastieTileSet();
+        try {
+            File imageFile = new File(filePath);
+            if (!imageFile.exists()) {
+                System.out.println("File does not exist!");
+                return tileSet;
+            }
+            BufferedImage tileSheet = ImageIO.read(imageFile);
+            for (int j = 0; j < tileSetRows; j++) {
+                for (int i = 0; i < tileSetCols; i++) {
+                    BufferedImage scaledImage = getScaledImage(tileSheet.getSubimage(offSetX + (i * width),
+                            offSetY + (j * height), width, height), scaledWidth, scaledHeight);
+                    BeastieTile tile = new BeastieTile(scaledImage);
+                    tileSet.addBeastieTile(tile);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tileSet;
+    }
+
     private TileSet createTileSet(String filePath, int tileSetRows, int tileSetCols, int width, int height, int scaledWidth, 
     int scaledHeight, int offSetX, int offSetY) {
         TileSet tileSet = new TileSet();
@@ -623,11 +756,70 @@ public class LevelEditor {
             // back ground tile
             int idx = (tileID + 100) * (-1);
             return this.bgTileArr.get(idx).getImage();
+        } else if (tileID >= BEASTIE_PREFIX) {
+            int idx = tileID - BEASTIE_PREFIX - 100;
+            return this.beastieTileArr.get(idx).getImage();
         } else if (tileID >= 0) {
             int idx = tileID - 100;
             return this.fgTileArr.get(idx).getImage();
         }
         return null;
+    }
+
+    public void startDragging(Image img, Point start, int tileId) {
+        curBeastieImage = img;
+        curBeastieTileId = tileId;
+        dragOverlay.setDraggedImage(img);
+        dragOverlay.setMousePoint(start);
+        dragOverlay.repaint();
+    }
+    
+    public void updateDragLocation(Component source, Point p) {
+        dragOverlay.setMousePoint(SwingUtilities.convertPoint(source, p, dragOverlay));
+        dragOverlay.repaint();
+    }
+    
+    public void stopDragging(Point releasePoint) {
+        // Only place if there’s a valid beastie image being dragged
+        if (curBeastieImage != null && curBeastieTileId != -1) {
+            int gridX = -1;
+            int gridY = -1;
+            if (snapIntoPlaceBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+                // Convert releasePoint to grid coordinates
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+            } else if (enlargeToFourByFourBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                // Compute scaled dimensions
+                int scaledWidth = this.scaledTileWidth * 4;
+                int scaledHeight = this.scaledTileHeight * 4;
+
+                // Create a new BufferedImage to hold the scaled image
+                BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
+
+                // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
+                g2.dispose();
+
+                // Replace the current image with the scaled one
+                curBeastieImage = scaledBuffered;
+            } else {
+                int imageWidth = curBeastieImage.getWidth(null);
+                int imageHeight = curBeastieImage.getHeight(null);
+                gridX = releasePoint.x - (imageWidth/2);
+                gridY = releasePoint.y - (imageHeight/2);
+            }
+
+            // Place the image on the levelTileGridPanel
+            levelTileGridPanel.placeBeastieTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+        }
+        curBeastieTileId = -1;
+        curBeastieImage = null;
+        dragOverlay.setDraggedImage(null);
+        dragOverlay.repaint();
     }
 
     public static void main(String[] args) {

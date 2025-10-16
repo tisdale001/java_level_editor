@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 
 
 
@@ -30,6 +32,9 @@ public class LevelTileGridPanel extends JPanel {
     private TilemapOverview overview = TilemapOverview.getInstance();
     private int curRow = 0;
     private int curCol = 0;
+    private ArrayList<PlacedBeastieTile> placedBeastieTileArr = new ArrayList<>();
+    private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
+
     
 
     public LevelTileGridPanel(LevelEditor levelEditor, int numRows, int numCols, int tileWidth, int tileHeight) {
@@ -39,6 +44,7 @@ public class LevelTileGridPanel extends JPanel {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         createLevelArr();
+        createBeastieNamesToConstantsMap();
 
         setPreferredSize(new Dimension(this.numCols * this.tileWidth, this.numRows * this.tileHeight));
         overview.setPreferredSize();
@@ -83,7 +89,9 @@ public class LevelTileGridPanel extends JPanel {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     System.out.println("Right clicked at: (" + x + ", " + y + ")");
-                    LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                    if (!LevelTileGridPanel.this.hasClickedOnBeastieTile(x, y)) {
+                        LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                    }
                 }
 
                 // Optionally, you can trigger a repaint or other actions based on the click
@@ -120,6 +128,36 @@ public class LevelTileGridPanel extends JPanel {
                 }
             }
         });
+    }
+
+    private void createBeastieNamesToConstantsMap() {
+        ArrayList<Integer> anemonesArr = new ArrayList<>(Arrays.asList(levelEditor.ANEMONE_FLOOR, levelEditor.ANEMONE_LEFT_WALL, levelEditor.ANEMONE_CEILING,
+            levelEditor.ANEMONE_RIGHT_WALL));
+        this.beastieNamesToConstantsMap.put("Anemones", anemonesArr);
+        ArrayList<Integer> piranhaArr = new ArrayList<>(Arrays.asList(levelEditor.PIRANHA_RIGHT, levelEditor.PIRANHA_LEFT));
+        this.beastieNamesToConstantsMap.put("Piranha", piranhaArr);
+        ArrayList<Integer> alligatorsArr = new ArrayList<>(Arrays.asList(levelEditor.ALLIGATOR_RIGHT, levelEditor.ALLIGATOR_LEFT));
+        this.beastieNamesToConstantsMap.put("Alligators", alligatorsArr);
+        ArrayList<Integer> magicFishArr = new ArrayList<>(Arrays.asList(levelEditor.MAGIC_FISH_RIGHT, levelEditor.MAGIC_FISH_LEFT));
+        this.beastieNamesToConstantsMap.put("MagicFish", magicFishArr);
+        ArrayList<Integer> pufferfishArr = new ArrayList<>(Arrays.asList(levelEditor.PUFFERFISH));
+        this.beastieNamesToConstantsMap.put("Pufferfish", pufferfishArr);
+    }
+
+    private boolean hasClickedOnBeastieTile(int x, int y) {
+        for (int i = 0; i < placedBeastieTileArr.size(); ++i) {
+            PlacedBeastieTile tile = placedBeastieTileArr.get(i);
+            if (tile.isClicked(x, y)) {
+                placedBeastieTileArr.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void placeBeastieTile(int x, int y, int id, Image tileImage) {
+        placedBeastieTileArr.add(new PlacedBeastieTile(x, y, id, tileImage));
+        repaint();
     }
 
     private void placeTileInLevel(int x, int y, int tileID) {
@@ -242,6 +280,67 @@ public class LevelTileGridPanel extends JPanel {
         lfw.saveLevelToFile(filePath, fileName, tileSetFolderName);
     }
 
+    public void saveBeastiesToLevel(String fileName) {
+        // public void saveBeastiesToFile(ArrayList<PlacedBeastieTile> placedBeastieTileArr, String fileName, String beastieName, ArrayList<Integer> beastieConstantArr) {
+        BeastieFileWriter bfw = new BeastieFileWriter();
+        for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
+            String key = entry.getKey();
+            ArrayList<Integer> value = entry.getValue();
+        
+            bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
+        }
+    }
+
+    public void loadBeastiesFromFiles(String filePath, String fileName) {
+        System.out.println("loadBeastiesFromFile");
+        this.placedBeastieTileArr.clear();
+        for (String key : this.beastieNamesToConstantsMap.keySet()) {
+            this.loadBeastiesFromFile(filePath, fileName, key);
+        }
+        repaint();
+    }
+
+    private void loadBeastiesFromFile(String filePath, String fileName, String beastieNamePlural) {
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            // Read the metadata (number of Anemones)
+            String metadataLine = reader.readLine();
+            if (metadataLine == null || metadataLine.isEmpty()) {
+                throw new IOException("Invalid level file: metadata missing");
+            }
+            String[] metadataParts = metadataLine.split(" ");
+            // if (metadataParts.length != 1) {
+            //     throw new IOException("Invalid level file: incorrect metadata format");
+            // }
+            int numBeasties = Integer.parseInt(metadataParts[0]);
+            // Read the beastie data
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue; // skip blank lines
+
+                String[] parts = line.split("\\s+"); // split by one or more spaces
+                if (parts.length != 3) {
+                    throw new IOException("Invalid beastie line format: " + line);
+                }
+
+                int xPos = Integer.parseInt(parts[0]);
+                int yPos = Integer.parseInt(parts[1]);
+                int beastieType = Integer.parseInt(parts[2]);
+                int tileId = beastieType + levelEditor.BEASTIE_PREFIX + 100;
+                Image image = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                // Place PlacedBeastieTile
+                this.placedBeastieTileArr.add(new PlacedBeastieTile(xPos, yPos, tileId, image));
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while loading the beasties from file: " + e.getMessage());
+            return;
+        }
+    }
+
     public LevelData loadLevelFromFile(String filePath, String fileName) {
         // Create the file object
         File file = new File(filePath + fileName);
@@ -338,6 +437,24 @@ public class LevelTileGridPanel extends JPanel {
                 }
                 
             }
-        } 
+        }
+
+        for (PlacedBeastieTile t : this.placedBeastieTileArr) {
+            int imgWidth = t.image.getWidth(this);
+            int imgHeight = t.image.getHeight(this);
+        
+            // Defensive check — sometimes width/height can return -1 if not yet loaded
+            if (imgWidth > 0 && imgHeight > 0) {
+                g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
+            }
+        }
+    }
+
+    public int getTileWidth() {
+        return this.tileWidth;
+    }
+
+    public int getTileHeight() {
+        return this.tileHeight;
     }
 }
