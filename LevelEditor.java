@@ -61,10 +61,20 @@ public class LevelEditor {
     public static final int SWITCH_OFF = 12;
     public static final int TOGGLE_DOOR_OPEN = 13;
     public static final int TOGGLE_DOOR_CLOSED = 14;
-    private ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL));
-    private ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
-    private ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
-    private ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
+    public static final int SPIDER_FLOOR_RIGHT = 15;
+    public static final int SPIDER_FLOOR_LEFT = 16;
+    public static final int SPIDER_CEILING_RIGHT = 17;
+    public static final int SPIDER_CEILING_LEFT = 18;
+    public static final int SPIDER_LEFT_WALL_UP = 19;
+    public static final int SPIDER_LEFT_WALL_DOWN = 20;
+    public static final int SPIDER_RIGHT_WALL_UP = 21;
+    public static final int SPIDER_RIGHT_WALL_DOWN = 22;
+    public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
+        SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
+        SPIDER_RIGHT_WALL_DOWN));
+    public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
+    public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
+    public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
 
     public LevelEditor() {
         createTileSetArrays();
@@ -115,6 +125,23 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet14);
         BeastieTileSet beastieTileSet15 = createBeastieTileSet("Assets/Beasties/SpriteSheets/vintage_door_closed_labeled_tile.png", 1, 1, 90, 149, scaledTileWidth, scaledTileHeight, 23, 0);
         beastieTileSetArr.add(beastieTileSet15);
+        // Spiders
+        BeastieTileSet beastieTileSet16 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_floor_right_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet16);
+        BeastieTileSet beastieTileSet17 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_floor_left_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet17);
+        BeastieTileSet beastieTileSet18 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_ceiling_right_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet18);
+        BeastieTileSet beastieTileSet19 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_ceiling_left_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet19);
+        BeastieTileSet beastieTileSet20 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_left_wall_up_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet20);
+        BeastieTileSet beastieTileSet21 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_left_wall_down_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet21);
+        BeastieTileSet beastieTileSet22 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_right_wall_up_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet22);
+        BeastieTileSet beastieTileSet23 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spider_right_wall_down_tile.png", 1, 1, 100, 100, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet23);
     }
 
     private void createTileSetArrays() {

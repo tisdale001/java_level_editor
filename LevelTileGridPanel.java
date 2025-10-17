@@ -146,6 +146,9 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("Switches", switchArr);
         ArrayList<Integer> toggleDoorsArr = new ArrayList<>(Arrays.asList(levelEditor.TOGGLE_DOOR_OPEN, levelEditor.TOGGLE_DOOR_CLOSED));
         this.beastieNamesToConstantsMap.put("ToggleDoors", toggleDoorsArr);
+        ArrayList<Integer> spidersArr = new ArrayList<>(Arrays.asList(levelEditor.SPIDER_FLOOR_RIGHT, levelEditor.SPIDER_FLOOR_LEFT, levelEditor.SPIDER_CEILING_RIGHT,
+            levelEditor.SPIDER_CEILING_LEFT, levelEditor.SPIDER_LEFT_WALL_UP, levelEditor.SPIDER_LEFT_WALL_DOWN, levelEditor.SPIDER_RIGHT_WALL_UP, levelEditor.SPIDER_RIGHT_WALL_DOWN));
+        this.beastieNamesToConstantsMap.put("Spiders", spidersArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -335,7 +338,56 @@ public class LevelTileGridPanel extends JPanel {
                 int yPos = Integer.parseInt(parts[1]);
                 int beastieType = Integer.parseInt(parts[2]);
                 int tileId = beastieType + levelEditor.BEASTIE_PREFIX + 100;
-                Image image = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                Image image;
+                if (levelEditor.enlargeToFourByFourBeasties.contains(beastieType)) {
+                    int scaledWidth = this.tileWidth * 4;
+                    int scaledHeight = this.tileHeight * 4;
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    // Create a new BufferedImage to hold the scaled image
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    // Replace the current image with the scaled one
+                    image = scaledBuffered;
+                } else if (levelEditor.enlargeByOnePointTwentyFiveBeasties.contains(beastieType)) {
+                    // Compute scaled dimensions
+                    int scaledWidth = (int)(this.tileWidth * 1.25);
+                    int scaledHeight = (int)(this.tileHeight * 1.25);
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    // Create a new BufferedImage to hold the scaled image
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    // Replace the current image with the scaled one
+                    image = scaledBuffered;
+                } else if (levelEditor.enlargeToOneByFourVerticallyBeasties.contains(beastieType)) {
+                    int scaledWidth = this.tileWidth;
+                    int scaledHeight = this.tileHeight * 4;
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    // Create a new BufferedImage to hold the scaled image
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    // Replace the current image with the scaled one
+                    image = scaledBuffered;
+                } else {
+                    image = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                }
                 // Place PlacedBeastieTile
                 this.placedBeastieTileArr.add(new PlacedBeastieTile(xPos, yPos, tileId, image));
             }
