@@ -142,6 +142,10 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("MagicFish", magicFishArr);
         ArrayList<Integer> pufferfishArr = new ArrayList<>(Arrays.asList(levelEditor.PUFFERFISH));
         this.beastieNamesToConstantsMap.put("Pufferfish", pufferfishArr);
+        ArrayList<Integer> switchArr = new ArrayList<>(Arrays.asList(levelEditor.SWITCH_ON, levelEditor.SWITCH_OFF));
+        this.beastieNamesToConstantsMap.put("Switches", switchArr);
+        ArrayList<Integer> toggleDoorsArr = new ArrayList<>(Arrays.asList(levelEditor.TOGGLE_DOOR_OPEN, levelEditor.TOGGLE_DOOR_CLOSED));
+        this.beastieNamesToConstantsMap.put("ToggleDoors", toggleDoorsArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {

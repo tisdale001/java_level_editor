@@ -57,8 +57,14 @@ public class LevelEditor {
     public static final int MAGIC_FISH_RIGHT = 8;
     public static final int MAGIC_FISH_LEFT = 9;
     public static final int PUFFERFISH = 10;
+    public static final int SWITCH_ON = 11;
+    public static final int SWITCH_OFF = 12;
+    public static final int TOGGLE_DOOR_OPEN = 13;
+    public static final int TOGGLE_DOOR_CLOSED = 14;
     private ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL));
     private ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
+    private ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
+    private ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
 
     public LevelEditor() {
         createTileSetArrays();
@@ -99,6 +105,16 @@ public class LevelEditor {
         // Pufferfish
         BeastieTileSet beastieTileSet11 = createBeastieTileSet("Assets/Beasties/SpriteSheets/pufferfish_tile.png", 1, 1, 194, 180, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet11);
+        // Switches
+        BeastieTileSet beastieTileSet12 = createBeastieTileSet("Assets/Beasties/SpriteSheets/switch_on_labeled.png", 1, 1, 36, 36, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet12);
+        BeastieTileSet beastieTileSet13 = createBeastieTileSet("Assets/Beasties/SpriteSheets/switch_off_labeled.png", 1, 1, 36, 36, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet13);
+        // Toggle Doors
+        BeastieTileSet beastieTileSet14 = createBeastieTileSet("Assets/Beasties/SpriteSheets/vintage_door_open_labeled_tile.png", 1, 1, 90, 149, scaledTileWidth, scaledTileHeight, 23, 0);
+        beastieTileSetArr.add(beastieTileSet14);
+        BeastieTileSet beastieTileSet15 = createBeastieTileSet("Assets/Beasties/SpriteSheets/vintage_door_closed_labeled_tile.png", 1, 1, 90, 149, scaledTileWidth, scaledTileHeight, 23, 0);
+        beastieTileSetArr.add(beastieTileSet15);
     }
 
     private void createTileSetArrays() {
@@ -793,6 +809,43 @@ public class LevelEditor {
                 gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
                 // Compute scaled dimensions
                 int scaledWidth = this.scaledTileWidth * 4;
+                int scaledHeight = this.scaledTileHeight * 4;
+
+                // Create a new BufferedImage to hold the scaled image
+                BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
+
+                // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
+                g2.dispose();
+
+                // Replace the current image with the scaled one
+                curBeastieImage = scaledBuffered;
+            } else if (enlargeByOnePointTwentyFiveBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+                int imageWidth = curBeastieImage.getWidth(null);
+                int imageHeight = curBeastieImage.getHeight(null);
+                gridX = releasePoint.x - (imageWidth/2);
+                gridY = releasePoint.y - (imageHeight/2);
+                // Compute scaled dimensions
+                int scaledWidth = (int)(this.scaledTileWidth * 1.25);
+                int scaledHeight = (int)(this.scaledTileHeight * 1.25);
+                // Create a new BufferedImage to hold the scaled image
+                BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
+
+                // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
+                g2.dispose();
+
+                // Replace the current image with the scaled one
+                curBeastieImage = scaledBuffered;
+            } else if (enlargeToOneByFourVerticallyBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                // Compute scaled dimensions
+                int scaledWidth = this.scaledTileWidth;
                 int scaledHeight = this.scaledTileHeight * 4;
 
                 // Create a new BufferedImage to hold the scaled image
