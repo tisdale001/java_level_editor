@@ -33,6 +33,7 @@ public class LevelTileGridPanel extends JPanel {
     private int curRow = 0;
     private int curCol = 0;
     private ArrayList<PlacedBeastieTile> placedBeastieTileArr = new ArrayList<>();
+    public ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr = new ArrayList<>();
     private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
 
     
@@ -78,6 +79,7 @@ public class LevelTileGridPanel extends JPanel {
             }
             @Override
             public void mousePressed(MouseEvent e) {
+                if (e.getClickCount() > 1) return;
                 // Get the x and y coordinates of the click
                 int x = e.getX();
                 int y = e.getY();
@@ -89,8 +91,12 @@ public class LevelTileGridPanel extends JPanel {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     System.out.println("Right clicked at: (" + x + ", " + y + ")");
-                    if (!LevelTileGridPanel.this.hasClickedOnBeastieTile(x, y)) {
-                        LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y)) {
+                        if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y)) {
+                            if (!LevelTileGridPanel.this.hasClickedOnBeastieTile(x, y)) {
+                                LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                            }
+                        }
                     }
                 }
 
@@ -155,6 +161,12 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("Rats", ratsArr);
         ArrayList<Integer> ratBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.RAT_BORDER_BOX_RIGHT, levelEditor.RAT_BORDER_BOX_LEFT));
         this.beastieNamesToConstantsMap.put("RatBorderBoxes", ratBorderBoxArr);
+        ArrayList<Integer> waterSpoutArr = new ArrayList<>(Arrays.asList(levelEditor.WATER_SPOUT_RIGHT, levelEditor.WATER_SPOUT_LEFT, levelEditor.WATER_SPOUT_UP,
+            levelEditor.WATER_SPOUT_DOWN));
+        this.beastieNamesToConstantsMap.put("WaterSpouts", waterSpoutArr);
+        ArrayList<Integer> waterCurrentArr = new ArrayList<>(Arrays.asList(levelEditor.WATER_CURRENT_RIGHT, levelEditor.WATER_CURRENT_LEFT, levelEditor.WATER_CURRENT_UP,
+            levelEditor.WATER_CURRENT_DOWN));
+        this.beastieNamesToConstantsMap.put("WaterCurrents", waterCurrentArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -168,8 +180,21 @@ public class LevelTileGridPanel extends JPanel {
         return false;
     }
 
+    private boolean hasEndedWaterSpoutSetup(int x, int y) {
+        return levelEditor.hasEndedWaterSpoutSetup(x, y);
+    }
+
+    private boolean hasClickedOnAWaterSpoutElement(int x, int y) {
+        return levelEditor.hasClickedOnAWaterSpoutElement(x, y);
+    }
+
     public void placeBeastieTile(int x, int y, int id, Image tileImage) {
         placedBeastieTileArr.add(new PlacedBeastieTile(x, y, id, tileImage));
+        repaint();
+    }
+
+    public void placeWaterSpoutTile(PlacedWaterSpoutTile tile) {
+        placedWaterSpoutTileArr.add(tile);
         repaint();
     }
 
@@ -299,9 +324,18 @@ public class LevelTileGridPanel extends JPanel {
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
-        
-            bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
+            if ((key != "WaterSpouts") && (key != "WaterCurrents")) {
+                bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
+            }
         }
+    }
+
+    public void saveWaterSpoutsToLevel(String fileName) {
+        WaterSpoutFileWriter wsfw = new WaterSpoutFileWriter();
+        String key1 = "WaterSpouts";
+        ArrayList<Integer> waterSpoutConstantArr = beastieNamesToConstantsMap.get(key1);
+
+        wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key1, tileWidth, tileHeight, waterSpoutConstantArr);
     }
 
     public void loadBeastiesFromFiles(String filePath, String fileName) {
@@ -403,6 +437,66 @@ public class LevelTileGridPanel extends JPanel {
         }
     }
 
+    public void loadWaterSpoutsFromFile(String filePath, String fileName) {
+        this.placedWaterSpoutTileArr.clear();
+
+        String beastieNamePlural = "WaterSpouts";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            // Read the metadata (number of Anemones)
+            String metadataLine = reader.readLine();
+            if (metadataLine == null || metadataLine.isEmpty()) {
+                throw new IOException("Invalid level file: metadata missing");
+            }
+            String[] metadataParts = metadataLine.split(" ");
+            // if (metadataParts.length != 1) {
+            //     throw new IOException("Invalid level file: incorrect metadata format");
+            // }
+            int numWaterSpouts = Integer.parseInt(metadataParts[0]);
+            
+            // Read the beastie data
+            for (int i = 0; i < numWaterSpouts; i++) {
+                String metaLine = reader.readLine();
+                if (metaLine == null) throw new IOException("Unexpected end of file while reading water spout metadata");
+
+                String[] parts = metaLine.split("\\s+"); // split by one or more spaces
+                int wsX = Integer.parseInt(parts[0]);
+                int wsY = Integer.parseInt(parts[1]);
+                int wsId = Integer.parseInt(parts[2]);
+                Image wsImage = levelEditor.beastieGridPanel.tileArr.get(wsId).getImage();
+
+                PlacedWaterSpoutTile placedWaterSpoutTile = new PlacedWaterSpoutTile(wsX, wsY, wsId, wsImage);
+                String metaLineBoxes = reader.readLine();
+                int numBoxes = Integer.parseInt(metaLineBoxes.trim());
+                for (int b = 0; b < numBoxes; b++) {
+                    String metaLineBox = reader.readLine();
+                    if (metaLineBox == null) throw new IOException("Unexpected end of file while reading water spout box data");
+                
+                    String[] partsBoxes = metaLineBox.split("\\s+"); // ✅ use metaLineBox, not metaLine
+                    if (partsBoxes.length < 3)
+                        throw new IOException("Invalid box data line: " + metaLineBox);
+                
+                    int boxX = Integer.parseInt(partsBoxes[0]);
+                    int boxY = Integer.parseInt(partsBoxes[1]);
+                    int boxId = Integer.parseInt(partsBoxes[2]);
+                
+                    Image boxImage = levelEditor.beastieGridPanel.tileArr.get(boxId).getImage();
+                    PlacedWaterCurrentTile placedWaterCurrentTile =
+                            new PlacedWaterCurrentTile(boxX, boxY, boxId, boxImage);
+                
+                    placedWaterSpoutTile.addPlacedWaterCurrentTile(placedWaterCurrentTile);
+                }
+                this.placedWaterSpoutTileArr.add(placedWaterSpoutTile);
+            }
+        } catch (IOException e) {
+            System.err.println("An error occurred while loading the beasties from file: " + e.getMessage());
+            return;
+        }
+    }
+
     public LevelData loadLevelFromFile(String filePath, String fileName) {
         // Create the file object
         File file = new File(filePath + fileName);
@@ -470,6 +564,7 @@ public class LevelTileGridPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // System.out.println("In paintComponent panel: " + this);
 
         // Set the color for the grid lines
         g.setColor(Color.BLACK);
@@ -507,6 +602,24 @@ public class LevelTileGridPanel extends JPanel {
         
             // Defensive check — sometimes width/height can return -1 if not yet loaded
             if (imgWidth > 0 && imgHeight > 0) {
+                g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
+            }
+        }
+
+        for (PlacedWaterSpoutTile t : this.placedWaterSpoutTileArr) {
+            System.out.println("t.image width=" + t.image.getWidth(this) + " height=" + t.image.getHeight(this));
+            int imgWidth = t.image.getWidth(this);
+            int imgHeight = t.image.getHeight(this);
+            // Defensive check — sometimes width/height can return -1 if not yet loaded
+            if (imgWidth > 0 && imgHeight > 0) {
+                ArrayList<PlacedWaterCurrentTile> placedWaterCurrentTileArr = t.getPlacedWaterCurrentTileArr();
+                for (PlacedWaterCurrentTile wct : placedWaterCurrentTileArr) {
+                    int wctImgWidth = wct.image.getWidth(this);
+                    int wctImgHeight = wct.image.getHeight(this);
+                    if (wctImgWidth > 0 && wctImgHeight > 0) {
+                        g.drawImage(wct.image, wct.x, wct.y, wctImgWidth, wctImgHeight, this);
+                    }
+                }
                 g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
             }
         }

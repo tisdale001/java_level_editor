@@ -1,58 +1,65 @@
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
+import java.io.File;
 import java.util.ArrayList;
 
 public class BeastieFileWriter {
 
-    public void saveBeastiesToFile(ArrayList<PlacedBeastieTile> placedBeastieTileArr, String fileName, String beastieName, int tileWidth, int tileHeight, ArrayList<Integer> beastieConstantArr) {
-        // remove the ".lvl" from fileName
+    public void saveBeastiesToFile(
+            ArrayList<PlacedBeastieTile> placedBeastieTileArr,
+            String fileName,
+            String beastieName,
+            int tileWidth,
+            int tileHeight,
+            ArrayList<Integer> beastieConstantArr) {
+
+        // Ensure base file name ends properly
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieName + ".txt";
-        // Hard-coded filePath
-        String filePath = "Assets/Beasties/BeastieLevelData/" + beastieName + "/";
-        // Create the directory if it doesn't exist
-        File directory = new File(filePath);
-        if (!directory.exists()) {
-            if (directory.mkdirs()) {
-                System.out.println("Directories created: " + filePath);
-            } else {
-                System.err.println("Failed to create directories: " + filePath);
-                return;
-            }
-        }
-        // Create the file object
-        File file = new File(filePath + fileName);
 
-        // count the number of Anemonies
+        // Directory path
+        String filePath = "Assets/Beasties/BeastieLevelData/" + beastieName + "/";
+        File directory = new File(filePath);
+        if (!directory.exists() && !directory.mkdirs()) {
+            System.err.println("Failed to create directories: " + filePath);
+            return;
+        }
+
+        File file = new File(filePath, fileName);
+
+        // Count matching beasties
         int count = 0;
         for (PlacedBeastieTile tile : placedBeastieTileArr) {
-            Integer value = tile.id - LevelEditor.BEASTIE_PREFIX  - 100;
+            int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
             if (beastieConstantArr.contains(value)) {
                 count++;
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            // Write the metadata at the beginning of the file
+        // Write data safely using UTF-8
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
+
+            // Metadata line
             writer.write(count + " " + tileWidth + " " + tileHeight);
             writer.newLine();
 
-            // Write the data for each anemone
+            // Write beastie entries
             for (PlacedBeastieTile tile : placedBeastieTileArr) {
-                Integer value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+                int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
                 if (beastieConstantArr.contains(value)) {
                     writer.write(tile.x + " " + tile.y + " " + value);
                     writer.newLine();
                 }
             }
 
-            System.out.println("Beastie data saved successfully to " + filePath);
+            System.out.println("Beastie data saved successfully to: " + file.getAbsolutePath());
 
         } catch (IOException e) {
-            System.err.println("An error occurred while saving the data to file: " + e.getMessage());
+            System.err.println("Error saving Beastie data: " + e.getMessage());
         }
     }
-
 }

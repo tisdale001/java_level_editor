@@ -45,6 +45,10 @@ public class LevelEditor {
     private DragOverlayPane dragOverlay;
     private Image curBeastieImage = null;
     private int curBeastieTileId = -1;
+    // Water Spout variables and Water Current variables
+    private int curWaterSpout = -1;
+    private PlacedWaterSpoutTile curPlacedWaterSpoutTile = null;
+    // private ArrayList<PlacedWaterSpoutTile> curPlacedWaterSpoutArr = new ArrayList<>();
     // Beastie constants
     public static final int ANEMONE_FLOOR = 0;
     public static final int ANEMONE_LEFT_WALL = 1;
@@ -74,12 +78,22 @@ public class LevelEditor {
     public static final int RAT_LEFT = 25;
     public static final int RAT_BORDER_BOX_RIGHT = 26;
     public static final int RAT_BORDER_BOX_LEFT = 27;
+    public static final int WATER_SPOUT_RIGHT = 28;
+    public static final int WATER_SPOUT_LEFT = 29;
+    public static final int WATER_SPOUT_UP = 30;
+    public static final int WATER_SPOUT_DOWN = 31;
+    public static final int WATER_CURRENT_RIGHT = 32;
+    public static final int WATER_CURRENT_LEFT = 33;
+    public static final int WATER_CURRENT_UP = 34;
+    public static final int WATER_CURRENT_DOWN = 35;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
+    public static final ArrayList<Integer> waterSpoutBeasties = new ArrayList<>(Arrays.asList(WATER_SPOUT_RIGHT, WATER_SPOUT_LEFT, WATER_SPOUT_UP, WATER_SPOUT_DOWN));
+    public static final ArrayList<Integer> waterCurrentBeasties = new ArrayList<>(Arrays.asList(WATER_CURRENT_RIGHT, WATER_CURRENT_LEFT, WATER_CURRENT_UP, WATER_CURRENT_DOWN));
 
     public LevelEditor() {
         createTileSetArrays();
@@ -160,6 +174,25 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet27);
         BeastieTileSet beastieTileSet28 = createBeastieTileSet("Assets/Beasties/SpriteSheets/rat_border_box_left_tile.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet28);
+        // Water spouts
+        BeastieTileSet beastieTileSet29 = createBeastieTileSet("Assets/Beasties/SpriteSheets/water_spout_right_tile.png", 1, 1, 50, 50, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet29);
+        BeastieTileSet beastieTileSet30 = createBeastieTileSet("Assets/Beasties/SpriteSheets/water_spout_left_tile.png", 1, 1, 50, 50, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet30);
+        BeastieTileSet beastieTileSet31 = createBeastieTileSet("Assets/Beasties/SpriteSheets/water_spout_up_tile.png", 1, 1, 50, 50, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet31);
+        BeastieTileSet beastieTileSet32 = createBeastieTileSet("Assets/Beasties/SpriteSheets/water_spout_down_tile.png", 1, 1, 50, 50, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet32);
+        // Water Current arrows
+        BeastieTileSet beastieTileSet33 = createBeastieTileSet("Assets/Beasties/SpriteSheets/green_right_arrow_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet33);
+        BeastieTileSet beastieTileSet34 = createBeastieTileSet("Assets/Beasties/SpriteSheets/green_left_arrow_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet34);
+        BeastieTileSet beastieTileSet35 = createBeastieTileSet("Assets/Beasties/SpriteSheets/green_up_arrow_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet35);
+        BeastieTileSet beastieTileSet36 = createBeastieTileSet("Assets/Beasties/SpriteSheets/green_down_arrow_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet36);
+
     }
 
     private void createTileSetArrays() {
@@ -390,6 +423,9 @@ public class LevelEditor {
         }
         String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
+        levelTileGridPanel.placedWaterSpoutTileArr.clear();
+        this.curPlacedWaterSpoutTile = null;
+        this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -524,6 +560,7 @@ public class LevelEditor {
         System.out.println("saveContent()");
         this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
         this.levelTileGridPanel.saveBeastiesToLevel(fileName);
+        this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -830,6 +867,11 @@ public class LevelEditor {
     public void startDragging(Image img, Point start, int tileId) {
         curBeastieImage = img;
         curBeastieTileId = tileId;
+        int actualId = tileId - BEASTIE_PREFIX - 100;
+        if (actualId == WATER_SPOUT_RIGHT || actualId == WATER_SPOUT_LEFT || actualId == WATER_SPOUT_UP || actualId == WATER_SPOUT_DOWN) {
+            // set curPlacedWaterSpoutTile in stopDragging()
+            this.curWaterSpout = tileId; // is this right?
+        }
         dragOverlay.setDraggedImage(img);
         dragOverlay.setMousePoint(start);
         dragOverlay.repaint();
@@ -839,13 +881,22 @@ public class LevelEditor {
         dragOverlay.setMousePoint(SwingUtilities.convertPoint(source, p, dragOverlay));
         dragOverlay.repaint();
     }
+
+    public void cancelDragging() {
+        curBeastieTileId = -1;
+        curBeastieImage = null;
+        dragOverlay.setDraggedImage(null);
+        dragOverlay.repaint();
+    }
+    
     
     public void stopDragging(Point releasePoint) {
         // Only place if there’s a valid beastie image being dragged
         if (curBeastieImage != null && curBeastieTileId != -1) {
             int gridX = -1;
             int gridY = -1;
-            if (snapIntoPlaceBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+            int beastieConstantId = curBeastieTileId - BEASTIE_PREFIX - 100;
+            if (snapIntoPlaceBeasties.contains(beastieConstantId)) {
                 // Convert releasePoint to grid coordinates
                 gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
                 gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
@@ -867,7 +918,7 @@ public class LevelEditor {
 
                 // Replace the current image with the scaled one
                 curBeastieImage = scaledBuffered;
-            } else if (enlargeByOnePointTwentyFiveBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+            } else if (enlargeByOnePointTwentyFiveBeasties.contains(beastieConstantId)) {
                 int imageWidth = curBeastieImage.getWidth(null);
                 int imageHeight = curBeastieImage.getHeight(null);
                 gridX = releasePoint.x - (imageWidth/2);
@@ -886,7 +937,7 @@ public class LevelEditor {
 
                 // Replace the current image with the scaled one
                 curBeastieImage = scaledBuffered;
-            } else if (enlargeToOneByFourVerticallyBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+            } else if (enlargeToOneByFourVerticallyBeasties.contains(beastieConstantId)) {
                 gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
                 gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
                 // Compute scaled dimensions
@@ -904,6 +955,27 @@ public class LevelEditor {
 
                 // Replace the current image with the scaled one
                 curBeastieImage = scaledBuffered;
+            } else if (waterSpoutBeasties.contains(beastieConstantId)) {
+                if (this.curWaterSpout != -1) {
+                    // Convert releasePoint to grid coordinates
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    PlacedWaterSpoutTile pwsTile = new PlacedWaterSpoutTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                    this.curPlacedWaterSpoutTile = pwsTile;
+                    levelTileGridPanel.placeWaterSpoutTile(pwsTile);
+                }
+                cancelDragging();
+                return;
+            } else if (waterCurrentBeasties.contains(beastieConstantId)) {
+                if (this.curWaterSpout != -1) {
+                    // Convert releasePoint to grid coordinates
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    PlacedWaterCurrentTile pwcTile = new PlacedWaterCurrentTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                    this.curPlacedWaterSpoutTile.addPlacedWaterCurrentTile(pwcTile);
+                }
+                cancelDragging();
+                return;
             } else {
                 int imageWidth = curBeastieImage.getWidth(null);
                 int imageHeight = curBeastieImage.getHeight(null);
@@ -914,10 +986,45 @@ public class LevelEditor {
             // Place the image on the levelTileGridPanel
             levelTileGridPanel.placeBeastieTile(gridX, gridY, curBeastieTileId, curBeastieImage);
         }
-        curBeastieTileId = -1;
-        curBeastieImage = null;
-        dragOverlay.setDraggedImage(null);
-        dragOverlay.repaint();
+        cancelDragging();
+    }
+
+    public boolean hasClickedOnAWaterSpoutElement(int x, int y) {
+        // System.out.println("Panel identity: " + levelTileGridPanel);
+        for (int i = 0; i < levelTileGridPanel.placedWaterSpoutTileArr.size(); ++i) {
+            PlacedWaterSpoutTile pwsTile = levelTileGridPanel.placedWaterSpoutTileArr.get(i);
+            if (pwsTile.isClicked(x, y) || pwsTile.hasClickedPlacedWaterCurrentTile(x, y)) {
+                levelTileGridPanel.placedWaterSpoutTileArr.remove(i);
+                System.out.println("HERE-3");
+                return true;
+            }
+        }
+        // TODO: I don't think this code can ever be called!!!!!!!
+        // now check the current placedWaterSpout
+        if (this.curPlacedWaterSpoutTile != null) {
+            System.out.println("HERE-1");
+            if (this.curPlacedWaterSpoutTile.isClicked(x, y) || this.curPlacedWaterSpoutTile.hasClickedPlacedWaterCurrentTile(x, y)) {
+                System.out.println("HERE-2");
+                this.curWaterSpout = -1;
+                this.curPlacedWaterSpoutTile = null;
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    public boolean hasEndedWaterSpoutSetup(int x, int y) {
+        System.out.println("HERE-4");
+        if (this.curWaterSpout != -1) {
+            System.out.println("HERE-5");
+            this.curWaterSpout = -1;
+            // levelTileGridPanel.placedWaterSpoutTileArr.add(this.curPlacedWaterSpoutTile);
+            this.curPlacedWaterSpoutTile = null;
+
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {

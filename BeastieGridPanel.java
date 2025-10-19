@@ -60,11 +60,19 @@ public class BeastieGridPanel extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    Point p = SwingUtilities.convertPoint(
-                        e.getComponent(), e.getPoint(), BeastieGridPanel.this.levelTileGridPanel
-                    );
+                if (!SwingUtilities.isLeftMouseButton(e)) return;
+
+                Point p = SwingUtilities.convertPoint(
+                    e.getComponent(), e.getPoint(), BeastieGridPanel.this.levelTileGridPanel
+                );
+
+                // visible rectangle of the component (in the component's coords)
+                Rectangle visible = BeastieGridPanel.this.levelTileGridPanel.getVisibleRect();
+
+                if (visible.contains(p)) {
                     BeastieGridPanel.this.levelEditor.stopDragging(p);
+                } else {
+                    BeastieGridPanel.this.levelEditor.cancelDragging();
                 }
             }
         });
