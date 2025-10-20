@@ -86,6 +86,7 @@ public class LevelEditor {
     public static final int WATER_CURRENT_LEFT = 33;
     public static final int WATER_CURRENT_UP = 34;
     public static final int WATER_CURRENT_DOWN = 35;
+    public static final int BEE_POT = 36;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT));
@@ -94,7 +95,7 @@ public class LevelEditor {
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
     public static final ArrayList<Integer> waterSpoutBeasties = new ArrayList<>(Arrays.asList(WATER_SPOUT_RIGHT, WATER_SPOUT_LEFT, WATER_SPOUT_UP, WATER_SPOUT_DOWN));
     public static final ArrayList<Integer> waterCurrentBeasties = new ArrayList<>(Arrays.asList(WATER_CURRENT_RIGHT, WATER_CURRENT_LEFT, WATER_CURRENT_UP, WATER_CURRENT_DOWN));
-
+    public static final ArrayList<Integer> enlargeToFourByOneHorizontallyBeasties = new ArrayList<>(Arrays.asList(BEE_POT));
     public LevelEditor() {
         createTileSetArrays();
         createBeastieTileSetArrays();
@@ -192,7 +193,9 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet35);
         BeastieTileSet beastieTileSet36 = createBeastieTileSet("Assets/Beasties/SpriteSheets/green_down_arrow_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet36);
-
+        // Bee pots
+        BeastieTileSet beastieTileSet37 = createBeastieTileSet("Assets/Beasties/SpriteSheets/metroid_tiles_cropped.png", 1, 1, 32, 7, scaledTileWidth, scaledTileHeight, 83, 80);
+        beastieTileSetArr.add(beastieTileSet37);
     }
 
     private void createTileSetArrays() {
@@ -943,6 +946,24 @@ public class LevelEditor {
                 // Compute scaled dimensions
                 int scaledWidth = this.scaledTileWidth;
                 int scaledHeight = this.scaledTileHeight * 4;
+
+                // Create a new BufferedImage to hold the scaled image
+                BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
+
+                // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
+                g2.dispose();
+
+                // Replace the current image with the scaled one
+                curBeastieImage = scaledBuffered;
+            } else if (enlargeToFourByOneHorizontallyBeasties.contains(beastieConstantId)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                // Compute scaled dimensions
+                int scaledWidth = this.scaledTileWidth * 4;
+                int scaledHeight = this.scaledTileHeight;
 
                 // Create a new BufferedImage to hold the scaled image
                 BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);

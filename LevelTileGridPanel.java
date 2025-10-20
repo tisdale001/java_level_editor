@@ -167,6 +167,8 @@ public class LevelTileGridPanel extends JPanel {
         ArrayList<Integer> waterCurrentArr = new ArrayList<>(Arrays.asList(levelEditor.WATER_CURRENT_RIGHT, levelEditor.WATER_CURRENT_LEFT, levelEditor.WATER_CURRENT_UP,
             levelEditor.WATER_CURRENT_DOWN));
         this.beastieNamesToConstantsMap.put("WaterCurrents", waterCurrentArr);
+        ArrayList<Integer> beePotArr = new ArrayList<>(Arrays.asList(levelEditor.BEE_POT));
+        this.beastieNamesToConstantsMap.put("BeePots", beePotArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -413,6 +415,21 @@ public class LevelTileGridPanel extends JPanel {
                 } else if (levelEditor.enlargeToOneByFourVerticallyBeasties.contains(beastieType)) {
                     int scaledWidth = this.tileWidth;
                     int scaledHeight = this.tileHeight * 4;
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    // Create a new BufferedImage to hold the scaled image
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    // For pixel art, use NEAREST_NEIGHBOR; for smoother scaling, use BILINEAR
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    // Replace the current image with the scaled one
+                    image = scaledBuffered;
+                } else if (levelEditor.enlargeToFourByOneHorizontallyBeasties.contains(beastieType)) {
+                    int scaledWidth = this.tileWidth * 4;
+                    int scaledHeight = this.tileHeight;
                     Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
                     // Create a new BufferedImage to hold the scaled image
                     BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
