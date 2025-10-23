@@ -87,9 +87,11 @@ public class LevelEditor {
     public static final int WATER_CURRENT_UP = 34;
     public static final int WATER_CURRENT_DOWN = 35;
     public static final int BEE_POT = 36;
+    public static final int SPIKES_UP = 37;
+    public static final int SPIKES_DOWN = 38;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
-        SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT));
+        SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
@@ -196,6 +198,11 @@ public class LevelEditor {
         // Bee pots
         BeastieTileSet beastieTileSet37 = createBeastieTileSet("Assets/Beasties/SpriteSheets/metroid_tiles_cropped.png", 1, 1, 32, 7, scaledTileWidth, scaledTileHeight, 83, 80);
         beastieTileSetArr.add(beastieTileSet37);
+        // Spikes
+        BeastieTileSet beastieTileSet38 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spikes_upward_cropped_tile.png", 1, 1, 28, 19, scaledTileWidth, scaledTileHeight, 0, 2);
+        beastieTileSetArr.add(beastieTileSet38);
+        BeastieTileSet beastieTileSet39 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spikes_downward_cropped_tile.png", 1, 1, 28, 19, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet39);
     }
 
     private void createTileSetArrays() {
