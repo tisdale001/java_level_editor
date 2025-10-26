@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 
@@ -164,9 +165,6 @@ public class LevelTileGridPanel extends JPanel {
         ArrayList<Integer> waterSpoutArr = new ArrayList<>(Arrays.asList(levelEditor.WATER_SPOUT_RIGHT, levelEditor.WATER_SPOUT_LEFT, levelEditor.WATER_SPOUT_UP,
             levelEditor.WATER_SPOUT_DOWN));
         this.beastieNamesToConstantsMap.put("WaterSpouts", waterSpoutArr);
-        ArrayList<Integer> waterCurrentArr = new ArrayList<>(Arrays.asList(levelEditor.WATER_CURRENT_RIGHT, levelEditor.WATER_CURRENT_LEFT, levelEditor.WATER_CURRENT_UP,
-            levelEditor.WATER_CURRENT_DOWN));
-        this.beastieNamesToConstantsMap.put("WaterCurrents", waterCurrentArr);
         ArrayList<Integer> beePotArr = new ArrayList<>(Arrays.asList(levelEditor.BEE_POT));
         this.beastieNamesToConstantsMap.put("BeePots", beePotArr);
         ArrayList<Integer> spikesArr = new ArrayList<>(Arrays.asList(levelEditor.SPIKES_UP, levelEditor.SPIKES_DOWN));
@@ -336,22 +334,28 @@ public class LevelTileGridPanel extends JPanel {
 
     public void saveWaterSpoutsToLevel(String fileName) {
         WaterSpoutFileWriter wsfw = new WaterSpoutFileWriter();
-        String key1 = "WaterSpouts";
-        ArrayList<Integer> waterSpoutConstantArr = beastieNamesToConstantsMap.get(key1);
-
-        wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key1, tileWidth, tileHeight, waterSpoutConstantArr);
+        for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
+            String key = entry.getKey();
+            ArrayList<Integer> value = entry.getValue();
+            if (key == "WaterSpouts") {
+                wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value);
+            }
+        }
     }
 
     public void loadBeastiesFromFiles(String filePath, String fileName) {
         System.out.println("loadBeastiesFromFile");
         this.placedBeastieTileArr.clear();
         for (String key : this.beastieNamesToConstantsMap.keySet()) {
-            this.loadBeastiesFromFile(filePath, fileName, key);
+            if (key != "WaterSpouts" && key != "WaterCurrents") {
+                this.loadBeastiesFromFile(filePath, fileName, key);
+            }
         }
         repaint();
     }
 
     private void loadBeastiesFromFile(String filePath, String fileName, String beastieNamePlural) {
+        System.out.println("beastieNamePlural: " + beastieNamePlural);
         filePath += beastieNamePlural + "/";
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieNamePlural + ".txt";
@@ -458,63 +462,124 @@ public class LevelTileGridPanel extends JPanel {
 
     public void loadWaterSpoutsFromFile(String filePath, String fileName) {
         this.placedWaterSpoutTileArr.clear();
-
+    
         String beastieNamePlural = "WaterSpouts";
         filePath += beastieNamePlural + "/";
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieNamePlural + ".txt";
         File file = new File(filePath + fileName);
+        System.out.println("filePath + fileName: " + filePath + fileName);
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Read the metadata (number of Anemones)
-            String metadataLine = reader.readLine();
-            if (metadataLine == null || metadataLine.isEmpty()) {
-                throw new IOException("Invalid level file: metadata missing");
+            AtomicInteger lineNumber = new AtomicInteger(0);
+    
+            // Helper lambda to read the next non-empty line (or null if EOF)
+            java.util.function.Supplier<String> readNonEmptyLine = () -> {
+                try {
+                    String ln;
+                    while ((ln = reader.readLine()) != null) {
+                        lineNumber.incrementAndGet();
+                        if (!ln.trim().isEmpty()) return ln;
+                        // else skip blank line and continue
+                    }
+                    return null;
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe);
+                }
+            };
+    
+            // Read metadata (num water spouts)
+            String metadataLine = readNonEmptyLine.get();
+            if (metadataLine == null) {
+                throw new IOException("Invalid level file: metadata missing (line " + lineNumber + ")");
             }
-            String[] metadataParts = metadataLine.split(" ");
-            // if (metadataParts.length != 1) {
-            //     throw new IOException("Invalid level file: incorrect metadata format");
-            // }
-            int numWaterSpouts = Integer.parseInt(metadataParts[0]);
-            
-            // Read the beastie data
+            String[] metadataParts = metadataLine.trim().split("\\s+");
+            int numWaterSpouts;
+            try {
+                numWaterSpouts = Integer.parseInt(metadataParts[0]);
+            } catch (NumberFormatException nfe) {
+                throw new IOException("Invalid metadata number on line " + lineNumber + ": '" + metadataLine + "'", nfe);
+            }
+            System.out.println("numWaterSpouts: " + numWaterSpouts);
+    
             for (int i = 0; i < numWaterSpouts; i++) {
-                String metaLine = reader.readLine();
-                if (metaLine == null) throw new IOException("Unexpected end of file while reading water spout metadata");
-
-                String[] parts = metaLine.split("\\s+"); // split by one or more spaces
-                int wsX = Integer.parseInt(parts[0]);
-                int wsY = Integer.parseInt(parts[1]);
-                int wsId = Integer.parseInt(parts[2]);
+                // read the water spout line
+                String metaLine = readNonEmptyLine.get();
+                if (metaLine == null) {
+                    throw new IOException("Unexpected end of file while reading water spout metadata (expected " + numWaterSpouts + " entries, got " + i + ")");
+                }
+                System.out.println("metaLine (line " + lineNumber + "): " + metaLine);
+    
+                String[] parts = metaLine.trim().split("\\s+");
+                if (parts.length < 3) {
+                    throw new IOException("Invalid water spout metadata (line " + lineNumber + "): " + metaLine);
+                }
+    
+                int wsX, wsY, wsId, tileId;
+                try {
+                    wsX = Integer.parseInt(parts[0]);
+                    wsY = Integer.parseInt(parts[1]);
+                    wsId = Integer.parseInt(parts[2]);
+                    tileId = wsId + levelEditor.BEASTIE_PREFIX + 100;
+                } catch (NumberFormatException nfe) {
+                    throw new IOException("Invalid integer in water spout metadata (line " + lineNumber + "): " + metaLine, nfe);
+                }
+    
                 Image wsImage = levelEditor.beastieGridPanel.tileArr.get(wsId).getImage();
-
-                PlacedWaterSpoutTile placedWaterSpoutTile = new PlacedWaterSpoutTile(wsX, wsY, wsId, wsImage);
-                String metaLineBoxes = reader.readLine();
-                int numBoxes = Integer.parseInt(metaLineBoxes.trim());
+                PlacedWaterSpoutTile placedWaterSpoutTile = new PlacedWaterSpoutTile(wsX, wsY, tileId, wsImage);
+    
+                // Read number of boxes (skip blank lines)
+                String metaLineBoxes = readNonEmptyLine.get();
+                if (metaLineBoxes == null) {
+                    throw new IOException("Unexpected end of file while reading number of boxes for water spout at index " + i + " (line " + lineNumber + ")");
+                }
+                System.out.println("metaLineBoxes (line " + lineNumber + "): " + metaLineBoxes);
+                int numBoxes;
+                try {
+                    numBoxes = Integer.parseInt(metaLineBoxes.trim());
+                } catch (NumberFormatException nfe) {
+                    throw new IOException("Invalid number-of-boxes (line " + lineNumber + "): " + metaLineBoxes, nfe);
+                }
+    
                 for (int b = 0; b < numBoxes; b++) {
-                    String metaLineBox = reader.readLine();
-                    if (metaLineBox == null) throw new IOException("Unexpected end of file while reading water spout box data");
-                
-                    String[] partsBoxes = metaLineBox.split("\\s+"); // ✅ use metaLineBox, not metaLine
-                    if (partsBoxes.length < 3)
-                        throw new IOException("Invalid box data line: " + metaLineBox);
-                
-                    int boxX = Integer.parseInt(partsBoxes[0]);
-                    int boxY = Integer.parseInt(partsBoxes[1]);
-                    int boxId = Integer.parseInt(partsBoxes[2]);
-                
+                    String metaLineBox = readNonEmptyLine.get();
+                    if (metaLineBox == null) {
+                        throw new IOException("Unexpected end of file while reading water spout box data for water spout index " + i + ", box " + b + " (line " + lineNumber + ")");
+                    }
+                    System.out.println("metaLineBox (line " + lineNumber + "): " + metaLineBox);
+    
+                    String[] partsBoxes = metaLineBox.trim().split("\\s+");
+                    if (partsBoxes.length < 3) {
+                        throw new IOException("Invalid box data line (line " + lineNumber + "): " + metaLineBox);
+                    }
+    
+                    int boxX, boxY, boxId;
+                    try {
+                        boxX = Integer.parseInt(partsBoxes[0]);
+                        boxY = Integer.parseInt(partsBoxes[1]);
+                        boxId = Integer.parseInt(partsBoxes[2]);
+                    } catch (NumberFormatException nfe) {
+                        throw new IOException("Invalid integer in box data (line " + lineNumber + "): " + metaLineBox, nfe);
+                    }
+    
                     Image boxImage = levelEditor.beastieGridPanel.tileArr.get(boxId).getImage();
                     PlacedWaterCurrentTile placedWaterCurrentTile =
                             new PlacedWaterCurrentTile(boxX, boxY, boxId, boxImage);
-                
+    
                     placedWaterSpoutTile.addPlacedWaterCurrentTile(placedWaterCurrentTile);
                 }
+    
+                System.out.println("HERE-10 (added water spout index " + i + ")");
                 this.placedWaterSpoutTileArr.add(placedWaterSpoutTile);
             }
-        } catch (IOException e) {
-            System.err.println("An error occurred while loading the beasties from file: " + e.getMessage());
+        } catch (Exception e) {
+            // Catch Exception so both IO and format problems are visible and you get a stack trace.
+            System.err.println("An error occurred while loading the water spouts from file: " + e.getMessage());
+            e.printStackTrace();
             return;
         }
     }
+    
 
     public LevelData loadLevelFromFile(String filePath, String fileName) {
         // Create the file object

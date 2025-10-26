@@ -38,7 +38,8 @@ public class LevelEditor {
     private LevelTileGridPanel levelTileGridPanel;
     public BeastieGridPanel beastieGridPanel;
     private String tileSetName = "None";
-    private JComboBox<String> levelSelector;
+    public JComboBox<String> levelSelector;
+    private String curSelectedLevel;
     // Beastie variables
     private TilemapOverview overview = TilemapOverview.getInstance();
     public static final int BEASTIE_PREFIX = 10000; // access tish LevelEditor.BEASTIE_PREFIX
@@ -417,7 +418,7 @@ public class LevelEditor {
     private void loadContent() {
         System.out.println("Content loaded!");
         String filePath = "Assets/Levels/" + this.tileSetName + "/";
-        String fileName = (String) this.levelSelector.getSelectedItem();
+        String fileName = this.curSelectedLevel;
         if (fileName == null || fileName == "") {
             return;
         }
@@ -433,7 +434,6 @@ public class LevelEditor {
         }
         String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
-        levelTileGridPanel.placedWaterSpoutTileArr.clear();
         this.curPlacedWaterSpoutTile = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
@@ -567,7 +567,11 @@ public class LevelEditor {
     }
 
     private void saveContent(String filePath, String fileName, String tileSetFolderName) {
-        System.out.println("saveContent()");
+        System.out.println("=== saveContent() called ===");
+        System.out.println("filePath: " + filePath);
+        System.out.println("fileName: " + fileName);
+        System.out.println("tileSetFolderName: " + tileSetFolderName);
+        System.out.println("============================");
         this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
         this.levelTileGridPanel.saveBeastiesToLevel(fileName);
         this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
@@ -751,6 +755,17 @@ public class LevelEditor {
         // Set the initial prompt
         levelSelector.insertItemAt("Select Level to Load", 0);
         levelSelector.setSelectedIndex(0);
+        // Add listener for when a user selects something
+        levelSelector.addActionListener(e -> {
+            String selectedLevel = (String) levelSelector.getSelectedItem();
+            if (selectedLevel == null || selectedLevel.equals("Select Level to Load")) {
+                System.out.println("No level selected yet.");
+                return;
+            }
+
+            System.out.println("Loading level: " + selectedLevel);
+            curSelectedLevel = selectedLevel;  // ← Call your level-loading function here
+        });
         buttonPanel.add(levelSelector, gbc);
 
         JButton loadButton = new JButton("Load");

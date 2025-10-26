@@ -11,12 +11,12 @@ import java.util.ArrayList;
 public class WaterSpoutFileWriter {
 
     public void saveWaterSpoutsToFile(
-            ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr,
-            String fileName,
-            String beastieName,
-            int tileWidth,
-            int tileHeight,
-            ArrayList<Integer> waterSpoutConstantArr) {
+        ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr,
+        String fileName,
+        String beastieName,
+        int tileWidth,
+        int tileHeight,
+        ArrayList<Integer> waterSpoutConstantArr) {
 
         // Remove the ".lvl" extension if present
         fileName = fileName.replaceFirst("\\.lvl$", "");
@@ -36,10 +36,12 @@ public class WaterSpoutFileWriter {
         int count = 0;
         for (PlacedWaterSpoutTile tile : placedWaterSpoutTileArr) {
             int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+            System.out.println("value: " + value);
             if (waterSpoutConstantArr.contains(value)) {
                 count++;
             }
         }
+        System.out.println("count of WaterSpouts: " + count);
 
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
@@ -49,9 +51,11 @@ public class WaterSpoutFileWriter {
             writer.newLine();
 
             // Write each WaterSpout
+            System.out.println("placedWaterSpoutTileArr.size() = " + placedWaterSpoutTileArr.size());
             for (PlacedWaterSpoutTile tile : placedWaterSpoutTileArr) {
                 int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
                 if (waterSpoutConstantArr.contains(value)) {
+                    System.out.println("value: " + value);
                     ArrayList<PlacedWaterCurrentTile> currents = tile.getPlacedWaterCurrentTileArr();
                     int numBoxes = (currents != null) ? currents.size() : 0;
 
