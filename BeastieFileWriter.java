@@ -33,7 +33,7 @@ public class BeastieFileWriter {
         // Count matching beasties
         int count = 0;
         for (PlacedBeastieTile tile : placedBeastieTileArr) {
-            int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+            int value = tile.id;
             if (beastieConstantArr.contains(value)) {
                 count++;
             }
@@ -49,7 +49,7 @@ public class BeastieFileWriter {
 
             // Write beastie entries
             for (PlacedBeastieTile tile : placedBeastieTileArr) {
-                int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+                int value = tile.id;
                 if (beastieConstantArr.contains(value)) {
                     writer.write(tile.x + " " + tile.y + " " + value);
                     writer.newLine();

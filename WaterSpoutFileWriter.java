@@ -35,7 +35,7 @@ public class WaterSpoutFileWriter {
         // Count valid water spouts
         int count = 0;
         for (PlacedWaterSpoutTile tile : placedWaterSpoutTileArr) {
-            int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+            int value = tile.id;
             System.out.println("value: " + value);
             if (waterSpoutConstantArr.contains(value)) {
                 count++;
@@ -53,7 +53,7 @@ public class WaterSpoutFileWriter {
             // Write each WaterSpout
             System.out.println("placedWaterSpoutTileArr.size() = " + placedWaterSpoutTileArr.size());
             for (PlacedWaterSpoutTile tile : placedWaterSpoutTileArr) {
-                int value = tile.id - LevelEditor.BEASTIE_PREFIX - 100;
+                int value = tile.id;
                 if (waterSpoutConstantArr.contains(value)) {
                     System.out.println("value: " + value);
                     ArrayList<PlacedWaterCurrentTile> currents = tile.getPlacedWaterCurrentTileArr();
@@ -70,7 +70,7 @@ public class WaterSpoutFileWriter {
                     // Write each current
                     if (currents != null) {
                         for (PlacedWaterCurrentTile pwcTile : currents) {
-                            int pwcValue = pwcTile.id - LevelEditor.BEASTIE_PREFIX - 100;
+                            int pwcValue = pwcTile.id;
                             writer.write(pwcTile.x + " " + pwcTile.y + " " + pwcValue);
                             writer.newLine();
                         }

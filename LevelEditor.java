@@ -42,7 +42,6 @@ public class LevelEditor {
     private String curSelectedLevel;
     // Beastie variables
     private TilemapOverview overview = TilemapOverview.getInstance();
-    public static final int BEASTIE_PREFIX = 10000; // access tish LevelEditor.BEASTIE_PREFIX
     private DragOverlayPane dragOverlay;
     private Image curBeastieImage = null;
     private int curBeastieTileId = -1;
@@ -316,10 +315,10 @@ public class LevelEditor {
     }
 
     private void createBeastieSet() {
-        int counter = 100;
+        int counter = 0;
         for (BeastieTileSet tileSet : beastieTileSetArr) {
             for (BeastieTile tile : tileSet.getBeastieTileArr()) {
-                tile.setID(BEASTIE_PREFIX + counter);
+                tile.setID(counter);
                 beastieTileArr.add(tile);
                 counter++;
             }
@@ -647,7 +646,7 @@ public class LevelEditor {
             public void mouseReleased(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     int tileId = getCurBeastieTileId();
-                    Image tileImage = LevelEditor.this.getImageFromTileID(tileId);
+                    Image tileImage = LevelEditor.this.getBeastieImageFromTileID(tileId);
         
                     if (tileImage != null) {
                         int gridX = e.getX();
@@ -874,14 +873,19 @@ public class LevelEditor {
         return this.curTileID;
     }
 
+    public BufferedImage getBeastieImageFromTileID(int tileID) {
+        System.out.println("getBeastieImageFromTileID, tileID = " + tileID);
+        if (tileID >= 0) {
+            return this.beastieTileArr.get(tileID).getImage();
+        }
+        return null;
+    }
+
     public BufferedImage getImageFromTileID(int tileID) {
         if (tileID < -1) {
             // back ground tile
             int idx = (tileID + 100) * (-1);
             return this.bgTileArr.get(idx).getImage();
-        } else if (tileID >= BEASTIE_PREFIX) {
-            int idx = tileID - BEASTIE_PREFIX - 100;
-            return this.beastieTileArr.get(idx).getImage();
         } else if (tileID >= 0) {
             int idx = tileID - 100;
             return this.fgTileArr.get(idx).getImage();
@@ -892,7 +896,7 @@ public class LevelEditor {
     public void startDragging(Image img, Point start, int tileId) {
         curBeastieImage = img;
         curBeastieTileId = tileId;
-        int actualId = tileId - BEASTIE_PREFIX - 100;
+        int actualId = tileId;
         if (actualId == WATER_SPOUT_RIGHT || actualId == WATER_SPOUT_LEFT || actualId == WATER_SPOUT_UP || actualId == WATER_SPOUT_DOWN) {
             // set curPlacedWaterSpoutTile in stopDragging()
             this.curWaterSpout = tileId; // is this right?
@@ -920,12 +924,12 @@ public class LevelEditor {
         if (curBeastieImage != null && curBeastieTileId != -1) {
             int gridX = -1;
             int gridY = -1;
-            int beastieConstantId = curBeastieTileId - BEASTIE_PREFIX - 100;
+            int beastieConstantId = curBeastieTileId;
             if (snapIntoPlaceBeasties.contains(beastieConstantId)) {
                 // Convert releasePoint to grid coordinates
                 gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
                 gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
-            } else if (enlargeToFourByFourBeasties.contains(curBeastieTileId - BEASTIE_PREFIX - 100)) {
+            } else if (enlargeToFourByFourBeasties.contains(curBeastieTileId)) {
                 gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
                 gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
                 // Compute scaled dimensions

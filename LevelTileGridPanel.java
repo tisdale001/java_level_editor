@@ -385,7 +385,7 @@ public class LevelTileGridPanel extends JPanel {
                 int xPos = Integer.parseInt(parts[0]);
                 int yPos = Integer.parseInt(parts[1]);
                 int beastieType = Integer.parseInt(parts[2]);
-                int tileId = beastieType + levelEditor.BEASTIE_PREFIX + 100;
+                int tileId = beastieType;
                 Image image;
                 if (levelEditor.enlargeToFourByFourBeasties.contains(beastieType)) {
                     int scaledWidth = this.tileWidth * 4;
@@ -520,7 +520,7 @@ public class LevelTileGridPanel extends JPanel {
                     wsX = Integer.parseInt(parts[0]);
                     wsY = Integer.parseInt(parts[1]);
                     wsId = Integer.parseInt(parts[2]);
-                    tileId = wsId + levelEditor.BEASTIE_PREFIX + 100;
+                    tileId = wsId;
                 } catch (NumberFormatException nfe) {
                     throw new IOException("Invalid integer in water spout metadata (line " + lineNumber + "): " + metaLine, nfe);
                 }

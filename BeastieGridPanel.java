@@ -45,7 +45,7 @@ public class BeastieGridPanel extends JPanel {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     System.out.println("Left clicked at: (" + x + ", " + y + ")");
                     int tileId = getTileID(x, y);
-                    Image tileImage = BeastieGridPanel.this.levelEditor.getImageFromTileID(tileId);
+                    Image tileImage = BeastieGridPanel.this.levelEditor.getBeastieImageFromTileID(tileId);
                     // TODO: HERE, tell the levelEditor to "startDragging"
                     if (tileImage != null) {
                         BeastieGridPanel.this.levelEditor.startDragging(tileImage, e.getPoint(), tileId);
