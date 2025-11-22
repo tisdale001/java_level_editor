@@ -89,6 +89,10 @@ public class LevelEditor {
     public static final int BEE_POT = 36;
     public static final int SPIKES_UP = 37;
     public static final int SPIKES_DOWN = 38;
+    public static final int SAND_LEFT_BORDER = 39;
+    public static final int SAND_LEFT = 40;
+    public static final int SAND_RIGHT = 41;
+    public static final int SAND_RIGHT_BORDER = 42;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN));
@@ -98,6 +102,7 @@ public class LevelEditor {
     public static final ArrayList<Integer> waterSpoutBeasties = new ArrayList<>(Arrays.asList(WATER_SPOUT_RIGHT, WATER_SPOUT_LEFT, WATER_SPOUT_UP, WATER_SPOUT_DOWN));
     public static final ArrayList<Integer> waterCurrentBeasties = new ArrayList<>(Arrays.asList(WATER_CURRENT_RIGHT, WATER_CURRENT_LEFT, WATER_CURRENT_UP, WATER_CURRENT_DOWN));
     public static final ArrayList<Integer> enlargeToFourByOneHorizontallyBeasties = new ArrayList<>(Arrays.asList(BEE_POT));
+    public static final ArrayList<Integer> sandBeasties = new ArrayList<>(Arrays.asList(SAND_LEFT_BORDER, SAND_LEFT, SAND_RIGHT, SAND_RIGHT_BORDER));
     public LevelEditor() {
         createTileSetArrays();
         createBeastieTileSetArrays();
@@ -203,6 +208,15 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet38);
         BeastieTileSet beastieTileSet39 = createBeastieTileSet("Assets/Beasties/SpriteSheets/spikes_downward_cropped_tile.png", 1, 1, 28, 19, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet39);
+        // SandTiles
+        BeastieTileSet beastieTileSet40 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_L_tile.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet40);
+        BeastieTileSet beastieTileSet41 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_left_arrow_tile.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet41);
+        BeastieTileSet beastieTileSet42 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_right_arrow_tile.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet42);
+        BeastieTileSet beastieTileSet43 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_R_tile.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet43);
     }
 
     private void createTileSetArrays() {
@@ -268,6 +282,9 @@ public class LevelEditor {
 
         TileSet fgTileSet14 = createTileSet("Assets/tilesheets/mvrk_coralgroundm_2x.png", 1, 1, 48, 48, scaledTileWidth, scaledTileHeight, 0, 0);
         fgTileSetArr.add(fgTileSet14);
+
+        TileSet fgTileSet15 = createTileSet("Assets/tilesheets/sand_ani_1.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        fgTileSetArr.add(fgTileSet15);
 
         // background tilesets
         TileSet bgTileSet1 = createTileSet("Assets/tilesheets/sewer_bricks.png", 3, 6, 52, 54, this.scaledTileWidth,
@@ -435,6 +452,7 @@ public class LevelEditor {
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.curPlacedWaterSpoutTile = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
+        this.levelTileGridPanel.loadSandTilesFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -574,6 +592,7 @@ public class LevelEditor {
         this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
         this.levelTileGridPanel.saveBeastiesToLevel(fileName);
         this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
+        this.levelTileGridPanel.saveSandTilesToLevel(fileName);
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -1021,6 +1040,14 @@ public class LevelEditor {
                     PlacedWaterCurrentTile pwcTile = new PlacedWaterCurrentTile(gridX, gridY, curBeastieTileId, curBeastieImage);
                     this.curPlacedWaterSpoutTile.addPlacedWaterCurrentTile(pwcTile);
                 }
+                cancelDragging();
+                return;
+            } else if (sandBeasties.contains(beastieConstantId)) {
+                // Convert releasePoint to grid coordinates
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                PlacedSandTile pst = new PlacedSandTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                this.levelTileGridPanel.placeSandTile(pst);
                 cancelDragging();
                 return;
             } else {

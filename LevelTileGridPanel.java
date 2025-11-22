@@ -35,6 +35,7 @@ public class LevelTileGridPanel extends JPanel {
     private int curCol = 0;
     private ArrayList<PlacedBeastieTile> placedBeastieTileArr = new ArrayList<>();
     public ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr = new ArrayList<>();
+    public ArrayList<PlacedSandTile> placedSandTilesArr = new ArrayList<>();
     private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
 
     
@@ -169,6 +170,8 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("BeePots", beePotArr);
         ArrayList<Integer> spikesArr = new ArrayList<>(Arrays.asList(levelEditor.SPIKES_UP, levelEditor.SPIKES_DOWN));
         this.beastieNamesToConstantsMap.put("Spikes", spikesArr);
+        ArrayList<Integer> sandTilesArr = new ArrayList<>(Arrays.asList(levelEditor.SAND_LEFT_BORDER, levelEditor.SAND_LEFT, levelEditor.SAND_RIGHT, levelEditor.SAND_RIGHT_BORDER));
+        this.beastieNamesToConstantsMap.put("SandTiles", sandTilesArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -176,6 +179,14 @@ public class LevelTileGridPanel extends JPanel {
             PlacedBeastieTile tile = placedBeastieTileArr.get(i);
             if (tile.isClicked(x, y)) {
                 placedBeastieTileArr.remove(i);
+                return true;
+            }
+        }
+        // also check sand tiles
+        for (int i = 0; i < placedSandTilesArr.size(); ++i) {
+            PlacedSandTile tile = placedSandTilesArr.get(i);
+            if (tile.isClicked(x, y)) {
+                placedSandTilesArr.remove(i);
                 return true;
             }
         }
@@ -198,6 +209,10 @@ public class LevelTileGridPanel extends JPanel {
     public void placeWaterSpoutTile(PlacedWaterSpoutTile tile) {
         placedWaterSpoutTileArr.add(tile);
         repaint();
+    }
+
+    public void placeSandTile(PlacedSandTile tile) {
+        placedSandTilesArr.add(tile);
     }
 
     private void placeTileInLevel(int x, int y, int tileID) {
@@ -341,6 +356,12 @@ public class LevelTileGridPanel extends JPanel {
                 wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value);
             }
         }
+    }
+
+    public void saveSandTilesToLevel(String fileName) {
+        SandTileFileWriter stfw = new SandTileFileWriter();
+        String key = "SandTiles";
+        stfw.saveSandTilesToFile(this.placedSandTilesArr, fileName, key, tileWidth, tileHeight);
     }
 
     public void loadBeastiesFromFiles(String filePath, String fileName) {
@@ -568,13 +589,130 @@ public class LevelTileGridPanel extends JPanel {
     
                     placedWaterSpoutTile.addPlacedWaterCurrentTile(placedWaterCurrentTile);
                 }
-    
-                System.out.println("HERE-10 (added water spout index " + i + ")");
                 this.placedWaterSpoutTileArr.add(placedWaterSpoutTile);
             }
         } catch (Exception e) {
             // Catch Exception so both IO and format problems are visible and you get a stack trace.
             System.err.println("An error occurred while loading the water spouts from file: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    public void loadSandTilesFromFile(String filePath, String fileName) {
+        this.placedSandTilesArr.clear();
+    
+        String beastieNamePlural = "SandTiles";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        System.out.println("filePath + fileName: " + filePath + fileName);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            AtomicInteger lineNumber = new AtomicInteger(0);
+    
+            // Helper lambda to read the next non-empty line (or null if EOF)
+            java.util.function.Supplier<String> readNonEmptyLine = () -> {
+                try {
+                    String ln;
+                    while ((ln = reader.readLine()) != null) {
+                        lineNumber.incrementAndGet();
+                        if (!ln.trim().isEmpty()) return ln;
+                        // else skip blank line and continue
+                    }
+                    return null;
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe);
+                }
+            };
+            // read the sand tiles line
+            String metaLine = readNonEmptyLine.get();
+            if (metaLine == null) {
+                throw new IOException("Unexpected end of file while reading sand tiles");
+            }
+            System.out.println("metaLine (line " + lineNumber + "): " + metaLine);
+
+            String[] parts = metaLine.trim().split("\\s+");
+            if (parts.length < 3) {
+                throw new IOException("Invalid sand tile metadata (line " + lineNumber + "): " + metaLine);
+            }
+
+            int numWormManagers;
+            try {
+                numWormManagers = Integer.parseInt(parts[0]);
+                // I don't need the tileWidth and tileHeight here
+            } catch (NumberFormatException nfe) {
+                throw new IOException("Invalid integer in sand tile metadata (line " + lineNumber + "): " + metaLine, nfe);
+            }
+
+            for (int j = 0; j < numWormManagers; j++) {
+                // x, y, movingRight, runCount
+                String metaLineWormManagers = readNonEmptyLine.get();
+                if (metaLine == null) {
+                    throw new IOException("Unexpected end of file while reading sand tiles");
+                }
+                System.out.println("metaLine (line " + lineNumber + "): " + metaLineWormManagers);
+
+                String[] parts2 = metaLineWormManagers.trim().split("\\s+");
+                if (parts2.length < 4) {
+                    throw new IOException("Invalid sand tile metadata (line " + lineNumber + "): " + metaLineWormManagers);
+                }
+                int stX, stY, runCount;
+                boolean movingRight;
+                try {
+                    stX = Integer.parseInt(parts2[0]);
+                    stY = Integer.parseInt(parts2[1]);
+                    movingRight = Integer.parseInt(parts2[2]) == 1;
+                    runCount = Integer.parseInt(parts2[3]);
+                } catch (NumberFormatException nfe) {
+                    throw new IOException("Invalid integer in sand tile metadata (line " + lineNumber + "): " + metaLineWormManagers, nfe);
+                }
+                // reconstruct placedSandTiles
+                int x;
+                int y;
+                int tileId;
+                Image image;
+                for (int i = 0; i < runCount; i++) {
+                    PlacedSandTile pst;
+                    if (i == 0) {
+                        // SAND_LEFT_BORDER
+                        x = stX;
+                        y = stY;
+                        tileId = levelEditor.SAND_LEFT_BORDER;
+                        image = levelEditor.beastieGridPanel.tileArr.get(tileId).getImage();
+                        pst = new PlacedSandTile(x, y, tileId, image);
+                    } else if (i == runCount - 1) {
+                        // SAND_RIGHT_BORDER
+                        x = stX + tileWidth * i;
+                        y = stY;
+                        tileId = levelEditor.SAND_RIGHT_BORDER;
+                        image = levelEditor.beastieGridPanel.tileArr.get(tileId).getImage();
+                        pst = new PlacedSandTile(x, y, tileId, image);
+                    } else {
+                        if (movingRight) {
+                            // SAND_RIGHT
+                            x = stX + tileWidth * i;
+                            y = stY;
+                            tileId = levelEditor.SAND_RIGHT;
+                            image = levelEditor.beastieGridPanel.tileArr.get(tileId).getImage();
+                            pst = new PlacedSandTile(x, y, tileId, image);
+                        } else {
+                            // SAND_LEFT
+                            x = stX + tileWidth * i;
+                            y = stY;
+                            tileId = levelEditor.SAND_LEFT;
+                            image = levelEditor.beastieGridPanel.tileArr.get(tileId).getImage();
+                            pst = new PlacedSandTile(x, y, tileId, image);
+                        }
+                    }
+                    this.placedSandTilesArr.add(pst);
+                }
+            }
+
+        } catch (Exception e) {
+            // Catch Exception so both IO and format problems are visible and you get a stack trace.
+            System.err.println("An error occurred while loading the sand tiles from file: " + e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -704,6 +842,16 @@ public class LevelTileGridPanel extends JPanel {
                         g.drawImage(wct.image, wct.x, wct.y, wctImgWidth, wctImgHeight, this);
                     }
                 }
+                g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
+            }
+        }
+
+        for (PlacedSandTile t : this.placedSandTilesArr) {
+            int imgWidth = t.image.getWidth(this);
+            int imgHeight = t.image.getHeight(this);
+        
+            // Defensive check — sometimes width/height can return -1 if not yet loaded
+            if (imgWidth > 0 && imgHeight > 0) {
                 g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
             }
         }
