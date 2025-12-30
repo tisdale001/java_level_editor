@@ -60,7 +60,7 @@ public class SandTileFileWriter {
             writer.write(count + " " + tileWidth + " " + tileHeight);
             writer.newLine();
 
-            // Write each LEFT_BORDER_TILE, x and y coordinates, then the count of the string of tiles
+            // Write each LEFT_BORDER_TILE, x and y coordinates, boolean movingRight, then the runCount of the string of tiles
             int runCount = 0;
             int x = 0;
             int y = 0;

@@ -49,6 +49,11 @@ public class LevelEditor {
     private int curWaterSpout = -1;
     private PlacedWaterSpoutTile curPlacedWaterSpoutTile = null;
     // private ArrayList<PlacedWaterSpoutTile> curPlacedWaterSpoutArr = new ArrayList<>();
+    // Moving Platform variables and platform border box variables
+    private int curMovingPlatform = -1;
+    private PlacedMovingPlatform curPlacedMovingPlatform = null;
+    private int curMovingPlatformBorderBox = -1;
+    // private PlacedMovingPlatformBorderBoxTile curPlacedMovingPlatformBorderBoxTile = null;
     // Beastie constants
     public static final int ANEMONE_FLOOR = 0;
     public static final int ANEMONE_LEFT_WALL = 1;
@@ -93,6 +98,8 @@ public class LevelEditor {
     public static final int SAND_LEFT = 40;
     public static final int SAND_RIGHT = 41;
     public static final int SAND_RIGHT_BORDER = 42;
+    public static final int MOVING_PLATFORM_TILE = 43;
+    public static final int MOVING_PLATFORM_BORDER_BOX_TILE = 44;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN));
@@ -103,6 +110,8 @@ public class LevelEditor {
     public static final ArrayList<Integer> waterCurrentBeasties = new ArrayList<>(Arrays.asList(WATER_CURRENT_RIGHT, WATER_CURRENT_LEFT, WATER_CURRENT_UP, WATER_CURRENT_DOWN));
     public static final ArrayList<Integer> enlargeToFourByOneHorizontallyBeasties = new ArrayList<>(Arrays.asList(BEE_POT));
     public static final ArrayList<Integer> sandBeasties = new ArrayList<>(Arrays.asList(SAND_LEFT_BORDER, SAND_LEFT, SAND_RIGHT, SAND_RIGHT_BORDER));
+    public static final ArrayList<Integer> movingPlatformBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_TILE));
+    public static final ArrayList<Integer> movingPlatformBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_BORDER_BOX_TILE));
     public LevelEditor() {
         createTileSetArrays();
         createBeastieTileSetArrays();
@@ -217,6 +226,12 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet42);
         BeastieTileSet beastieTileSet43 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_R_tile.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet43);
+        // Moving Platforms
+        BeastieTileSet beastieTileSet44 = createBeastieTileSet("Assets/Beasties/SpriteSheets/moving_platform_tile.png", 1, 1, 230, 230, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet44);
+        // Moving platform border boxes
+        BeastieTileSet beastieTileSet45 = createBeastieTileSet("Assets/Beasties/SpriteSheets/platform_border_box.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet45);
     }
 
     private void createTileSetArrays() {
@@ -451,8 +466,10 @@ public class LevelEditor {
         String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.curPlacedWaterSpoutTile = null;
+        this.curPlacedMovingPlatform = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadSandTilesFromFile(beastieFilepath, fileName);
+        this.levelTileGridPanel.loadMovingPlatformsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -593,6 +610,7 @@ public class LevelEditor {
         this.levelTileGridPanel.saveBeastiesToLevel(fileName);
         this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
         this.levelTileGridPanel.saveSandTilesToLevel(fileName);
+        this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName);
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -919,6 +937,10 @@ public class LevelEditor {
         if (actualId == WATER_SPOUT_RIGHT || actualId == WATER_SPOUT_LEFT || actualId == WATER_SPOUT_UP || actualId == WATER_SPOUT_DOWN) {
             // set curPlacedWaterSpoutTile in stopDragging()
             this.curWaterSpout = tileId; // is this right?
+        } else if (actualId == MOVING_PLATFORM_TILE) {
+            this.curMovingPlatform = tileId;
+        } else if (actualId == MOVING_PLATFORM_BORDER_BOX_TILE) {
+            this.curMovingPlatformBorderBox = tileId;
         }
         dragOverlay.setDraggedImage(img);
         dragOverlay.setMousePoint(start);
@@ -1042,6 +1064,42 @@ public class LevelEditor {
                 }
                 cancelDragging();
                 return;
+            } else if (movingPlatformBeasties.contains(beastieConstantId)) {
+                if (this.curMovingPlatform != -1) {
+                    // Convert releasePoint to grid coordinates
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    if (this.curPlacedMovingPlatform == null) {
+                        PlacedMovingPlatformTile pmpTile = new PlacedMovingPlatformTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        PlacedMovingPlatform pmp = new PlacedMovingPlatform();
+                        pmp.addPlacedMovingPlatformTile(pmpTile);
+                        this.curPlacedMovingPlatform = pmp;
+                        levelTileGridPanel.placeMovingPlatform(pmp);
+                    } else {
+                        PlacedMovingPlatformTile pmpTile = new PlacedMovingPlatformTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        this.curPlacedMovingPlatform.addPlacedMovingPlatformTile(pmpTile);
+                    }
+                }
+                cancelDragging();
+                return;
+            } else if (movingPlatformBorderBoxBeasties.contains(beastieConstantId)) {
+                if (this.curMovingPlatformBorderBox != -1) {
+                    // Convert releasePoint to grid coordinates
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    if (this.curPlacedMovingPlatform == null) {
+                        PlacedMovingPlatformBorderBoxTile pmpbbTile = new PlacedMovingPlatformBorderBoxTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        PlacedMovingPlatform pmp = new PlacedMovingPlatform();
+                        pmp.addPlacedMovingPlatformBorderBoxTile(pmpbbTile);
+                        this.curPlacedMovingPlatform = pmp;
+                        levelTileGridPanel.placeMovingPlatform(pmp);
+                    } else {
+                        PlacedMovingPlatformBorderBoxTile pmpbbTile = new PlacedMovingPlatformBorderBoxTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        this.curPlacedMovingPlatform.addPlacedMovingPlatformBorderBoxTile(pmpbbTile);
+                    }
+                }
+                cancelDragging();
+                return;
             } else if (sandBeasties.contains(beastieConstantId)) {
                 // Convert releasePoint to grid coordinates
                 gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
@@ -1069,16 +1127,16 @@ public class LevelEditor {
             PlacedWaterSpoutTile pwsTile = levelTileGridPanel.placedWaterSpoutTileArr.get(i);
             if (pwsTile.isClicked(x, y) || pwsTile.hasClickedPlacedWaterCurrentTile(x, y)) {
                 levelTileGridPanel.placedWaterSpoutTileArr.remove(i);
-                System.out.println("HERE-3");
+                // System.out.println("HERE-3");
                 return true;
             }
         }
         // TODO: I don't think this code can ever be called!!!!!!!
         // now check the current placedWaterSpout
         if (this.curPlacedWaterSpoutTile != null) {
-            System.out.println("HERE-1");
+            // System.out.println("HERE-1");
             if (this.curPlacedWaterSpoutTile.isClicked(x, y) || this.curPlacedWaterSpoutTile.hasClickedPlacedWaterCurrentTile(x, y)) {
-                System.out.println("HERE-2");
+                // System.out.println("HERE-2");
                 this.curWaterSpout = -1;
                 this.curPlacedWaterSpoutTile = null;
                 return true;
@@ -1088,13 +1146,40 @@ public class LevelEditor {
         return false;
     }
 
+    public boolean hasClickedOnAMovingPlatformElement(int x, int y) {
+        // System.out.println("Panel identity: " + levelTileGridPanel);
+        for (int i = 0; i < levelTileGridPanel.placedMovingPlatformArr.size(); ++i) {
+            PlacedMovingPlatform pmp = levelTileGridPanel.placedMovingPlatformArr.get(i);
+            if (pmp.hasClickedPlacedMovingPlatformTile(x, y) || pmp.hasClickedPlacedMovingPlatformBorderBoxTile(x, y)) {
+                levelTileGridPanel.placedMovingPlatformArr.remove(i);
+                // System.out.println("HERE-3");
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
     public boolean hasEndedWaterSpoutSetup(int x, int y) {
-        System.out.println("HERE-4");
+        // System.out.println("HERE-4");
         if (this.curWaterSpout != -1) {
-            System.out.println("HERE-5");
+            // System.out.println("HERE-5");
             this.curWaterSpout = -1;
             // levelTileGridPanel.placedWaterSpoutTileArr.add(this.curPlacedWaterSpoutTile);
             this.curPlacedWaterSpoutTile = null;
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasEndedMovingPlatformSetup(int x, int y) {
+        // System.out.println("HERE-4");
+        if (this.curMovingPlatform != -1 && this.curMovingPlatformBorderBox != -1) {
+            // System.out.println("HERE-5");
+            this.curMovingPlatform = -1;
+            this.curMovingPlatformBorderBox = -1;
+            this.curPlacedMovingPlatform = null;
 
             return true;
         }

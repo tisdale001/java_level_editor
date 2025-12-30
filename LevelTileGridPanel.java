@@ -36,6 +36,7 @@ public class LevelTileGridPanel extends JPanel {
     private ArrayList<PlacedBeastieTile> placedBeastieTileArr = new ArrayList<>();
     public ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr = new ArrayList<>();
     public ArrayList<PlacedSandTile> placedSandTilesArr = new ArrayList<>();
+    public ArrayList<PlacedMovingPlatform> placedMovingPlatformArr = new ArrayList<>();
     private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
 
     
@@ -93,8 +94,8 @@ public class LevelTileGridPanel extends JPanel {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     System.out.println("Right clicked at: (" + x + ", " + y + ")");
-                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y)) {
-                        if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y)) {
+                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y) && !LevelTileGridPanel.this.hasEndedMovingPlatformSetup(x, y)) {
+                        if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y) && !LevelTileGridPanel.this.hasClickedOnAMovingPlatformElement(x, y)) {
                             if (!LevelTileGridPanel.this.hasClickedOnBeastieTile(x, y)) {
                                 LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
                             }
@@ -172,6 +173,8 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("Spikes", spikesArr);
         ArrayList<Integer> sandTilesArr = new ArrayList<>(Arrays.asList(levelEditor.SAND_LEFT_BORDER, levelEditor.SAND_LEFT, levelEditor.SAND_RIGHT, levelEditor.SAND_RIGHT_BORDER));
         this.beastieNamesToConstantsMap.put("SandTiles", sandTilesArr);
+        ArrayList<Integer> movingPlatformArr = new ArrayList<>(Arrays.asList(levelEditor.MOVING_PLATFORM_TILE, levelEditor.MOVING_PLATFORM_BORDER_BOX_TILE));
+        this.beastieNamesToConstantsMap.put("MovingPlatforms", movingPlatformArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -201,6 +204,14 @@ public class LevelTileGridPanel extends JPanel {
         return levelEditor.hasClickedOnAWaterSpoutElement(x, y);
     }
 
+    private boolean hasEndedMovingPlatformSetup(int x, int y) {
+        return levelEditor.hasEndedMovingPlatformSetup(x, y);
+    }
+
+    private boolean hasClickedOnAMovingPlatformElement(int x, int y) {
+        return levelEditor.hasClickedOnAMovingPlatformElement(x, y);
+    }
+
     public void placeBeastieTile(int x, int y, int id, Image tileImage) {
         placedBeastieTileArr.add(new PlacedBeastieTile(x, y, id, tileImage));
         repaint();
@@ -208,6 +219,11 @@ public class LevelTileGridPanel extends JPanel {
 
     public void placeWaterSpoutTile(PlacedWaterSpoutTile tile) {
         placedWaterSpoutTileArr.add(tile);
+        repaint();
+    }
+
+    public void placeMovingPlatform(PlacedMovingPlatform pmp) {
+        placedMovingPlatformArr.add(pmp);
         repaint();
     }
 
@@ -341,7 +357,7 @@ public class LevelTileGridPanel extends JPanel {
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
-            if ((key != "WaterSpouts") && (key != "WaterCurrents")) {
+            if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms")) {
                 bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
             }
         }
@@ -358,6 +374,17 @@ public class LevelTileGridPanel extends JPanel {
         }
     }
 
+    public void saveMovingPlatformsToLevel(String fileName) {
+        MovingPlatformFileWriter mpfw = new MovingPlatformFileWriter();
+        for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
+            String key = entry.getKey();
+            ArrayList<Integer> value = entry.getValue();
+            if (key == "MovingPlatforms") {
+                mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight);
+            }
+        }
+    }
+
     public void saveSandTilesToLevel(String fileName) {
         SandTileFileWriter stfw = new SandTileFileWriter();
         String key = "SandTiles";
@@ -368,7 +395,7 @@ public class LevelTileGridPanel extends JPanel {
         System.out.println("loadBeastiesFromFile");
         this.placedBeastieTileArr.clear();
         for (String key : this.beastieNamesToConstantsMap.keySet()) {
-            if (key != "WaterSpouts" && key != "WaterCurrents") {
+            if (key != "WaterSpouts" && key != "WaterCurrents" && key != "MovingPlatforms") {
                 this.loadBeastiesFromFile(filePath, fileName, key);
             }
         }
@@ -594,6 +621,99 @@ public class LevelTileGridPanel extends JPanel {
         } catch (Exception e) {
             // Catch Exception so both IO and format problems are visible and you get a stack trace.
             System.err.println("An error occurred while loading the water spouts from file: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    public void loadMovingPlatformsFromFile(String filePath, String fileName) {
+        this.placedMovingPlatformArr.clear();
+    
+        String beastieNamePlural = "MovingPlatforms";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        System.out.println("filePath + fileName: " + filePath + fileName);
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            AtomicInteger lineNumber = new AtomicInteger(0);
+    
+            // Helper lambda to read the next non-empty line (or null if EOF)
+            java.util.function.Supplier<String> readNonEmptyLine = () -> {
+                try {
+                    String ln;
+                    while ((ln = reader.readLine()) != null) {
+                        lineNumber.incrementAndGet();
+                        if (!ln.trim().isEmpty()) return ln;
+                        // else skip blank line and continue
+                    }
+                    return null;
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe);
+                }
+            };
+    
+            // Read metadata (num moving platforms) (will also have tileWidth and tileHeight, but not read here)
+            String metadataLine = readNonEmptyLine.get();
+            if (metadataLine == null) {
+                throw new IOException("Invalid level file: metadata missing (line " + lineNumber + ")");
+            }
+            String[] metadataParts = metadataLine.trim().split("\\s+");
+            int numMovingPlatforms;
+            try {
+                numMovingPlatforms = Integer.parseInt(metadataParts[0]);
+            } catch (NumberFormatException nfe) {
+                throw new IOException("Invalid metadata number on line " + lineNumber + ": '" + metadataLine + "'", nfe);
+            }
+            System.out.println("numMovingPlatforms: " + numMovingPlatforms);
+    
+            for (int i = 0; i < numMovingPlatforms; i++) {
+                // read the moving platform line (x, y, numTiles)
+                // then min border box (x, y), then max border box (x, y)
+                String metaLine = readNonEmptyLine.get();
+                if (metaLine == null) {
+                    throw new IOException("Unexpected end of file while reading moving platform metadata (expected " + numMovingPlatforms + " entries, got " + i + ")");
+                }
+                // System.out.println("metaLine (line " + lineNumber + "): " + metaLine);
+    
+                String[] parts = metaLine.trim().split("\\s+");
+                if (parts.length < 9) {
+                    throw new IOException("Invalid moving platform metadata (line " + lineNumber + "): " + metaLine);
+                }
+    
+                int mpX, mpY, mpNumTiles, mpId, minX, minY, maxX, maxY, bbId;
+                try {
+                    mpX = Integer.parseInt(parts[0]);
+                    mpY = Integer.parseInt(parts[1]);
+                    mpNumTiles = Integer.parseInt(parts[2]);
+                    mpId = Integer.parseInt(parts[3]);
+                    minX = Integer.parseInt(parts[4]);
+                    minY = Integer.parseInt(parts[5]);
+                    maxX = Integer.parseInt(parts[6]);
+                    maxY = Integer.parseInt(parts[7]);
+                    bbId = Integer.parseInt(parts[8]);
+                } catch (NumberFormatException nfe) {
+                    throw new IOException("Invalid integer in moving platform metadata (line " + lineNumber + "): " + metaLine, nfe);
+                }
+
+                Image mpImage = levelEditor.beastieGridPanel.tileArr.get(mpId).getImage();
+                Image bbImage = levelEditor.beastieGridPanel.tileArr.get(bbId).getImage();
+                PlacedMovingPlatform placedMovingPlatform = new PlacedMovingPlatform();
+                for (int j = 0; j < mpNumTiles; j++) {
+                    PlacedMovingPlatformTile placedMovingPlatformTile = new PlacedMovingPlatformTile(mpX + j * this.tileWidth, mpY, mpId, mpImage);
+                    placedMovingPlatform.addPlacedMovingPlatformTile(placedMovingPlatformTile);
+                }
+                PlacedMovingPlatformBorderBoxTile pmpbbMinTile = new PlacedMovingPlatformBorderBoxTile(minX, minY, bbId, bbImage);
+                PlacedMovingPlatformBorderBoxTile pmpbbMaxTile = new PlacedMovingPlatformBorderBoxTile(maxX, maxY, bbId, bbImage);
+                placedMovingPlatform.addPlacedMovingPlatformBorderBoxTile(pmpbbMinTile);
+                placedMovingPlatform.addPlacedMovingPlatformBorderBoxTile(pmpbbMaxTile);
+                
+                this.placedMovingPlatformArr.add(placedMovingPlatform);
+            }
+        } catch (Exception e) {
+            // Catch Exception so both IO and format problems are visible and you get a stack trace.
+            System.err.println("An error occurred while loading the moving platforms from file: " + e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -829,7 +949,7 @@ public class LevelTileGridPanel extends JPanel {
         }
 
         for (PlacedWaterSpoutTile t : this.placedWaterSpoutTileArr) {
-            System.out.println("t.image width=" + t.image.getWidth(this) + " height=" + t.image.getHeight(this));
+            // System.out.println("t.image width=" + t.image.getWidth(this) + " height=" + t.image.getHeight(this));
             int imgWidth = t.image.getWidth(this);
             int imgHeight = t.image.getHeight(this);
             // Defensive check — sometimes width/height can return -1 if not yet loaded
@@ -843,6 +963,28 @@ public class LevelTileGridPanel extends JPanel {
                     }
                 }
                 g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
+            }
+        }
+
+        for (PlacedMovingPlatform p : this.placedMovingPlatformArr) {
+            ArrayList<PlacedMovingPlatformTile> placedMovingPlatformTileArr = p.getPlacedMovingPlatformTileArr();
+            for (PlacedMovingPlatformTile t : placedMovingPlatformTileArr) {
+                // System.out.println("t.image width=" + t.image.getWidth(this) + " height=" + t.image.getHeight(this));
+                int imgWidth = t.image.getWidth(this);
+                int imgHeight = t.image.getHeight(this);
+                // Defensive check — sometimes width/height can return -1 if not yet loaded
+                if (imgWidth > 0 && imgHeight > 0) {
+                    g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
+                }
+            }
+            ArrayList<PlacedMovingPlatformBorderBoxTile> placedMovingPlatformBorderBoxTileArr = p.getPlacedMovingPlatformBorderBoxTileArr();
+            for (PlacedMovingPlatformBorderBoxTile bbt : placedMovingPlatformBorderBoxTileArr) {
+                // System.out.println("bbt.image width=" + bbt.image.getWidth(this) + " height=" + bbt.image.getHeight(this));
+                int bbtImgWidth = bbt.image.getWidth(this);
+                int bbtImgHeight = bbt.image.getHeight(this);
+                if (bbtImgWidth > 0 && bbtImgHeight > 0) {
+                    g.drawImage(bbt.image, bbt.x, bbt.y, bbtImgWidth, bbtImgHeight, this);
+                }
             }
         }
 
