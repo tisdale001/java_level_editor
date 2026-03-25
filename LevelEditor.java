@@ -100,9 +100,14 @@ public class LevelEditor {
     public static final int SAND_RIGHT_BORDER = 42;
     public static final int MOVING_PLATFORM_TILE = 43;
     public static final int MOVING_PLATFORM_BORDER_BOX_TILE = 44;
+    public static final int DOG_RIGHT = 45;
+    public static final int DOG_LEFT = 46;
+    public static final int DOG_BORDER_BOX_LEFT = 47;
+    public static final int DOG_BORDER_BOX_RIGHT = 48;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
-        SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN));
+        SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
+        DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
@@ -232,6 +237,16 @@ public class LevelEditor {
         // Moving platform border boxes
         BeastieTileSet beastieTileSet45 = createBeastieTileSet("Assets/Beasties/SpriteSheets/platform_border_box.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet45);
+        // Dogs
+        BeastieTileSet beastieTileSet46 = createBeastieTileSet("Assets/Beasties/SpriteSheets/dog_right_tile.png", 1, 1, 99, 99, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet46);
+        BeastieTileSet beastieTileSet47 = createBeastieTileSet("Assets/Beasties/SpriteSheets/dog_left_tile.png", 1, 1, 99, 99, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet47);
+        // Dog border boxes
+        BeastieTileSet beastieTileSet48 = createBeastieTileSet("Assets/Beasties/SpriteSheets/dog_border_left_tile.png", 1, 1, 288, 288, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet48);
+        BeastieTileSet beastieTileSet49 = createBeastieTileSet("Assets/Beasties/SpriteSheets/dog_border_right_tile.png", 1, 1, 288, 288, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet49);
     }
 
     private void createTileSetArrays() {
