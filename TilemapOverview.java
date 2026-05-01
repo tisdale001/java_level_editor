@@ -10,6 +10,7 @@ public class TilemapOverview {
     private JPanel overviewMapPanel;
     private LevelEditor levelEditor;
     private ArrayList<ArrayList<Integer>> levelArr;
+    private ArrayList<ArrayList<Integer>> mcLevelArr;
     private int numRows;
     private int numCols;
     private int tileWidth;
@@ -40,6 +41,7 @@ public class TilemapOverview {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 drawTiles(g);
+                drawMovingColumnTiles(g);
             }
         };
 
@@ -69,9 +71,27 @@ public class TilemapOverview {
         }
     }
 
-    public void initiateOverviewMap(LevelEditor levelEditor, ArrayList<ArrayList<Integer>> levelArr, int numRows, int numCols, int tileWidth, int tileHeight) {
+    private void drawMovingColumnTiles(Graphics g) {
+        // Draw tiles (scaled down for the overview window)
+        for (int i = 0; i < mcLevelArr.size(); i++) {
+            for (int j = 0; j < mcLevelArr.get(i).size(); j++) {
+                int mcTileID = mcLevelArr.get(i).get(j);
+                if (mcTileID != -1) {
+                    BufferedImage image = levelEditor.getImageFromMovingColumnTileID(mcTileID);
+                    int yPos = i * scaledHeight;
+                    int xPos = j * scaledWidth;
+
+                    g.drawImage(image, xPos, yPos, scaledWidth, scaledHeight, overviewMapPanel);
+                }
+            }
+        }
+    }
+
+    public void initiateOverviewMap(LevelEditor levelEditor, ArrayList<ArrayList<Integer>> levelArr, ArrayList<ArrayList<Integer>> mcLevelArr, int numRows, int numCols,
+            int tileWidth, int tileHeight) {
         this.levelEditor = levelEditor;
         this.levelArr = levelArr;
+        this.mcLevelArr = mcLevelArr;
         this.numRows = numRows;
         this.numCols = numCols;
         this.tileWidth = tileWidth;
@@ -86,6 +106,14 @@ public class TilemapOverview {
         int row = y / this.tileHeight;
         if (row >= 0 && row < this.levelArr.size() && col >= 0 && col < this.levelArr.get(row).size()) {
             this.levelArr.get(row).set(col, tileID);
+        }
+    }
+
+    public void placeMovingColumnTileInLevel(int x, int y, int mcTileID) {
+        int col = x / this.tileWidth;
+        int row = y / this.tileHeight;
+        if (row >= 0 && row < this.mcLevelArr.size() && col >= 0 && col < this.mcLevelArr.get(row).size()) {
+            this.mcLevelArr.get(row).set(col, mcTileID);
         }
     }
 

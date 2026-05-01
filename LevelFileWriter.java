@@ -20,6 +20,7 @@ public class LevelFileWriter {
     // "tileSetFolderName" is the folder and the name of your tileset, 
     // this is how your level will be found and ensure the correct settings
     public void saveLevelToFile(String filePath, String fileName, String tileSetFolderName) {
+        System.out.println("saveLevelToFile()");
         // Create the directory if it doesn't exist
         File directory = new File(filePath);
         if (!directory.exists()) {
@@ -31,7 +32,7 @@ public class LevelFileWriter {
             }
         }
         // Create the file object
-        File file = new File(filePath + fileName);
+        File file = new File(filePath, fileName);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             // Write the metadata (rows and columns) at the beginning of the file

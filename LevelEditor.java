@@ -23,16 +23,20 @@ public class LevelEditor {
     private final int scaledTileHeight = 32;
     private ArrayList<TileSet> fgTileSetArr = new ArrayList<>();
     private ArrayList<TileSet> bgTileSetArr = new ArrayList<>();
+    private ArrayList<MovingColumnTileSet> mcTileSetArr = new ArrayList<>();
     private ArrayList<BeastieTileSet> beastieTileSetArr = new ArrayList<>();
     private ArrayList<Tile> fgTileArr = new ArrayList<>();
     private ArrayList<Tile> bgTileArr = new ArrayList<>();
+    private ArrayList<MovingColumnTile> mcTileArr = new ArrayList<>();
     private ArrayList<BeastieTile> beastieTileArr = new ArrayList<>();
-    private int fgNumCols = 21;
+    private int fgNumCols = 10;
     private int bgNumCols = 10;
+    private int mcNumCols = 10;
     private int beastieNumCols = 10;
     private int levelNumRows = 20;
     private int levelNumCols = 50;
     private int curTileID = -1;
+    private int curMovingColumnTileID = -1;
     private JTextField rowTextField;
     private JTextField colTextField;
     private LevelTileGridPanel levelTileGridPanel;
@@ -54,6 +58,10 @@ public class LevelEditor {
     private PlacedMovingPlatform curPlacedMovingPlatform = null;
     private int curMovingPlatformBorderBox = -1;
     // private PlacedMovingPlatformBorderBoxTile curPlacedMovingPlatformBorderBoxTile = null;
+    // Moving Column variables
+    // private int curMovingColumn = -1;
+    private PlacedMovingColumn curPlacedMovingColumn = null;
+    private int curMovingColumnBorderBox = -1;
     // Beastie constants
     public static final int ANEMONE_FLOOR = 0;
     public static final int ANEMONE_LEFT_WALL = 1;
@@ -104,6 +112,10 @@ public class LevelEditor {
     public static final int DOG_LEFT = 46;
     public static final int DOG_BORDER_BOX_LEFT = 47;
     public static final int DOG_BORDER_BOX_RIGHT = 48;
+    public static final int MOVING_COLUMN_LEFT_BORDER = 49;
+    public static final int MOVING_COLUMN_RIGHT_BORDER = 50;
+    public static final int MOVING_COLUMN_UP_BORDER = 51;
+    public static final int MOVING_COLUMN_DOWN_BORDER = 52;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
@@ -117,11 +129,15 @@ public class LevelEditor {
     public static final ArrayList<Integer> sandBeasties = new ArrayList<>(Arrays.asList(SAND_LEFT_BORDER, SAND_LEFT, SAND_RIGHT, SAND_RIGHT_BORDER));
     public static final ArrayList<Integer> movingPlatformBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_TILE));
     public static final ArrayList<Integer> movingPlatformBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_BORDER_BOX_TILE));
+    public static final ArrayList<Integer> movingColumnBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_COLUMN_LEFT_BORDER, MOVING_COLUMN_RIGHT_BORDER,
+        MOVING_COLUMN_UP_BORDER, MOVING_COLUMN_DOWN_BORDER));
     public LevelEditor() {
         createTileSetArrays();
+        createMovingColumnTileSetArrays();
         createBeastieTileSetArrays();
         createForeGroundSet();
         createBackGroundSet();
+        createMovingColumnSet();
         createBeastieSet();
     }
 
@@ -247,6 +263,15 @@ public class LevelEditor {
         beastieTileSetArr.add(beastieTileSet48);
         BeastieTileSet beastieTileSet49 = createBeastieTileSet("Assets/Beasties/SpriteSheets/dog_border_right_tile.png", 1, 1, 288, 288, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet49);
+        // Moving column border boxes
+        BeastieTileSet beastieTileSet50 = createBeastieTileSet("Assets/Beasties/SpriteSheets/moving_column_left_border_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet50);
+        BeastieTileSet beastieTileSet51 = createBeastieTileSet("Assets/Beasties/SpriteSheets/moving_column_right_border_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet51);
+        BeastieTileSet beastieTileSet52 = createBeastieTileSet("Assets/Beasties/SpriteSheets/moving_column_up_border_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet52);
+        BeastieTileSet beastieTileSet53 = createBeastieTileSet("Assets/Beasties/SpriteSheets/moving_column_down_border_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet53);
     }
 
     private void createTileSetArrays() {
@@ -339,6 +364,59 @@ public class LevelEditor {
 
     }
 
+    private void createMovingColumnTileSetArrays() {
+        // tileSetName is set in createTileSetArrays()
+        // this.tileSetName = "Sewer";
+
+        MovingColumnTileSet mcTileSet1 = createMovingColumnTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 54, this.scaledTileWidth, this.scaledTileHeight, 0, 20);
+        mcTileSetArr.add(mcTileSet1);
+
+        MovingColumnTileSet mcTileSet2 = createMovingColumnTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 58, this.scaledTileWidth, this.scaledTileHeight, 0, 20 + 5 * 54 + 27);
+        mcTileSetArr.add(mcTileSet2);
+
+        MovingColumnTileSet mcTileSet3 = createMovingColumnTileSet("Assets/tilesheets/sewer_bricks.png", 2, 19, 52, 52, this.scaledTileWidth, this.scaledTileHeight, 0, 20 + 16 * 54 + 18);
+        mcTileSetArr.add(mcTileSet3);
+
+        MovingColumnTileSet mcTileSet4 = createMovingColumnTileSet("Assets/tilesheets/light_wooden_beams.png", 1, 5, 91, 81, this.scaledTileWidth, this.scaledTileHeight, 5, 934);
+        mcTileSetArr.add(mcTileSet4);
+
+        MovingColumnTileSet mcTileSet5 = createMovingColumnTileSet("Assets/tilesheets/light_wooden_beams_rotated.png", 5, 1, 81, 91, scaledTileWidth, scaledTileHeight, 6, 4);
+        mcTileSetArr.add(mcTileSet5);
+
+        // sewer pipes
+        MovingColumnTileSet mcTileSet6 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 105, 120, scaledTileWidth, scaledTileHeight, 52, 870);
+        mcTileSetArr.add(mcTileSet6);
+
+        MovingColumnTileSet mcTileSet7 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 364);
+        mcTileSetArr.add(mcTileSet7);
+
+        MovingColumnTileSet mcTileSet8 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 438);
+        mcTileSetArr.add(mcTileSet8);
+
+        MovingColumnTileSet mcTileSet9 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 54, 490);
+        mcTileSetArr.add(mcTileSet9);
+
+        MovingColumnTileSet mcTileSet10 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet_horizontal_flip.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 756, 65);
+        mcTileSetArr.add(mcTileSet10);
+
+        MovingColumnTileSet mcTileSet11 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 157, 65);
+        mcTileSetArr.add(mcTileSet11);
+
+        MovingColumnTileSet mcTileSet12 = createMovingColumnTileSet("Assets/tilesheets/sewer_pipes_sheet_horizontal_flip.png", 1, 1, 110, 110, scaledTileWidth, scaledTileHeight, 586, 65);
+        mcTileSetArr.add(mcTileSet12);
+
+        MovingColumnTileSet mcTileSet13 = createMovingColumnTileSet("Assets/tilesheets/coral_ground_tilesheet.png", 1, 9, 96, 96, scaledTileWidth, scaledTileHeight, 0, 0);
+        mcTileSetArr.add(mcTileSet13);
+
+        MovingColumnTileSet mcTileSet14 = createMovingColumnTileSet("Assets/tilesheets/mvrk_coralgroundm_2x.png", 1, 1, 48, 48, scaledTileWidth, scaledTileHeight, 0, 0);
+        mcTileSetArr.add(mcTileSet14);
+
+        MovingColumnTileSet mcTileSet15 = createMovingColumnTileSet("Assets/tilesheets/sand_ani_1.png", 1, 1, 148, 148, scaledTileWidth, scaledTileHeight, 0, 0);
+        mcTileSetArr.add(mcTileSet15);
+
+
+    }
+
     private void createForeGroundSet() {
         int counter = 100;
         for (TileSet tileSet : fgTileSetArr) {
@@ -357,6 +435,17 @@ public class LevelEditor {
                 tile.setID(counter);
                 bgTileArr.add(tile);
                 counter--;
+            }
+        }
+    }
+
+    private void createMovingColumnSet() {
+        int counter = 100;
+        for (MovingColumnTileSet mcTileSet : mcTileSetArr) {
+            for (MovingColumnTile tile : mcTileSet.getMovingColumnTileArr()) {
+                tile.setID(counter);
+                mcTileArr.add(tile);
+                counter++;
             }
         }
     }
@@ -464,12 +553,13 @@ public class LevelEditor {
     private void loadContent() {
         System.out.println("Content loaded!");
         String filePath = "Assets/Levels/" + this.tileSetName + "/";
+        String mcFilePath = "Assets/MovingColumnLevels/" + this.tileSetName + "/";
         String fileName = this.curSelectedLevel;
         if (fileName == null || fileName == "") {
             return;
         }
         // get data
-        LevelData levelData = this.levelTileGridPanel.loadLevelFromFile(filePath, fileName);
+        LevelData levelData = this.levelTileGridPanel.loadLevelFromFile(filePath, mcFilePath, fileName);
         if (levelData != null) {
             this.levelNumRows = levelData.numRows;
             this.levelNumCols = levelData.numCols;
@@ -482,9 +572,11 @@ public class LevelEditor {
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.curPlacedWaterSpoutTile = null;
         this.curPlacedMovingPlatform = null;
+        this.curPlacedMovingColumn = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadSandTilesFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadMovingPlatformsFromFile(beastieFilepath, fileName);
+        this.levelTileGridPanel.loadMovingColumnsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -535,7 +627,8 @@ public class LevelEditor {
                     comboBoxInput = comboBoxInput + ".lvl";
                 }
                 String filePath = "Assets/Levels/" + LevelEditor.this.tileSetName + "/";
-                LevelEditor.this.checkLevelNameForSaving(filePath, comboBoxInput, LevelEditor.this.tileSetName);
+                String mcFilePath = "Assets/MovingColumnLevels/" + LevelEditor.this.tileSetName + "/";
+                LevelEditor.this.checkLevelNameForSaving(filePath, mcFilePath, comboBoxInput, LevelEditor.this.tileSetName);
 
                 // Close the pop-up window
                 popupFrame.dispose();
@@ -555,17 +648,17 @@ public class LevelEditor {
         popupFrame.setVisible(true);
     }
 
-    private void checkLevelNameForSaving(String filePath, String fileName, String tileSetFolderName) {
+    private void checkLevelNameForSaving(String filePath, String mcFilePath, String fileName, String tileSetFolderName) {
         System.out.println("checkLevelNameForSaving()");
         File file = new File(filePath + fileName);
         if (file.exists()) {
-            createOverridePopup(filePath, fileName, tileSetFolderName);
+            createOverridePopup(filePath, mcFilePath, fileName, tileSetFolderName);
         } else {
-            saveContent(filePath, fileName, tileSetFolderName);
+            saveContent(filePath, mcFilePath, fileName, tileSetFolderName);
         }
     }
 
-    private void createOverridePopup(String filePath, String fileName, String tileSetFolderName) {
+    private void createOverridePopup(String filePath, String mcFilePath, String fileName, String tileSetFolderName) {
         JFrame popupFrame = new JFrame("Override");
         popupFrame.setSize(400, 300);
         popupFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Only close the pop-up window
@@ -584,7 +677,7 @@ public class LevelEditor {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                LevelEditor.this.saveContent(filePath, fileName, tileSetFolderName);
+                LevelEditor.this.saveContent(filePath, mcFilePath, fileName, tileSetFolderName);
 
                 // Close the pop-up window
                 popupFrame.dispose();
@@ -615,17 +708,20 @@ public class LevelEditor {
         popupFrame.setVisible(true);
     }
 
-    private void saveContent(String filePath, String fileName, String tileSetFolderName) {
+    private void saveContent(String filePath, String mcFilePath, String fileName, String tileSetFolderName) {
         System.out.println("=== saveContent() called ===");
         System.out.println("filePath: " + filePath);
+        System.out.println("mcFilePath: " + mcFilePath);
         System.out.println("fileName: " + fileName);
         System.out.println("tileSetFolderName: " + tileSetFolderName);
         System.out.println("============================");
         this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveMovingColumnTilesToLevel(mcFilePath, fileName, tileSetFolderName);
         this.levelTileGridPanel.saveBeastiesToLevel(fileName);
         this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
         this.levelTileGridPanel.saveSandTilesToLevel(fileName);
         this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName);
+        this.levelTileGridPanel.saveMovingColumnsToLevel(fileName);
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -645,6 +741,21 @@ public class LevelEditor {
                 levelSelector.addItem(level);
             }
         }
+    }
+
+    private JPanel createLabeledPanel(String title, JScrollPane scrollPane, int x, int y, int w, int h) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+    
+        JLabel label = new JLabel(title, SwingConstants.CENTER);
+        label.setFont(new Font("Arial", Font.BOLD, 14));
+    
+        panel.add(label, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+    
+        panel.setBounds(x, y, w, h);
+    
+        return panel;
     }
 
     private void createEditor() {
@@ -667,16 +778,25 @@ public class LevelEditor {
         JScrollPane fgTileScrollPane = new JScrollPane(fgTilePanel);
         fgTileScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         fgTileScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        fgTileScrollPane.setBounds(100, 50, 700, 150);
-        canvasPanel.add(fgTileScrollPane);
+
+        JPanel fgPanel = createLabeledPanel("Foreground Tiles", fgTileScrollPane, 100, 50, 350, 150);
+        canvasPanel.add(fgPanel);
 
         TileGridPanel bgTilePanel = new TileGridPanel(this, this.bgTileArr, this.bgNumCols, this.scaledTileWidth, this.scaledTileHeight);
-        // bgTilePanel.setPreferredSize(new Dimension(800, 600));
         JScrollPane bgTileScrollPane = new JScrollPane(bgTilePanel);
         bgTileScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         bgTileScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        bgTileScrollPane.setBounds(800, 50, 350, 150);
-        canvasPanel.add(bgTileScrollPane);
+
+        JPanel bgPanel = createLabeledPanel("Background Tiles", bgTileScrollPane, 450, 50, 350, 150);
+        canvasPanel.add(bgPanel);
+
+        MovingColumnTileGridPanel mcTilePanel = new MovingColumnTileGridPanel(this, this.mcTileArr, this.mcNumCols, this.scaledTileWidth, this.scaledTileHeight);
+        JScrollPane mcTileScrollPane = new JScrollPane(mcTilePanel);
+        mcTileScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        mcTileScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        JPanel mcPanel = createLabeledPanel("Moving Columns", mcTileScrollPane, 800, 50, 350, 150);
+        canvasPanel.add(mcPanel);
 
         this.levelTileGridPanel = new LevelTileGridPanel(this, this.levelNumRows, this.levelNumCols, this.scaledTileWidth, this.scaledTileHeight);
         JScrollPane gameLevelScrollPane = new JScrollPane(levelTileGridPanel);
@@ -684,13 +804,14 @@ public class LevelEditor {
         gameLevelScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         gameLevelScrollPane.setBounds(100, 200, 1400, 500);
 
+        // This must be initialized last because levelTileGridPanel must be passed into beastieGridPanel
         this.beastieGridPanel = new BeastieGridPanel(this, this.levelTileGridPanel, this.beastieTileArr, this.beastieNumCols, this.scaledTileWidth, this.scaledTileHeight);
         JScrollPane beastieScrollPane = new JScrollPane(beastieGridPanel);
         beastieScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         beastieScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        beastieScrollPane.setBounds(1150, 50, 350, 150);
+        JPanel beastiePanel = createLabeledPanel("Game Objects / Beasties", beastieScrollPane, 1150, 50, 350, 150);
+        canvasPanel.add(beastiePanel);
 
-        canvasPanel.add(beastieScrollPane);
         canvasPanel.add(gameLevelScrollPane);
 
         this.levelTileGridPanel.addMouseListener(new MouseAdapter() {
@@ -908,6 +1029,30 @@ public class LevelEditor {
         return tileSet;
     }
 
+    private MovingColumnTileSet createMovingColumnTileSet(String filePath, int tileSetRows, int tileSetCols, int width, int height, int scaledWidth, 
+    int scaledHeight, int offSetX, int offSetY) {
+        MovingColumnTileSet tileSet = new MovingColumnTileSet();
+        try {
+            File imageFile = new File(filePath);
+            if (!imageFile.exists()) {
+                System.out.println("File does not exist!");
+                return tileSet;
+            }
+            BufferedImage tileSheet = ImageIO.read(imageFile);
+            for (int j = 0; j < tileSetRows; j++) {
+                for (int i = 0; i < tileSetCols; i++) {
+                    BufferedImage scaledImage = getScaledImage(tileSheet.getSubimage(offSetX + (i * width),
+                            offSetY + (j * height), width, height), scaledWidth, scaledHeight);
+                    MovingColumnTile tile = new MovingColumnTile(scaledImage);
+                    tileSet.addTile(tile);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return tileSet;
+    }
+
     private BufferedImage getScaledImage(BufferedImage originalImage, int scaledWidth, int scaledHeight) {
         Image scaledImage = originalImage.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
         BufferedImage scaledBufferedImage = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
@@ -919,16 +1064,34 @@ public class LevelEditor {
 
     public void setCurTile(int tileID) {
         this.curTileID = tileID;
+        this.curMovingColumnTileID = -1;
+    }
+
+    public void setCurMovingColumnTile(int tileID) {
+        this.curMovingColumnTileID = tileID;
+        this.curTileID = -1;
     }
 
     public int getCurTile() {
         return this.curTileID;
     }
 
+    public int getCurMovingColumnTile() {
+        return this.curMovingColumnTileID;
+    }
+
     public BufferedImage getBeastieImageFromTileID(int tileID) {
-        System.out.println("getBeastieImageFromTileID, tileID = " + tileID);
+        // System.out.println("getBeastieImageFromTileID, tileID = " + tileID);
         if (tileID >= 0) {
             return this.beastieTileArr.get(tileID).getImage();
+        }
+        return null;
+    }
+
+    public BufferedImage getImageFromMovingColumnTileID(int mcTileID) {
+        if (mcTileID >= 0) {
+            int idx = mcTileID - 100;
+            return this.mcTileArr.get(idx).getImage();
         }
         return null;
     }
@@ -946,6 +1109,10 @@ public class LevelEditor {
     }
 
     public void startDragging(Image img, Point start, int tileId) {
+        this.curTileID = -1;
+        this.curMovingColumnTileID = -1;
+        this.levelTileGridPanel.cancelFastEntryMode();
+        this.levelTileGridPanel.cancelFastEraseMode();
         curBeastieImage = img;
         curBeastieTileId = tileId;
         int actualId = tileId;
@@ -956,6 +1123,8 @@ public class LevelEditor {
             this.curMovingPlatform = tileId;
         } else if (actualId == MOVING_PLATFORM_BORDER_BOX_TILE) {
             this.curMovingPlatformBorderBox = tileId;
+        } else if (actualId == MOVING_COLUMN_LEFT_BORDER || actualId == MOVING_COLUMN_RIGHT_BORDER || actualId == MOVING_COLUMN_UP_BORDER || actualId == MOVING_COLUMN_DOWN_BORDER) {
+            this.curMovingColumnBorderBox = tileId;
         }
         dragOverlay.setDraggedImage(img);
         dragOverlay.setMousePoint(start);
@@ -1123,6 +1292,24 @@ public class LevelEditor {
                 this.levelTileGridPanel.placeSandTile(pst);
                 cancelDragging();
                 return;
+            } else if (movingColumnBorderBoxBeasties.contains(beastieConstantId)) {
+                if (this.curMovingColumnBorderBox != -1) {
+                    // Convert releasePoint to grid coordinates
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    if (this.curPlacedMovingColumn == null) {
+                        PlacedMovingColumnBorderBoxTile pmcbbt = new PlacedMovingColumnBorderBoxTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        PlacedMovingColumn pmc = new PlacedMovingColumn();
+                        pmc.addPlacedMovingColumnBorderBoxTile(pmcbbt);
+                        this.curPlacedMovingColumn = pmc;
+                        levelTileGridPanel.placeMovingColumn(pmc);
+                    } else {
+                        PlacedMovingColumnBorderBoxTile pmcbbt = new PlacedMovingColumnBorderBoxTile(gridX, gridY, curBeastieTileId, curBeastieImage);
+                        this.curPlacedMovingColumn.addPlacedMovingColumnBorderBoxTile(pmcbbt);
+                    }
+                }
+                cancelDragging();
+                return;
             } else {
                 int imageWidth = curBeastieImage.getWidth(null);
                 int imageHeight = curBeastieImage.getHeight(null);
@@ -1142,16 +1329,13 @@ public class LevelEditor {
             PlacedWaterSpoutTile pwsTile = levelTileGridPanel.placedWaterSpoutTileArr.get(i);
             if (pwsTile.isClicked(x, y) || pwsTile.hasClickedPlacedWaterCurrentTile(x, y)) {
                 levelTileGridPanel.placedWaterSpoutTileArr.remove(i);
-                // System.out.println("HERE-3");
                 return true;
             }
         }
         // TODO: I don't think this code can ever be called!!!!!!!
         // now check the current placedWaterSpout
         if (this.curPlacedWaterSpoutTile != null) {
-            // System.out.println("HERE-1");
             if (this.curPlacedWaterSpoutTile.isClicked(x, y) || this.curPlacedWaterSpoutTile.hasClickedPlacedWaterCurrentTile(x, y)) {
-                // System.out.println("HERE-2");
                 this.curWaterSpout = -1;
                 this.curPlacedWaterSpoutTile = null;
                 return true;
@@ -1162,12 +1346,10 @@ public class LevelEditor {
     }
 
     public boolean hasClickedOnAMovingPlatformElement(int x, int y) {
-        // System.out.println("Panel identity: " + levelTileGridPanel);
         for (int i = 0; i < levelTileGridPanel.placedMovingPlatformArr.size(); ++i) {
             PlacedMovingPlatform pmp = levelTileGridPanel.placedMovingPlatformArr.get(i);
             if (pmp.hasClickedPlacedMovingPlatformTile(x, y) || pmp.hasClickedPlacedMovingPlatformBorderBoxTile(x, y)) {
                 levelTileGridPanel.placedMovingPlatformArr.remove(i);
-                // System.out.println("HERE-3");
                 return true;
             }
         }
@@ -1175,12 +1357,20 @@ public class LevelEditor {
         return false;
     }
 
+    public boolean hasClickedOnAMovingColumnElement(int x, int y) {
+        for (int i = 0; i < levelTileGridPanel.placedMovingColumnArr.size(); ++i) {
+            PlacedMovingColumn pmc = levelTileGridPanel.placedMovingColumnArr.get(i);
+            if (pmc.hasClickedPlacedMovingColumnBorderBoxTile(x, y)) {
+                levelTileGridPanel.placedMovingColumnArr.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasEndedWaterSpoutSetup(int x, int y) {
-        // System.out.println("HERE-4");
         if (this.curWaterSpout != -1) {
-            // System.out.println("HERE-5");
             this.curWaterSpout = -1;
-            // levelTileGridPanel.placedWaterSpoutTileArr.add(this.curPlacedWaterSpoutTile);
             this.curPlacedWaterSpoutTile = null;
 
             return true;
@@ -1189,12 +1379,20 @@ public class LevelEditor {
     }
 
     public boolean hasEndedMovingPlatformSetup(int x, int y) {
-        // System.out.println("HERE-4");
         if (this.curMovingPlatform != -1 && this.curMovingPlatformBorderBox != -1) {
-            // System.out.println("HERE-5");
             this.curMovingPlatform = -1;
             this.curMovingPlatformBorderBox = -1;
             this.curPlacedMovingPlatform = null;
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasEndedMovingColumnSetup(int x, int y) {
+        if (this.curMovingColumnBorderBox != -1) {
+            this.curMovingColumnBorderBox = -1;
+            this.curPlacedMovingColumn = null;
 
             return true;
         }
