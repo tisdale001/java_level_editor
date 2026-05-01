@@ -28,6 +28,7 @@ public class LevelTileGridPanel extends JPanel {
     private int numCols;
     private LevelEditor levelEditor;
     private ArrayList<ArrayList<Integer>> levelArr = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> mcLevelArr = new ArrayList<>();
     private boolean fastEntryMode = false;
     private boolean fastEraseMode = false;
     private TilemapOverview overview = TilemapOverview.getInstance();
@@ -37,6 +38,7 @@ public class LevelTileGridPanel extends JPanel {
     public ArrayList<PlacedWaterSpoutTile> placedWaterSpoutTileArr = new ArrayList<>();
     public ArrayList<PlacedSandTile> placedSandTilesArr = new ArrayList<>();
     public ArrayList<PlacedMovingPlatform> placedMovingPlatformArr = new ArrayList<>();
+    public ArrayList<PlacedMovingColumn> placedMovingColumnArr = new ArrayList<>();
     private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
 
     
@@ -47,7 +49,7 @@ public class LevelTileGridPanel extends JPanel {
         this.numCols = numCols;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
-        createLevelArr();
+        createLevelArrays();
         createBeastieNamesToConstantsMap();
 
         setPreferredSize(new Dimension(this.numCols * this.tileWidth, this.numRows * this.tileHeight));
@@ -91,13 +93,21 @@ public class LevelTileGridPanel extends JPanel {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     System.out.println("Left clicked at: (" + x + ", " + y + ")");
                     int tileID = LevelTileGridPanel.this.levelEditor.getCurTile();
-                    LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
+                    int mcTileID = LevelTileGridPanel.this.levelEditor.getCurMovingColumnTile();
+                    if (tileID != -1) {
+                        LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
+                    } else if (mcTileID != -1) {
+                        LevelTileGridPanel.this.placeMovingColumnTileInLevel(x, y, mcTileID);
+                    }
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     System.out.println("Right clicked at: (" + x + ", " + y + ")");
-                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y) && !LevelTileGridPanel.this.hasEndedMovingPlatformSetup(x, y)) {
-                        if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y) && !LevelTileGridPanel.this.hasClickedOnAMovingPlatformElement(x, y)) {
+                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y) && !LevelTileGridPanel.this.hasEndedMovingPlatformSetup(x, y) &&
+                        !LevelTileGridPanel.this.hasEndedMovingColumnSetup(x, y)) {
+                        if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y) && !LevelTileGridPanel.this.hasClickedOnAMovingPlatformElement(x, y) &&
+                            !LevelTileGridPanel.this.hasClickedOnAMovingColumnElement(x, y)) {
                             if (!LevelTileGridPanel.this.hasClickedOnBeastieTile(x, y)) {
                                 LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                                LevelTileGridPanel.this.placeMovingColumnTileInLevel(x, y, -1);
                             }
                         }
                     }
@@ -118,11 +128,17 @@ public class LevelTileGridPanel extends JPanel {
                 // Handle mouse move event
                 if (fastEntryMode) {
                     int tileID = LevelTileGridPanel.this.levelEditor.getCurTile();
-                    LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
+                    int mcTileID = LevelTileGridPanel.this.levelEditor.getCurMovingColumnTile();
+                    if (tileID != -1) {
+                        LevelTileGridPanel.this.placeTileInLevel(x, y, tileID);
+                    } else if (mcTileID != -1) {
+                        LevelTileGridPanel.this.placeMovingColumnTileInLevel(x, y, mcTileID);
+                    }
                     repaint();
                     overview.repaint();
                 } else if (fastEraseMode) {
                     LevelTileGridPanel.this.placeTileInLevel(x, y, -1);
+                    LevelTileGridPanel.this.placeMovingColumnTileInLevel(x, y, -1);
                     repaint();
                     overview.repaint();
                 } else {
@@ -179,6 +195,9 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("Dogs", dogArr);
         ArrayList<Integer> dogBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.DOG_BORDER_BOX_LEFT, levelEditor.DOG_BORDER_BOX_RIGHT));
         this.beastieNamesToConstantsMap.put("DogBorderBoxes", dogBorderBoxArr);
+        ArrayList<Integer> movingColumnArr = new ArrayList<>(Arrays.asList(levelEditor.MOVING_COLUMN_LEFT_BORDER, levelEditor.MOVING_COLUMN_RIGHT_BORDER,
+            levelEditor.MOVING_COLUMN_UP_BORDER, levelEditor.MOVING_COLUMN_DOWN_BORDER));
+        this.beastieNamesToConstantsMap.put("MovingColumns", movingColumnArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -212,8 +231,16 @@ public class LevelTileGridPanel extends JPanel {
         return levelEditor.hasEndedMovingPlatformSetup(x, y);
     }
 
+    private boolean hasEndedMovingColumnSetup(int x, int y) {
+        return levelEditor.hasEndedMovingColumnSetup(x, y);
+    }
+
     private boolean hasClickedOnAMovingPlatformElement(int x, int y) {
         return levelEditor.hasClickedOnAMovingPlatformElement(x, y);
+    }
+
+    private boolean hasClickedOnAMovingColumnElement(int x, int y) {
+        return levelEditor.hasClickedOnAMovingColumnElement(x, y);
     }
 
     public void placeBeastieTile(int x, int y, int id, Image tileImage) {
@@ -231,6 +258,11 @@ public class LevelTileGridPanel extends JPanel {
         repaint();
     }
 
+    public void placeMovingColumn(PlacedMovingColumn pmc) {
+        placedMovingColumnArr.add(pmc);
+        repaint();
+    }
+
     public void placeSandTile(PlacedSandTile tile) {
         placedSandTilesArr.add(tile);
     }
@@ -244,7 +276,16 @@ public class LevelTileGridPanel extends JPanel {
         overview.placeTileInLevel(x, y, tileID);
     }
 
-    private void createLevelArr() {
+    private void placeMovingColumnTileInLevel(int x, int y, int mcTileID) {
+        int col = x / this.tileWidth;
+        int row = y / this.tileHeight;
+        if (row >= 0 && row < this.mcLevelArr.size() && col >= 0 && col < this.mcLevelArr.get(row).size()) {
+            this.mcLevelArr.get(row).set(col, mcTileID);
+        }
+        overview.placeMovingColumnTileInLevel(x, y, mcTileID);
+    }
+
+    private void createLevelArrays() {
         for (int i = 0; i < this.numRows; i++) {
             ArrayList<Integer> innerList = new ArrayList<>();
             for (int j = 0; j < this.numCols; j++) {
@@ -252,9 +293,17 @@ public class LevelTileGridPanel extends JPanel {
             }
             this.levelArr.add(innerList);
         }
-        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
+        for (int i = 0; i < this.numRows; i++) {
+            ArrayList<Integer> innerList = new ArrayList<>();
+            for (int j = 0; j < this.numCols; j++) {
+                innerList.add(-1);
+            }
+            this.mcLevelArr.add(innerList);
+        }
+        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.mcLevelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
     }
 
+    // TODO: this doesn't erase beasties if they are no longer on the screen: you need to add this functionality
     public void refreshRowsCols(String topBottomSelection, String leftRightSelection, int deltaRows, int deltaCols) {
         System.out.println(String.format("refreshRowsCols(), deltaRows = %d, deltaCols = %d", deltaRows, deltaCols));
         if (topBottomSelection == "Top") {
@@ -264,7 +313,9 @@ public class LevelTileGridPanel extends JPanel {
                 System.out.println("add rows to top");
                 for (int i = 0; i < deltaRows; i++) {
                     ArrayList<Integer> newArr = new ArrayList<>(Collections.nCopies(this.numCols, -1));
+                    ArrayList<Integer> newArr2 = new ArrayList<>(Collections.nCopies(this.numCols, -1));
                     this.levelArr.add(0, newArr);
+                    this.mcLevelArr.add(0, newArr2);
                 }
             } else if (deltaRows < 0) {
                 // subtract rows from top
@@ -272,6 +323,9 @@ public class LevelTileGridPanel extends JPanel {
                 for (int i = 0; i < -deltaRows; i++) {
                     if (!this.levelArr.isEmpty()) {
                         this.levelArr.remove(0);
+                    }
+                    if (!this.mcLevelArr.isEmpty()) {
+                        this.mcLevelArr.remove(0);
                     }
                 }
             }
@@ -282,8 +336,9 @@ public class LevelTileGridPanel extends JPanel {
                 System.out.println("add rows to bottom");
                 for (int i = 0; i < deltaRows; i++) {
                     ArrayList<Integer> newArr = new ArrayList<>(Collections.nCopies(this.numCols, -1));
-                    System.out.println(newArr);
+                    ArrayList<Integer> newArr2 = new ArrayList<>(Collections.nCopies(this.numCols, -1));
                     this.levelArr.add(newArr);
+                    this.mcLevelArr.add(newArr2);
                 }
             } else if (deltaRows < 0) {
                 // subtract rows from bottom
@@ -291,6 +346,9 @@ public class LevelTileGridPanel extends JPanel {
                 for (int i = 0; i < -deltaRows; i++) {
                     if (!this.levelArr.isEmpty()) {
                         this.levelArr.remove(this.levelArr.size() - 1);
+                    }
+                    if (!this.mcLevelArr.isEmpty()) {
+                        this.mcLevelArr.remove(this.mcLevelArr.size() - 1);
                     }
                 }
             }
@@ -305,6 +363,11 @@ public class LevelTileGridPanel extends JPanel {
                         this.levelArr.get(j).add(0, -1);
                     }
                 }
+                for (int j = 0; j < this.mcLevelArr.size(); j++) {
+                    for (int i = 0; i < deltaCols; i++) {
+                        this.mcLevelArr.get(j).add(0, -1);
+                    }
+                }
             } else if (deltaCols < 0) {
                 // subtract cols from left
                 System.out.println("subtract cols from left");
@@ -312,6 +375,13 @@ public class LevelTileGridPanel extends JPanel {
                     for (int i = 0; i < -deltaCols; i++) {
                         if (!this.levelArr.get(j).isEmpty()) {
                             this.levelArr.get(j).remove(0);
+                        }
+                    }
+                }
+                for (int j = 0; j < this.mcLevelArr.size(); j++) {
+                    for (int i = 0; i < -deltaCols; i++) {
+                        if (!this.mcLevelArr.get(j).isEmpty()) {
+                            this.mcLevelArr.get(j).remove(0);
                         }
                     }
                 }
@@ -326,6 +396,11 @@ public class LevelTileGridPanel extends JPanel {
                         this.levelArr.get(j).add(-1);
                     }
                 }
+                for (int j = 0; j < this.mcLevelArr.size(); j++) {
+                    for (int i = 0; i < deltaCols; i++) {
+                        this.mcLevelArr.get(j).add(-1);
+                    }
+                }
             } else if (deltaCols < 0) {
                 // subtract cols from right
                 System.out.println("subtract cols from right");
@@ -333,6 +408,13 @@ public class LevelTileGridPanel extends JPanel {
                     for (int i = 0; i < -deltaCols; i++) {
                         if (!this.levelArr.get(j).isEmpty()) {
                             this.levelArr.get(j).remove(this.levelArr.get(j).size() - 1);
+                        }
+                    }
+                }
+                for (int j = 0; j < this.mcLevelArr.size(); j++) {
+                    for (int i = 0; i < -deltaCols; i++) {
+                        if (!this.mcLevelArr.get(j).isEmpty()) {
+                            this.mcLevelArr.get(j).remove(this.mcLevelArr.get(j).size() - 1);
                         }
                     }
                 }
@@ -344,7 +426,7 @@ public class LevelTileGridPanel extends JPanel {
         setPreferredSize(new Dimension(this.numCols * this.tileWidth, this.numRows * this.tileHeight));
         revalidate();
         repaint();
-        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
+        overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.mcLevelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
         overview.setPreferredSize();
         overview.revalidate();
         overview.repaint();
@@ -355,13 +437,31 @@ public class LevelTileGridPanel extends JPanel {
         lfw.saveLevelToFile(filePath, fileName, tileSetFolderName);
     }
 
+    public void saveMovingColumnTilesToLevel(String mcFilePath, String fileName, String tileSetFolderName) {
+        System.out.println("Entered saveMovingColumnTilesToLevel");
+
+        if (mcLevelArr == null) {
+            throw new IllegalStateException("mcLevelArr is null");
+        }
+
+        if (mcLevelArr.isEmpty()) {
+            throw new IllegalStateException("mcLevelArr is empty");
+        }
+
+        if (mcLevelArr.get(0) == null || mcLevelArr.get(0).isEmpty()) {
+            throw new IllegalStateException("mcLevelArr first row is invalid");
+        }
+        LevelFileWriter lfw = new LevelFileWriter(this.mcLevelArr, this.mcLevelArr.size(), this.mcLevelArr.get(0).size());
+        lfw.saveLevelToFile(mcFilePath, fileName, tileSetFolderName);
+    }
+
     public void saveBeastiesToLevel(String fileName) {
         // public void saveBeastiesToFile(ArrayList<PlacedBeastieTile> placedBeastieTileArr, String fileName, String beastieName, ArrayList<Integer> beastieConstantArr) {
         BeastieFileWriter bfw = new BeastieFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
-            if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms")) {
+            if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms" && (key != "MovingColumns"))) {
                 bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
             }
         }
@@ -385,6 +485,17 @@ public class LevelTileGridPanel extends JPanel {
             ArrayList<Integer> value = entry.getValue();
             if (key == "MovingPlatforms") {
                 mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight);
+            }
+        }
+    }
+
+    public void saveMovingColumnsToLevel(String fileName) {
+        MovingColumnFileWriter mcfw = new MovingColumnFileWriter();
+        for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
+            String key = entry.getKey();
+            ArrayList<Integer> value = entry.getValue();
+            if (key == "MovingColumns") {
+                mcfw.saveMovingColumnsToFile(this.placedMovingColumnArr, fileName, key, tileWidth, tileHeight);
             }
         }
     }
@@ -723,6 +834,93 @@ public class LevelTileGridPanel extends JPanel {
         }
     }
 
+    public void loadMovingColumnsFromFile(String filePath, String fileName) {
+        this.placedMovingColumnArr.clear();
+    
+        String beastieNamePlural = "MovingColumns";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath, fileName);
+        System.out.println("filePath + fileName: " + filePath + fileName);
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            AtomicInteger lineNumber = new AtomicInteger(0);
+    
+            // Helper lambda to read the next non-empty line (or null if EOF)
+            java.util.function.Supplier<String> readNonEmptyLine = () -> {
+                try {
+                    String ln;
+                    while ((ln = reader.readLine()) != null) {
+                        lineNumber.incrementAndGet();
+                        if (!ln.trim().isEmpty()) return ln;
+                        // else skip blank line and continue
+                    }
+                    return null;
+                } catch (IOException ioe) {
+                    throw new RuntimeException(ioe);
+                }
+            };
+    
+            // Read metadata (num moving platforms) (will also have tileWidth and tileHeight, but not read here)
+            String metadataLine = readNonEmptyLine.get();
+            if (metadataLine == null) {
+                throw new IOException("Invalid level file: metadata missing (line " + lineNumber + ")");
+            }
+            String[] metadataParts = metadataLine.trim().split("\\s+");
+            int numMovingColumns;
+            try {
+                numMovingColumns = Integer.parseInt(metadataParts[0]);
+            } catch (NumberFormatException nfe) {
+                throw new IOException("Invalid metadata number on line " + lineNumber + ": '" + metadataLine + "'", nfe);
+            }
+            System.out.println("numMovingColumns: " + numMovingColumns);
+    
+            for (int i = 0; i < numMovingColumns; i++) {
+                // read min border box (x, y), then max border box (x, y)
+                String metaLine = readNonEmptyLine.get();
+                if (metaLine == null) {
+                    throw new IOException("Unexpected end of file while reading moving column metadata (expected " + numMovingColumns + " entries, got " + i + ")");
+                }
+                // System.out.println("metaLine (line " + lineNumber + "): " + metaLine);
+    
+                // minX, minY, maxX, maxY, bbMinId, bbMaxId
+                String[] parts = metaLine.trim().split("\\s+");
+                if (parts.length < 6) {
+                    throw new IOException("Invalid moving platform metadata (line " + lineNumber + "): " + metaLine);
+                }
+    
+                int minX, minY, maxX, maxY, bbMinId, bbMaxId;
+                try {
+                    minX = Integer.parseInt(parts[0]);
+                    minY = Integer.parseInt(parts[1]);
+                    maxX = Integer.parseInt(parts[2]);
+                    maxY = Integer.parseInt(parts[3]);
+                    bbMinId = Integer.parseInt(parts[4]);
+                    bbMaxId = Integer.parseInt(parts[5]);
+                } catch (NumberFormatException nfe) {
+                    throw new IOException("Invalid integer in moving column metadata (line " + lineNumber + "): " + metaLine, nfe);
+                }
+
+                Image bbMinImage = levelEditor.beastieGridPanel.tileArr.get(bbMinId).getImage();
+                Image bbMaxImage = levelEditor.beastieGridPanel.tileArr.get(bbMaxId).getImage();
+                PlacedMovingColumn placedMovingColumn = new PlacedMovingColumn();
+                
+                PlacedMovingColumnBorderBoxTile minTile = new PlacedMovingColumnBorderBoxTile(minX, minY, bbMinId, bbMinImage);
+                PlacedMovingColumnBorderBoxTile maxTile = new PlacedMovingColumnBorderBoxTile(maxX, maxY, bbMaxId, bbMaxImage);
+                placedMovingColumn.addPlacedMovingColumnBorderBoxTile(minTile);
+                placedMovingColumn.addPlacedMovingColumnBorderBoxTile(maxTile);
+                
+                this.placedMovingColumnArr.add(placedMovingColumn);
+            }
+        } catch (Exception e) {
+            // Catch Exception so both IO and format problems are visible and you get a stack trace.
+            System.err.println("An error occurred while loading the moving columns from file: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+    }
+
     public void loadSandTilesFromFile(String filePath, String fileName) {
         this.placedSandTilesArr.clear();
     
@@ -841,67 +1039,110 @@ public class LevelTileGridPanel extends JPanel {
             return;
         }
     }
+
+    public LevelData loadLevelFromFile(String filePath, String mcFilePath, String fileName) {
+        File levelFile = new File(filePath, fileName);
+        File mcFile = new File(mcFilePath, fileName);
     
-
-    public LevelData loadLevelFromFile(String filePath, String fileName) {
-        // Create the file object
-        File file = new File(filePath + fileName);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Read the metadata (rows, columns, and tileset folder name)
-            String metadataLine = reader.readLine();
-            if (metadataLine == null || metadataLine.isEmpty()) {
-                throw new IOException("Invalid level file: metadata missing");
+        try (
+            BufferedReader levelReader = new BufferedReader(new FileReader(levelFile))
+        ) {
+            // ===== Read level metadata FIRST =====
+            String levelMeta = levelReader.readLine();
+            if (levelMeta == null) {
+                throw new IOException("Missing metadata in level file");
             }
-
-            String[] metadataParts = metadataLine.split(" ");
-            if (metadataParts.length != 3) {
-                throw new IOException("Invalid level file: incorrect metadata format");
+    
+            String[] levelParts = levelMeta.split(" ");
+            if (levelParts.length != 3) {
+                throw new IOException("Invalid level metadata format");
             }
-
-            int numR = Integer.parseInt(metadataParts[0]);
-            int numC = Integer.parseInt(metadataParts[1]);
-            String tileSetFolderName = metadataParts[2];
-
-            // Initialize the level array
+    
+            int numR = Integer.parseInt(levelParts[0]);
+            int numC = Integer.parseInt(levelParts[1]);
+            String tileSetFolderName = levelParts[2];
+    
+            // ===== Initialize arrays =====
             this.levelArr = new ArrayList<>(numR);
-
-            // Read the level data (tile IDs)
+            this.mcLevelArr = new ArrayList<>(numR);
+    
+            // ===== Read LEVEL data =====
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] tileIDs = line.trim().split(" ");
+            while ((line = levelReader.readLine()) != null) {
+                String[] ids = line.trim().split(" ");
                 ArrayList<Integer> row = new ArrayList<>(numC);
-                for (String tileID : tileIDs) {
-                    row.add(Integer.parseInt(tileID));
+    
+                for (int i = 0; i < numC; i++) {
+                    row.add(Integer.parseInt(ids[i]));
                 }
+    
                 levelArr.add(row);
             }
-
-            // Verify the loaded data matches the expected dimensions
-            if (levelArr.size() != numR) {
-                throw new IOException("Invalid level file: row count does not match metadata");
-            }
-            for (ArrayList<Integer> row : levelArr) {
-                if (row.size() != numC) {
-                    throw new IOException("Invalid level file: column count does not match metadata");
+    
+            // ===== Handle MC file =====
+            if (mcFile.exists()) {
+                try (BufferedReader mcReader = new BufferedReader(new FileReader(mcFile))) {
+    
+                    String mcMeta = mcReader.readLine();
+                    if (mcMeta == null) {
+                        throw new IOException("Missing metadata in MC file");
+                    }
+    
+                    String[] mcParts = mcMeta.split(" ");
+                    int mcNumR = Integer.parseInt(mcParts[0]);
+                    int mcNumC = Integer.parseInt(mcParts[1]);
+    
+                    if (mcNumR != numR || mcNumC != numC) {
+                        throw new IOException("MC file dimensions do not match level file");
+                    }
+    
+                    String mcLine;
+                    while ((mcLine = mcReader.readLine()) != null) {
+                        String[] ids = mcLine.trim().split(" ");
+                        ArrayList<Integer> row = new ArrayList<>(numC);
+    
+                        for (int i = 0; i < numC; i++) {
+                            row.add(Integer.parseInt(ids[i]));
+                        }
+    
+                        mcLevelArr.add(row);
+                    }
+    
+                }
+            } else {
+                // ✅ Generate default MC data
+                System.out.println("MC file not found. Generating default MC data.");
+    
+                for (int i = 0; i < numR; i++) {
+                    ArrayList<Integer> row = new ArrayList<>(numC);
+                    for (int j = 0; j < numC; j++) {
+                        row.add(-1);
+                    }
+                    mcLevelArr.add(row);
                 }
             }
-
-            // Set necessary data
+    
+            // ===== Final validation =====
+            if (levelArr.size() != numR || mcLevelArr.size() != numR) {
+                throw new IOException("Row count mismatch");
+            }
+    
+            // ===== Set data =====
             this.numRows = numR;
             this.numCols = numC;
+    
             revalidate();
             repaint();
-            // set TilemapOverview
-            overview.initiateOverviewMap(this.levelEditor, levelArr, numRows, numCols, tileWidth, tileHeight);
+    
+            overview.initiateOverviewMap(this.levelEditor, levelArr, mcLevelArr, numRows, numCols, tileWidth, tileHeight);
             overview.setPreferredSize();
             overview.revalidate();
             overview.repaint();
-            // Return the loaded level data
+    
             return new LevelData(numR, numC, tileSetFolderName);
-
+    
         } catch (IOException e) {
-            System.err.println("An error occurred while loading the level from file: " + e.getMessage());
+            System.err.println("Error loading level: " + e.getMessage());
             return null;
         }
     }
@@ -934,6 +1175,19 @@ public class LevelTileGridPanel extends JPanel {
                 int tileID = this.levelArr.get(i).get(j);
                 if (tileID != -1) {
                     BufferedImage image = levelEditor.getImageFromTileID(tileID);
+                    int y = i * this.tileHeight;
+                    int x = j * this.tileWidth;
+                    g.drawImage(image, x, y, this.tileWidth, this.tileHeight, this);
+                }
+                
+            }
+        }
+
+        for (int i = 0; i < this.mcLevelArr.size(); i++) {
+            for (int j = 0; j < this.mcLevelArr.get(i).size(); j++) {
+                int mcTileID = this.mcLevelArr.get(i).get(j);
+                if (mcTileID != -1) {
+                    BufferedImage image = levelEditor.getImageFromMovingColumnTileID(mcTileID);
                     int y = i * this.tileHeight;
                     int x = j * this.tileWidth;
                     g.drawImage(image, x, y, this.tileWidth, this.tileHeight, this);
@@ -992,6 +1246,18 @@ public class LevelTileGridPanel extends JPanel {
             }
         }
 
+        for (PlacedMovingColumn c : this.placedMovingColumnArr) {
+            ArrayList<PlacedMovingColumnBorderBoxTile> placedMovingColumnBorderBoxTileArr = c.getPlacedMovingColumnBorderBoxTileArr();
+            for (PlacedMovingColumnBorderBoxTile pmcbbt : placedMovingColumnBorderBoxTileArr) {
+                int pmcbbtImgWidth = pmcbbt.image.getWidth(this);
+                int pmcbbtImgHeight = pmcbbt.image.getHeight(this);
+                // defensive check
+                if (pmcbbtImgWidth > 0 && pmcbbtImgHeight > 0) {
+                    g.drawImage(pmcbbt.image, pmcbbt.x, pmcbbt.y, pmcbbtImgWidth, pmcbbtImgHeight, this);
+                }
+            }
+        }
+
         for (PlacedSandTile t : this.placedSandTilesArr) {
             int imgWidth = t.image.getWidth(this);
             int imgHeight = t.image.getHeight(this);
@@ -1010,4 +1276,14 @@ public class LevelTileGridPanel extends JPanel {
     public int getTileHeight() {
         return this.tileHeight;
     }
+
+    public void cancelFastEntryMode() {
+        this.fastEntryMode = false;
+    }
+
+    public void cancelFastEraseMode() {
+        this.fastEraseMode = false;
+    }
+
+
 }
