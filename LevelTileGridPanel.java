@@ -303,7 +303,500 @@ public class LevelTileGridPanel extends JPanel {
         overview.initiateOverviewMap(this.levelEditor, this.levelArr, this.mcLevelArr, this.numRows, this.numCols, this.tileWidth, this.tileHeight);
     }
 
-    // TODO: this doesn't erase beasties if they are no longer on the screen: you need to add this functionality
+    // Here we erase and move Beasties as necessary during a Refresh
+    public void refreshBeastiesRowsCols(String topBottomSelection, String leftRightSelection, int newNumRows, int newNumCols, int oldNumRows, int oldNumCols) {
+        int deltaRows = newNumRows - oldNumRows;
+        int deltaCols = newNumCols - oldNumCols;
+        if (topBottomSelection == "Top") {
+            // Top
+            if (deltaRows > 0) {
+                // add rows to top (move beasties down)
+                int deltaY = deltaRows * this.tileHeight;
+                for (PlacedBeastieTile pbTile : placedBeastieTileArr) {
+                    pbTile.y = pbTile.y + deltaY;
+                }
+                for (PlacedWaterSpoutTile pwsTile : placedWaterSpoutTileArr) {
+                    pwsTile.y = pwsTile.y + deltaY;
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        pwcTile.y = pwcTile.y + deltaY;
+                    }
+                }
+                for (PlacedSandTile psTile : placedSandTilesArr) {
+                    psTile.y = psTile.y + deltaY;
+                }
+                for (PlacedMovingPlatform pmp : placedMovingPlatformArr) {
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        pmpTile.y = pmpTile.y + deltaY;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        pmpbbTile.y = pmpbbTile.y + deltaY;
+                    }
+                }
+                for (PlacedMovingColumn pmc : placedMovingColumnArr) {
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        pmcbbTile.y = pmcbbTile.y + deltaY;
+                    }
+                }
+            } else if (deltaRows < 0) {
+                // subtract rows from top (move beasties up AND delete beasties that are no longer in range)
+                int deltaY = -deltaRows * this.tileHeight;
+                ArrayList<Integer> indicesToBeDeletedArr = new ArrayList<>();
+
+                for (int i = placedBeastieTileArr.size() - 1; i >= 0; i--) {
+                    PlacedBeastieTile pbTile = placedBeastieTileArr.get(i);
+                    pbTile.y = pbTile.y - deltaY;
+                    if (pbTile.y < 0) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedBeastieTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedWaterSpoutTileArr.size() - 1; i >= 0; i--) {
+                    PlacedWaterSpoutTile pwsTile = placedWaterSpoutTileArr.get(i);
+                    pwsTile.y = pwsTile.y - deltaY;
+                    if (pwsTile.y < 0) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        pwcTile.y = pwcTile.y - deltaY;
+                        if (pwcTile.y < 0) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedWaterSpoutTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedSandTilesArr.size() - 1; i >= 0; i--) {
+                    PlacedSandTile psTile = placedSandTilesArr.get(i);
+                    psTile.y = psTile.y - deltaY;
+                    if (psTile.y < 0) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedSandTilesArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingPlatformArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingPlatform pmp = placedMovingPlatformArr.get(i);
+                    boolean addIndex = false;
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        pmpTile.y = pmpTile.y - deltaY;
+                        if (pmpTile.y < 0) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        pmpbbTile.y = pmpbbTile.y - deltaY;
+                        if (pmpbbTile.y < 0) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingPlatformArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingColumnArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingColumn pmc = placedMovingColumnArr.get(i);
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        pmcbbTile.y = pmcbbTile.y - deltaY;
+                        if (pmcbbTile.y < 0) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingColumnArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+            }
+        } else {
+            // Bottom
+            if (deltaRows > 0) {
+                // add rows to Bottom (nothing needs to be done here)
+            } else if (deltaRows < 0) {
+                // subtract rows from Bottom
+                int maxY = newNumRows * this.tileHeight;
+                ArrayList<Integer> indicesToBeDeletedArr = new ArrayList<>();
+
+                for (int i = placedBeastieTileArr.size() - 1; i >= 0; i--) {
+                    PlacedBeastieTile pbTile = placedBeastieTileArr.get(i);
+                    if (pbTile.y >= maxY) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedBeastieTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedWaterSpoutTileArr.size() - 1; i >= 0; i--) {
+                    PlacedWaterSpoutTile pwsTile = placedWaterSpoutTileArr.get(i);
+                    if (pwsTile.y >= maxY) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        if (pwcTile.y >= maxY) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedWaterSpoutTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedSandTilesArr.size() - 1; i >= 0; i--) {
+                    PlacedSandTile psTile = placedSandTilesArr.get(i);
+                    if (psTile.y >= maxY) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedSandTilesArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingPlatformArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingPlatform pmp = placedMovingPlatformArr.get(i);
+                    boolean addIndex = false;
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        if (pmpTile.y >= maxY) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        if (pmpbbTile.y >= maxY) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingPlatformArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingColumnArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingColumn pmc = placedMovingColumnArr.get(i);
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        if (pmcbbTile.y >= maxY) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingColumnArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+            }
+        }
+        if (leftRightSelection == "Left") {
+            // Left
+            if (deltaCols > 0) {
+                // add columns to left (shift beasties to the right)
+                int deltaX = deltaCols * this.tileWidth;
+                for (PlacedBeastieTile pbTile : placedBeastieTileArr) {
+                    pbTile.x = pbTile.x + deltaX;
+                }
+                for (PlacedWaterSpoutTile pwsTile : placedWaterSpoutTileArr) {
+                    pwsTile.x = pwsTile.x + deltaX;
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        pwcTile.x = pwcTile.x + deltaX;
+                    }
+                }
+                for (PlacedSandTile psTile : placedSandTilesArr) {
+                    psTile.x = psTile.x + deltaX;
+                }
+                for (PlacedMovingPlatform pmp : placedMovingPlatformArr) {
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        pmpTile.x = pmpTile.x + deltaX;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        pmpbbTile.x = pmpbbTile.x + deltaX;
+                    }
+                }
+                for (PlacedMovingColumn pmc : placedMovingColumnArr) {
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        pmcbbTile.x = pmcbbTile.x + deltaX;
+                    }
+                }
+
+            } else if (deltaCols < 0) {
+                // subtract columns from left (move beasties to the left and delete if necessary)
+                int deltaX = -deltaCols * this.tileWidth;
+                ArrayList<Integer> indicesToBeDeletedArr = new ArrayList<>();
+
+                for (int i = placedBeastieTileArr.size() - 1; i >= 0; i--) {
+                    PlacedBeastieTile pbTile = placedBeastieTileArr.get(i);
+                    pbTile.x = pbTile.x - deltaX;
+                    if (pbTile.x < 0) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedBeastieTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedWaterSpoutTileArr.size() - 1; i >= 0; i--) {
+                    PlacedWaterSpoutTile pwsTile = placedWaterSpoutTileArr.get(i);
+                    pwsTile.x = pwsTile.x - deltaX;
+                    if (pwsTile.x < 0) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        pwcTile.x = pwcTile.x - deltaX;
+                        if (pwcTile.x < 0) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedWaterSpoutTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedSandTilesArr.size() - 1; i >= 0; i--) {
+                    PlacedSandTile psTile = placedSandTilesArr.get(i);
+                    psTile.x = psTile.x - deltaX;
+                    if (psTile.x < 0) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedSandTilesArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingPlatformArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingPlatform pmp = placedMovingPlatformArr.get(i);
+                    boolean addIndex = false;
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        pmpTile.x = pmpTile.x - deltaX;
+                        if (pmpTile.x < 0) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        pmpbbTile.x = pmpbbTile.x - deltaX;
+                        if (pmpbbTile.x < 0) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingPlatformArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingColumnArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingColumn pmc = placedMovingColumnArr.get(i);
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        pmcbbTile.x = pmcbbTile.x - deltaX;
+                        if (pmcbbTile.x < 0) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingColumnArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+            }
+        } else {
+            // Right
+            if (deltaCols > 0) {
+                // add columns to right (nothing needs to be done here)
+            } else if (deltaCols < 0) {
+                // subtract columns from right (delete beasties at the far right)
+                int maxX = newNumCols * this.tileWidth;
+                ArrayList<Integer> indicesToBeDeletedArr = new ArrayList<>();
+
+                for (int i = placedBeastieTileArr.size() - 1; i >= 0; i--) {
+                    PlacedBeastieTile pbTile = placedBeastieTileArr.get(i);
+                    if (pbTile.x >= maxX) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedBeastieTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedWaterSpoutTileArr.size() - 1; i >= 0; i--) {
+                    PlacedWaterSpoutTile pwsTile = placedWaterSpoutTileArr.get(i);
+                    if (pwsTile.x >= maxX) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedWaterCurrentTile> pwcTileArr = pwsTile.getPlacedWaterCurrentTileArr();
+                    for (PlacedWaterCurrentTile pwcTile : pwcTileArr) {
+                        if (pwcTile.x >= maxX) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedWaterSpoutTileArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedSandTilesArr.size() - 1; i >= 0; i--) {
+                    PlacedSandTile psTile = placedSandTilesArr.get(i);
+                    if (psTile.x >= maxX) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedSandTilesArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingPlatformArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingPlatform pmp = placedMovingPlatformArr.get(i);
+                    boolean addIndex = false;
+                    ArrayList<PlacedMovingPlatformTile> pmpTileArr = pmp.getPlacedMovingPlatformTileArr();
+                    for (PlacedMovingPlatformTile pmpTile : pmpTileArr) {
+                        if (pmpTile.x >= maxX) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                        continue;
+                    }
+                    ArrayList<PlacedMovingPlatformBorderBoxTile> pmpbbTileArr = pmp.getPlacedMovingPlatformBorderBoxTileArr();
+                    for (PlacedMovingPlatformBorderBoxTile pmpbbTile : pmpbbTileArr) {
+                        if (pmpbbTile.x >= maxX) {
+                            addIndex = true;
+                            break;
+                        }
+                    }
+                    if (addIndex) {
+                        indicesToBeDeletedArr.add(i);
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingPlatformArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+                for (int i = placedMovingColumnArr.size() - 1; i >= 0; i--) {
+                    PlacedMovingColumn pmc = placedMovingColumnArr.get(i);
+                    ArrayList<PlacedMovingColumnBorderBoxTile> pmcbbTileArr = pmc.getPlacedMovingColumnBorderBoxTileArr();
+                    for (PlacedMovingColumnBorderBoxTile pmcbbTile: pmcbbTileArr) {
+                        if (pmcbbTile.x >= maxX) {
+                            indicesToBeDeletedArr.add(i);
+                            break;
+                        }
+                    }
+                }
+                indicesToBeDeletedArr.sort(Collections.reverseOrder());
+                for (int i : indicesToBeDeletedArr) {
+                    placedMovingColumnArr.remove(i);
+                }
+                indicesToBeDeletedArr.clear();
+
+            }
+        }
+        revalidate();
+        repaint();
+    }
+
+    // Erasing Beasties is done in refreshBeastiesRowsCols()
     public void refreshRowsCols(String topBottomSelection, String leftRightSelection, int deltaRows, int deltaCols) {
         System.out.println(String.format("refreshRowsCols(), deltaRows = %d, deltaCols = %d", deltaRows, deltaCols));
         if (topBottomSelection == "Top") {
