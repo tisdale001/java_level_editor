@@ -546,6 +546,7 @@ public class LevelEditor {
         int deltaRows = newNumRows - this.levelNumRows;
         int deltaCols = newNumCols - this.levelNumCols;
         this.levelTileGridPanel.refreshRowsCols(topBottomSelection, leftRightSelection, deltaRows, deltaCols);
+        this.levelTileGridPanel.refreshBeastiesRowsCols(topBottomSelection, leftRightSelection, newNumRows, newNumCols, this.levelNumRows, this.levelNumCols);
         this.levelNumRows = newNumRows;
         this.levelNumCols = newNumCols;
     }
