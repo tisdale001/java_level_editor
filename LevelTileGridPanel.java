@@ -198,6 +198,8 @@ public class LevelTileGridPanel extends JPanel {
         ArrayList<Integer> movingColumnArr = new ArrayList<>(Arrays.asList(levelEditor.MOVING_COLUMN_LEFT_BORDER, levelEditor.MOVING_COLUMN_RIGHT_BORDER,
             levelEditor.MOVING_COLUMN_UP_BORDER, levelEditor.MOVING_COLUMN_DOWN_BORDER));
         this.beastieNamesToConstantsMap.put("MovingColumns", movingColumnArr);
+        ArrayList<Integer> depthBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.DEPTH_BORDER_BOX));
+        this.beastieNamesToConstantsMap.put("DepthBorderBoxes", depthBorderBoxArr);
     }
 
     private boolean hasClickedOnBeastieTile(int x, int y) {
@@ -1016,6 +1018,9 @@ public class LevelTileGridPanel extends JPanel {
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieNamePlural + ".txt";
         File file = new File(filePath + fileName);
+        if (!file.exists()) {
+            return;
+        }
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             // Read the metadata (number of Anemones)
             String metadataLine = reader.readLine();
