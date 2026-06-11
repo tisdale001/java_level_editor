@@ -117,10 +117,20 @@ public class LevelEditor {
     public static final int MOVING_COLUMN_UP_BORDER = 51;
     public static final int MOVING_COLUMN_DOWN_BORDER = 52;
     public static final int DEPTH_BORDER_BOX = 53;
+    public static final int SCORPION_FLOOR_RIGHT = 54;
+    public static final int SCORPION_FLOOR_LEFT = 55;
+    public static final int SCORPION_CEILING_RIGHT = 56;
+    public static final int SCORPION_CEILING_LEFT = 57;
+    public static final int SCORPION_LEFT_WALL_UP = 58;
+    public static final int SCORPION_LEFT_WALL_DOWN = 59;
+    public static final int SCORPION_RIGHT_WALL_UP = 60;
+    public static final int SCORPION_RIGHT_WALL_DOWN = 61;
+    public static final int SCORPION_BORDER_BOX = 62;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
-        DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT, DEPTH_BORDER_BOX));
+        DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT, DEPTH_BORDER_BOX, SCORPION_FLOOR_RIGHT, SCORPION_FLOOR_LEFT, SCORPION_CEILING_RIGHT, SCORPION_CEILING_LEFT,
+        SCORPION_LEFT_WALL_UP, SCORPION_LEFT_WALL_DOWN, SCORPION_RIGHT_WALL_UP, SCORPION_RIGHT_WALL_DOWN, SCORPION_BORDER_BOX));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
@@ -276,6 +286,26 @@ public class LevelEditor {
         // Depth border boxes
         BeastieTileSet beastieTileSet54 = createBeastieTileSet("Assets/Beasties/SpriteSheets/black_arrow_down_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet54);
+        // Scorpions
+        BeastieTileSet beastieTileSet55 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet55);
+        BeastieTileSet beastieTileSet56 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet56);
+        BeastieTileSet beastieTileSet57 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_ceiling_right_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet57);
+        BeastieTileSet beastieTileSet58 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_ceiling_left_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet58);
+        BeastieTileSet beastieTileSet59 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_wall_up_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet59);
+        BeastieTileSet beastieTileSet60 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_wall_down_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet60);
+        BeastieTileSet beastieTileSet61 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_wall_up_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet61);
+        BeastieTileSet beastieTileSet62 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_wall_down_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet62);
+        // Scorpion border box
+        BeastieTileSet beastieTileSet63 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_border_tile.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet63);
     }
 
     private void createTileSetArrays() {

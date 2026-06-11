@@ -174,6 +174,12 @@ public class LevelTileGridPanel extends JPanel {
         ArrayList<Integer> spidersArr = new ArrayList<>(Arrays.asList(levelEditor.SPIDER_FLOOR_RIGHT, levelEditor.SPIDER_FLOOR_LEFT, levelEditor.SPIDER_CEILING_RIGHT,
             levelEditor.SPIDER_CEILING_LEFT, levelEditor.SPIDER_LEFT_WALL_UP, levelEditor.SPIDER_LEFT_WALL_DOWN, levelEditor.SPIDER_RIGHT_WALL_UP, levelEditor.SPIDER_RIGHT_WALL_DOWN));
         this.beastieNamesToConstantsMap.put("Spiders", spidersArr);
+        ArrayList<Integer> scorpionsArr = new ArrayList<>(Arrays.asList(levelEditor.SCORPION_FLOOR_RIGHT, levelEditor.SCORPION_FLOOR_LEFT, levelEditor.SCORPION_CEILING_RIGHT,
+            levelEditor.SCORPION_CEILING_LEFT, levelEditor.SCORPION_LEFT_WALL_UP, levelEditor.SCORPION_LEFT_WALL_DOWN, levelEditor.SCORPION_RIGHT_WALL_UP,
+            levelEditor.SCORPION_RIGHT_WALL_DOWN));
+        this.beastieNamesToConstantsMap.put("Scorpions", scorpionsArr);
+        ArrayList<Integer> scorpionBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.SCORPION_BORDER_BOX));
+        this.beastieNamesToConstantsMap.put("ScorpionBorderBoxes", scorpionBorderBoxArr);
         ArrayList<Integer> spiderBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.SPIDER_BORDER_BOX));
         this.beastieNamesToConstantsMap.put("SpiderBorderBoxes", spiderBorderBoxArr);
         ArrayList<Integer> ratsArr = new ArrayList<>(Arrays.asList(levelEditor.RAT_RIGHT, levelEditor.RAT_LEFT));
