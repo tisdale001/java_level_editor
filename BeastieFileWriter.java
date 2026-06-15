@@ -14,14 +14,15 @@ public class BeastieFileWriter {
             String beastieName,
             int tileWidth,
             int tileHeight,
-            ArrayList<Integer> beastieConstantArr) {
+            ArrayList<Integer> beastieConstantArr,
+            String beastieFilePath) {
 
         // Ensure base file name ends properly
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieName + ".txt";
 
         // Directory path
-        String filePath = "Assets/Beasties/BeastieLevelData/" + beastieName + "/";
+        String filePath = beastieFilePath + beastieName + "/";
         File directory = new File(filePath);
         if (!directory.exists() && !directory.mkdirs()) {
             System.err.println("Failed to create directories: " + filePath);

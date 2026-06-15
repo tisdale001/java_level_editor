@@ -956,55 +956,55 @@ public class LevelTileGridPanel extends JPanel {
         lfw.saveLevelToFile(mcFilePath, fileName, tileSetFolderName);
     }
 
-    public void saveBeastiesToLevel(String fileName) {
+    public void saveBeastiesToLevel(String fileName, String beastieFilePath) {
         // public void saveBeastiesToFile(ArrayList<PlacedBeastieTile> placedBeastieTileArr, String fileName, String beastieName, ArrayList<Integer> beastieConstantArr) {
         BeastieFileWriter bfw = new BeastieFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms" && (key != "MovingColumns"))) {
-                bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
+                bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
             }
         }
     }
 
-    public void saveWaterSpoutsToLevel(String fileName) {
+    public void saveWaterSpoutsToLevel(String fileName, String beastieFilePath) {
         WaterSpoutFileWriter wsfw = new WaterSpoutFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "WaterSpouts") {
-                wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value);
+                wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
             }
         }
     }
 
-    public void saveMovingPlatformsToLevel(String fileName) {
+    public void saveMovingPlatformsToLevel(String fileName, String beastieFilePath) {
         MovingPlatformFileWriter mpfw = new MovingPlatformFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "MovingPlatforms") {
-                mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight);
+                mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
             }
         }
     }
 
-    public void saveMovingColumnsToLevel(String fileName) {
+    public void saveMovingColumnsToLevel(String fileName, String beastieFilePath) {
         MovingColumnFileWriter mcfw = new MovingColumnFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "MovingColumns") {
-                mcfw.saveMovingColumnsToFile(this.placedMovingColumnArr, fileName, key, tileWidth, tileHeight);
+                mcfw.saveMovingColumnsToFile(this.placedMovingColumnArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
             }
         }
     }
 
-    public void saveSandTilesToLevel(String fileName) {
+    public void saveSandTilesToLevel(String fileName, String beastieFilePath) {
         SandTileFileWriter stfw = new SandTileFileWriter();
         String key = "SandTiles";
-        stfw.saveSandTilesToFile(this.placedSandTilesArr, fileName, key, tileWidth, tileHeight);
+        stfw.saveSandTilesToFile(this.placedSandTilesArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
     }
 
     public void loadBeastiesFromFiles(String filePath, String fileName) {

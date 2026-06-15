@@ -16,14 +16,15 @@ public class WaterSpoutFileWriter {
         String beastieName,
         int tileWidth,
         int tileHeight,
-        ArrayList<Integer> waterSpoutConstantArr) {
+        ArrayList<Integer> waterSpoutConstantArr,
+        String beastieFilePath) {
 
         // Remove the ".lvl" extension if present
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieName + ".txt";
 
         // Construct the output directory
-        String filePath = "Assets/Beasties/BeastieLevelData/" + beastieName + "/";
+        String filePath = beastieFilePath + beastieName + "/";
         File directory = new File(filePath);
         if (!directory.exists() && !directory.mkdirs()) {
             System.err.println("Failed to create directories: " + filePath);

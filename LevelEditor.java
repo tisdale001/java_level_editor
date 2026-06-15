@@ -19,6 +19,16 @@ import javax.swing.SwingUtilities;
 
 
 public class LevelEditor {
+    private static final String EDITOR_LEVELS_ROOT = "Assets/Levels/";
+    private static final String EDITOR_MOVING_COLUMN_LEVELS_ROOT = "Assets/MovingColumnLevels/";
+    private static final String EDITOR_BEASTIE_LEVEL_DATA_ROOT = "Assets/Beasties/BeastieLevelData/";
+
+    private static final String LUCIAN_CAT_GAME_ASSETS_PATH = "/home/luciantisdale/AndroidStudioProjects/cat_game/Proto/app/src/main/assets/";
+    private static final String WALLY_CAT_GAME_ASSETS_PATH = "/absolute/path/to/cat_game/Proto/app/src/main/assets/";
+
+    // Change this to WALLY_CAT_GAME_ASSETS_PATH when Wally uses the editor.
+    private static final String SECOND_COPY_CAT_GAME_ASSETS_PATH = LUCIAN_CAT_GAME_ASSETS_PATH;
+
     private final int scaledTileWidth = 32;
     private final int scaledTileHeight = 32;
     private ArrayList<TileSet> fgTileSetArr = new ArrayList<>();
@@ -150,6 +160,37 @@ public class LevelEditor {
         createBackGroundSet();
         createMovingColumnSet();
         createBeastieSet();
+    }
+
+    private static String withTrailingSeparator(String path) {
+        if (path == null || path.isEmpty()) {
+            return "";
+        }
+        return path.endsWith(File.separator) || path.endsWith("/") ? path : path + File.separator;
+    }
+
+    private String getEditorLevelPath() {
+        return EDITOR_LEVELS_ROOT + this.tileSetName + "/";
+    }
+
+    private String getEditorMovingColumnLevelPath() {
+        return EDITOR_MOVING_COLUMN_LEVELS_ROOT + this.tileSetName + "/";
+    }
+
+    private String getCatGameAssetsRoot() {
+        return withTrailingSeparator(SECOND_COPY_CAT_GAME_ASSETS_PATH);
+    }
+
+    private String getCatGameLevelPath() {
+        return getCatGameAssetsRoot();
+    }
+
+    private String getCatGameMovingColumnLevelPath() {
+        return getCatGameAssetsRoot() + "MovingColumnLevels/" + this.tileSetName + "/";
+    }
+
+    private String getCatGameBeastiePath() {
+        return getCatGameAssetsRoot() + "Beasties/";
     }
 
     private void createBeastieTileSetArrays() {
@@ -587,8 +628,8 @@ public class LevelEditor {
 
     private void loadContent() {
         System.out.println("Content loaded!");
-        String filePath = "Assets/Levels/" + this.tileSetName + "/";
-        String mcFilePath = "Assets/MovingColumnLevels/" + this.tileSetName + "/";
+        String filePath = getEditorLevelPath();
+        String mcFilePath = getEditorMovingColumnLevelPath();
         String fileName = this.curSelectedLevel;
         if (fileName == null || fileName == "") {
             return;
@@ -603,7 +644,7 @@ public class LevelEditor {
             this.rowTextField.setText(Integer.toString(this.levelNumRows));
             this.colTextField.setText(Integer.toString(this.levelNumCols));
         }
-        String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
+        String beastieFilepath = EDITOR_BEASTIE_LEVEL_DATA_ROOT;
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.curPlacedWaterSpoutTile = null;
         this.curPlacedMovingPlatform = null;
@@ -633,7 +674,7 @@ public class LevelEditor {
         comboBox.setEditable(true);
 
         // Populate the JComboBox with file names from "Assets/Levels/tilsSetName"
-        File directory = new File("Assets/Levels/" + this.tileSetName);
+        File directory = new File(getEditorLevelPath());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles((dir, name) -> name.endsWith(".lvl")); // Only add .lvl files
             if (files != null) {
@@ -661,8 +702,8 @@ public class LevelEditor {
                 if (!comboBoxInput.endsWith(".lvl")) {
                     comboBoxInput = comboBoxInput + ".lvl";
                 }
-                String filePath = "Assets/Levels/" + LevelEditor.this.tileSetName + "/";
-                String mcFilePath = "Assets/MovingColumnLevels/" + LevelEditor.this.tileSetName + "/";
+                String filePath = LevelEditor.this.getEditorLevelPath();
+                String mcFilePath = LevelEditor.this.getEditorMovingColumnLevelPath();
                 LevelEditor.this.checkLevelNameForSaving(filePath, mcFilePath, comboBoxInput, LevelEditor.this.tileSetName);
 
                 // Close the pop-up window
@@ -750,13 +791,13 @@ public class LevelEditor {
         System.out.println("fileName: " + fileName);
         System.out.println("tileSetFolderName: " + tileSetFolderName);
         System.out.println("============================");
-        this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
-        this.levelTileGridPanel.saveMovingColumnTilesToLevel(mcFilePath, fileName, tileSetFolderName);
-        this.levelTileGridPanel.saveBeastiesToLevel(fileName);
-        this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
-        this.levelTileGridPanel.saveSandTilesToLevel(fileName);
-        this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName);
-        this.levelTileGridPanel.saveMovingColumnsToLevel(fileName);
+        saveContentToDestination(filePath, mcFilePath, EDITOR_BEASTIE_LEVEL_DATA_ROOT, fileName, tileSetFolderName);
+
+        String catGameAssetsRoot = getCatGameAssetsRoot();
+        if (!catGameAssetsRoot.isEmpty()) {
+            saveContentToDestination(getCatGameLevelPath(), getCatGameMovingColumnLevelPath(), getCatGameBeastiePath(), fileName, tileSetFolderName);
+        }
+
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -776,6 +817,16 @@ public class LevelEditor {
                 levelSelector.addItem(level);
             }
         }
+    }
+
+    private void saveContentToDestination(String filePath, String mcFilePath, String beastieFilePath, String fileName, String tileSetFolderName) {
+        this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveMovingColumnTilesToLevel(mcFilePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveBeastiesToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveSandTilesToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveMovingColumnsToLevel(fileName, beastieFilePath);
     }
 
     private JPanel createLabeledPanel(String title, JScrollPane scrollPane, int x, int y, int w, int h) {
