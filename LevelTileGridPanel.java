@@ -39,6 +39,10 @@ public class LevelTileGridPanel extends JPanel {
     public ArrayList<PlacedSandTile> placedSandTilesArr = new ArrayList<>();
     public ArrayList<PlacedMovingPlatform> placedMovingPlatformArr = new ArrayList<>();
     public ArrayList<PlacedMovingColumn> placedMovingColumnArr = new ArrayList<>();
+    public ArrayList<PlacedFlightPath> placedFlightPathArr = new ArrayList<>();
+    public ArrayList<PlacedBat> placedBatArr = new ArrayList<>();
+    private PlacedFlightPath activeFlightPath = null;
+    private int activeFlightPathHandle = PlacedFlightPath.HANDLE_NONE;
     private HashMap<String, ArrayList<Integer>> beastieNamesToConstantsMap = new HashMap<>();
 
     
@@ -92,6 +96,10 @@ public class LevelTileGridPanel extends JPanel {
                 // Display the coordinates
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     System.out.println("Left clicked at: (" + x + ", " + y + ")");
+                    if (LevelTileGridPanel.this.startFlightPathHandleDrag(x, y)) {
+                        repaint();
+                        return;
+                    }
                     int tileID = LevelTileGridPanel.this.levelEditor.getCurTile();
                     int mcTileID = LevelTileGridPanel.this.levelEditor.getCurMovingColumnTile();
                     if (tileID != -1) {
@@ -101,7 +109,10 @@ public class LevelTileGridPanel extends JPanel {
                     }
                 } else if (SwingUtilities.isRightMouseButton(e)) {
                     System.out.println("Right clicked at: (" + x + ", " + y + ")");
-                    if (!LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y) && !LevelTileGridPanel.this.hasEndedMovingPlatformSetup(x, y) &&
+                    if (!LevelTileGridPanel.this.hasEndedBatSetup(x, y) &&
+                        !LevelTileGridPanel.this.hasClickedOnABatElement(x, y) &&
+                        !LevelTileGridPanel.this.hasClickedOnAFlightPath(x, y) &&
+                        !LevelTileGridPanel.this.hasEndedWaterSpoutSetup(x, y) && !LevelTileGridPanel.this.hasEndedMovingPlatformSetup(x, y) &&
                         !LevelTileGridPanel.this.hasEndedMovingColumnSetup(x, y)) {
                         if (!LevelTileGridPanel.this.hasClickedOnAWaterSpoutElement(x, y) && !LevelTileGridPanel.this.hasClickedOnAMovingPlatformElement(x, y) &&
                             !LevelTileGridPanel.this.hasClickedOnAMovingColumnElement(x, y)) {
@@ -116,6 +127,12 @@ public class LevelTileGridPanel extends JPanel {
                 // Optionally, you can trigger a repaint or other actions based on the click
                 repaint();
                 overview.repaint();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                activeFlightPath = null;
+                activeFlightPathHandle = PlacedFlightPath.HANDLE_NONE;
             }
         });
 
@@ -152,6 +169,17 @@ public class LevelTileGridPanel extends JPanel {
                     }
                 }
             }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (activeFlightPath != null && activeFlightPathHandle != PlacedFlightPath.HANDLE_NONE) {
+                    int x = snapToTile(e.getX(), tileWidth);
+                    int y = snapToTile(e.getY(), tileHeight);
+                    activeFlightPath.moveHandle(activeFlightPathHandle, x, y);
+                    repaint();
+                    overview.repaint();
+                }
+            }
         });
     }
 
@@ -174,6 +202,12 @@ public class LevelTileGridPanel extends JPanel {
         ArrayList<Integer> spidersArr = new ArrayList<>(Arrays.asList(levelEditor.SPIDER_FLOOR_RIGHT, levelEditor.SPIDER_FLOOR_LEFT, levelEditor.SPIDER_CEILING_RIGHT,
             levelEditor.SPIDER_CEILING_LEFT, levelEditor.SPIDER_LEFT_WALL_UP, levelEditor.SPIDER_LEFT_WALL_DOWN, levelEditor.SPIDER_RIGHT_WALL_UP, levelEditor.SPIDER_RIGHT_WALL_DOWN));
         this.beastieNamesToConstantsMap.put("Spiders", spidersArr);
+        ArrayList<Integer> scorpionsArr = new ArrayList<>(Arrays.asList(levelEditor.SCORPION_FLOOR_RIGHT, levelEditor.SCORPION_FLOOR_LEFT, levelEditor.SCORPION_CEILING_RIGHT,
+            levelEditor.SCORPION_CEILING_LEFT, levelEditor.SCORPION_LEFT_WALL_UP, levelEditor.SCORPION_LEFT_WALL_DOWN, levelEditor.SCORPION_RIGHT_WALL_UP,
+            levelEditor.SCORPION_RIGHT_WALL_DOWN));
+        this.beastieNamesToConstantsMap.put("Scorpions", scorpionsArr);
+        ArrayList<Integer> scorpionBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.SCORPION_BORDER_BOX));
+        this.beastieNamesToConstantsMap.put("ScorpionBorderBoxes", scorpionBorderBoxArr);
         ArrayList<Integer> spiderBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.SPIDER_BORDER_BOX));
         this.beastieNamesToConstantsMap.put("SpiderBorderBoxes", spiderBorderBoxArr);
         ArrayList<Integer> ratsArr = new ArrayList<>(Arrays.asList(levelEditor.RAT_RIGHT, levelEditor.RAT_LEFT));
@@ -237,6 +271,10 @@ public class LevelTileGridPanel extends JPanel {
         return levelEditor.hasEndedMovingColumnSetup(x, y);
     }
 
+    private boolean hasEndedBatSetup(int x, int y) {
+        return levelEditor.hasEndedBatSetup(x, y);
+    }
+
     private boolean hasClickedOnAMovingPlatformElement(int x, int y) {
         return levelEditor.hasClickedOnAMovingPlatformElement(x, y);
     }
@@ -245,8 +283,87 @@ public class LevelTileGridPanel extends JPanel {
         return levelEditor.hasClickedOnAMovingColumnElement(x, y);
     }
 
+    private boolean startFlightPathHandleDrag(int x, int y) {
+        for (int i = placedBatArr.size() - 1; i >= 0; i--) {
+            PlacedBat bat = placedBatArr.get(i);
+            int handle = bat.getClickedFlightPathHandle(x, y);
+            if (handle != PlacedFlightPath.HANDLE_NONE) {
+                activeFlightPath = bat.getFlightPath();
+                activeFlightPathHandle = handle;
+                return true;
+            }
+        }
+        for (int i = placedFlightPathArr.size() - 1; i >= 0; i--) {
+            PlacedFlightPath path = placedFlightPathArr.get(i);
+            int handle = path.getClickedHandle(x, y);
+            if (handle != PlacedFlightPath.HANDLE_NONE) {
+                activeFlightPath = path;
+                activeFlightPathHandle = handle;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasClickedOnABatElement(int x, int y) {
+        for (int i = placedBatArr.size() - 1; i >= 0; i--) {
+            PlacedBat bat = placedBatArr.get(i);
+            if (bat.isClicked(x, y)) {
+                placedBatArr.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasClickedOnAFlightPath(int x, int y) {
+        for (int i = placedFlightPathArr.size() - 1; i >= 0; i--) {
+            PlacedFlightPath path = placedFlightPathArr.get(i);
+            if (path.isClicked(x, y)) {
+                placedFlightPathArr.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void placeBeastieTile(int x, int y, int id, Image tileImage) {
         placedBeastieTileArr.add(new PlacedBeastieTile(x, y, id, tileImage));
+        repaint();
+    }
+
+    public void placeFlightPath(int x, int y, int id, Image tileImage) {
+        int startX = x;
+        int startY = y;
+        int endX = x + this.tileWidth * 8;
+        int endY = y;
+        int controlX = x + this.tileWidth * 4;
+        int controlY = y + this.tileHeight * 5;
+        placedFlightPathArr.add(new PlacedFlightPath(startX, startY, controlX, controlY, endX, endY, id, tileImage));
+        repaint();
+    }
+
+    public void attachFlightPathToBat(PlacedBat bat, int x, int y, int id, Image tileImage) {
+        int batCenterX = bat.x + this.tileWidth / 2;
+        int batCenterY = bat.y + this.tileHeight / 2;
+        int startX = x;
+        int startY = y;
+        int endX = x + this.tileWidth * 8;
+        int endY = y;
+
+        if (Math.abs(x - batCenterX) <= this.tileWidth && Math.abs(y - batCenterY) <= this.tileHeight) {
+            startX = batCenterX;
+            startY = batCenterY;
+        }
+
+        int controlX = (startX + endX) / 2;
+        int controlY = Math.max(startY, endY) + this.tileHeight * 5;
+        bat.setFlightPath(new PlacedFlightPath(startX, startY, controlX, controlY, endX, endY, id, tileImage));
+        repaint();
+    }
+
+    public void placeBat(PlacedBat bat) {
+        placedBatArr.add(bat);
         repaint();
     }
 
@@ -267,6 +384,10 @@ public class LevelTileGridPanel extends JPanel {
 
     public void placeSandTile(PlacedSandTile tile) {
         placedSandTilesArr.add(tile);
+    }
+
+    private int snapToTile(int value, int tileSize) {
+        return (value / tileSize) * tileSize;
     }
 
     private void placeTileInLevel(int x, int y, int tileID) {
@@ -794,6 +915,24 @@ public class LevelTileGridPanel extends JPanel {
 
             }
         }
+        int flightPathDeltaX = "Left".equals(leftRightSelection) ? deltaCols * this.tileWidth : 0;
+        int flightPathDeltaY = "Top".equals(topBottomSelection) ? deltaRows * this.tileHeight : 0;
+        int maxFlightPathX = newNumCols * this.tileWidth;
+        int maxFlightPathY = newNumRows * this.tileHeight;
+        for (int i = placedFlightPathArr.size() - 1; i >= 0; i--) {
+            PlacedFlightPath path = placedFlightPathArr.get(i);
+            path.translate(flightPathDeltaX, flightPathDeltaY);
+            if (path.isOutside(maxFlightPathX, maxFlightPathY)) {
+                placedFlightPathArr.remove(i);
+            }
+        }
+        for (int i = placedBatArr.size() - 1; i >= 0; i--) {
+            PlacedBat bat = placedBatArr.get(i);
+            bat.translate(flightPathDeltaX, flightPathDeltaY);
+            if (bat.isOutside(maxFlightPathX, maxFlightPathY)) {
+                placedBatArr.remove(i);
+            }
+        }
         revalidate();
         repaint();
     }
@@ -950,55 +1089,67 @@ public class LevelTileGridPanel extends JPanel {
         lfw.saveLevelToFile(mcFilePath, fileName, tileSetFolderName);
     }
 
-    public void saveBeastiesToLevel(String fileName) {
+    public void saveBeastiesToLevel(String fileName, String beastieFilePath) {
         // public void saveBeastiesToFile(ArrayList<PlacedBeastieTile> placedBeastieTileArr, String fileName, String beastieName, ArrayList<Integer> beastieConstantArr) {
         BeastieFileWriter bfw = new BeastieFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms" && (key != "MovingColumns"))) {
-                bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value);
+                bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
             }
         }
     }
 
-    public void saveWaterSpoutsToLevel(String fileName) {
+    public void saveWaterSpoutsToLevel(String fileName, String beastieFilePath) {
         WaterSpoutFileWriter wsfw = new WaterSpoutFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "WaterSpouts") {
-                wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value);
+                wsfw.saveWaterSpoutsToFile(this.placedWaterSpoutTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
             }
         }
     }
 
-    public void saveMovingPlatformsToLevel(String fileName) {
+    public void saveMovingPlatformsToLevel(String fileName, String beastieFilePath) {
         MovingPlatformFileWriter mpfw = new MovingPlatformFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "MovingPlatforms") {
-                mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight);
+                mpfw.saveMovingPlatformsToFile(this.placedMovingPlatformArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
             }
         }
     }
 
-    public void saveMovingColumnsToLevel(String fileName) {
+    public void saveMovingColumnsToLevel(String fileName, String beastieFilePath) {
         MovingColumnFileWriter mcfw = new MovingColumnFileWriter();
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
             if (key == "MovingColumns") {
-                mcfw.saveMovingColumnsToFile(this.placedMovingColumnArr, fileName, key, tileWidth, tileHeight);
+                mcfw.saveMovingColumnsToFile(this.placedMovingColumnArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
             }
         }
     }
 
-    public void saveSandTilesToLevel(String fileName) {
+    public void saveSandTilesToLevel(String fileName, String beastieFilePath) {
         SandTileFileWriter stfw = new SandTileFileWriter();
         String key = "SandTiles";
-        stfw.saveSandTilesToFile(this.placedSandTilesArr, fileName, key, tileWidth, tileHeight);
+        stfw.saveSandTilesToFile(this.placedSandTilesArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
+    }
+
+    public void saveFlightPathsToLevel(String fileName, String beastieFilePath) {
+        FlightPathFileWriter fpfw = new FlightPathFileWriter();
+        String key = "FlightPaths";
+        fpfw.saveFlightPathsToFile(this.placedFlightPathArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
+    }
+
+    public void saveBatsToLevel(String fileName, String beastieFilePath) {
+        BatFileWriter bfw = new BatFileWriter();
+        String key = "Bats";
+        bfw.saveBatsToFile(this.placedBatArr, fileName, key, tileWidth, tileHeight, beastieFilePath);
     }
 
     public void loadBeastiesFromFiles(String filePath, String fileName) {
@@ -1538,6 +1689,121 @@ public class LevelTileGridPanel extends JPanel {
         }
     }
 
+    public void loadFlightPathsFromFile(String filePath, String fileName) {
+        this.placedFlightPathArr.clear();
+
+        String beastieNamePlural = "FlightPaths";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        if (!file.exists()) {
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String metadataLine = reader.readLine();
+            if (metadataLine == null || metadataLine.trim().isEmpty()) {
+                throw new IOException("Invalid flight path file: metadata missing");
+            }
+            String[] metadataParts = metadataLine.trim().split("\\s+");
+            int numFlightPaths = Integer.parseInt(metadataParts[0]);
+
+            for (int i = 0; i < numFlightPaths; i++) {
+                String line = reader.readLine();
+                while (line != null && line.trim().isEmpty()) {
+                    line = reader.readLine();
+                }
+                if (line == null) {
+                    throw new IOException("Unexpected end of file while reading flight paths");
+                }
+
+                String[] parts = line.trim().split("\\s+");
+                if (parts.length < 7) {
+                    throw new IOException("Invalid flight path metadata: " + line);
+                }
+
+                int startX = Integer.parseInt(parts[0]);
+                int startY = Integer.parseInt(parts[1]);
+                int controlX = Integer.parseInt(parts[2]);
+                int controlY = Integer.parseInt(parts[3]);
+                int endX = Integer.parseInt(parts[4]);
+                int endY = Integer.parseInt(parts[5]);
+                int tileId = Integer.parseInt(parts[6]);
+                Image image = levelEditor.beastieGridPanel.tileArr.get(tileId).getImage();
+
+                this.placedFlightPathArr.add(new PlacedFlightPath(startX, startY, controlX, controlY, endX, endY, tileId, image));
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred while loading flight paths from file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadBatsFromFile(String filePath, String fileName) {
+        this.placedBatArr.clear();
+
+        String beastieNamePlural = "Bats";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        if (!file.exists()) {
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String metadataLine = reader.readLine();
+            if (metadataLine == null || metadataLine.trim().isEmpty()) {
+                throw new IOException("Invalid bat file: metadata missing");
+            }
+            String[] metadataParts = metadataLine.trim().split("\\s+");
+            int numBats = Integer.parseInt(metadataParts[0]);
+
+            for (int i = 0; i < numBats; i++) {
+                String line = reader.readLine();
+                while (line != null && line.trim().isEmpty()) {
+                    line = reader.readLine();
+                }
+                if (line == null) {
+                    throw new IOException("Unexpected end of file while reading bats");
+                }
+
+                String[] parts = line.trim().split("\\s+");
+                if (parts.length < 4) {
+                    throw new IOException("Invalid bat metadata: " + line);
+                }
+
+                int batX = Integer.parseInt(parts[0]);
+                int batY = Integer.parseInt(parts[1]);
+                int batId = Integer.parseInt(parts[2]);
+                int hasFlightPath = Integer.parseInt(parts[3]);
+                Image batImage = levelEditor.beastieGridPanel.tileArr.get(batId).getImage();
+                PlacedBat bat = new PlacedBat(batX, batY, batId, batImage);
+
+                if (hasFlightPath == 1) {
+                    if (parts.length < 11) {
+                        throw new IOException("Invalid bat flight path metadata: " + line);
+                    }
+                    int startX = Integer.parseInt(parts[4]);
+                    int startY = Integer.parseInt(parts[5]);
+                    int controlX = Integer.parseInt(parts[6]);
+                    int controlY = Integer.parseInt(parts[7]);
+                    int endX = Integer.parseInt(parts[8]);
+                    int endY = Integer.parseInt(parts[9]);
+                    int pathId = Integer.parseInt(parts[10]);
+                    Image pathImage = levelEditor.beastieGridPanel.tileArr.get(pathId).getImage();
+                    bat.setFlightPath(new PlacedFlightPath(startX, startY, controlX, controlY, endX, endY, pathId, pathImage));
+                }
+
+                this.placedBatArr.add(bat);
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred while loading bats from file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public LevelData loadLevelFromFile(String filePath, String mcFilePath, String fileName) {
         File levelFile = new File(filePath, fileName);
         File mcFile = new File(mcFilePath, fileName);
@@ -1756,6 +2022,9 @@ public class LevelTileGridPanel extends JPanel {
             }
         }
 
+        drawBats(g);
+        drawFlightPaths(g);
+
         for (PlacedSandTile t : this.placedSandTilesArr) {
             int imgWidth = t.image.getWidth(this);
             int imgHeight = t.image.getHeight(this);
@@ -1765,6 +2034,88 @@ public class LevelTileGridPanel extends JPanel {
                 g.drawImage(t.image, t.x, t.y, imgWidth, imgHeight, this);
             }
         }
+    }
+
+    private void drawFlightPaths(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(new BasicStroke(3));
+
+        for (PlacedFlightPath path : this.placedFlightPathArr) {
+            g2.setColor(new Color(40, 150, 210));
+            int prevX = path.getBezierX(0);
+            int prevY = path.getBezierY(0);
+            for (int i = 1; i <= 48; i++) {
+                double t = i / 48.0;
+                int x = path.getBezierX(t);
+                int y = path.getBezierY(t);
+                g2.drawLine(prevX, prevY, x, y);
+                prevX = x;
+                prevY = y;
+            }
+
+            g2.setStroke(new BasicStroke(1));
+            g2.setColor(new Color(40, 150, 210, 110));
+            g2.drawLine(path.startX, path.startY, path.controlX, path.controlY);
+            g2.drawLine(path.controlX, path.controlY, path.endX, path.endY);
+
+            drawFlightPathHandle(g2, path.startX, path.startY, new Color(35, 125, 75));
+            drawFlightPathHandle(g2, path.controlX, path.controlY, new Color(220, 130, 25));
+            drawFlightPathHandle(g2, path.endX, path.endY, new Color(150, 55, 170));
+            g2.setStroke(new BasicStroke(3));
+        }
+
+        g2.dispose();
+    }
+
+    private void drawBats(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        for (PlacedBat bat : this.placedBatArr) {
+            PlacedFlightPath path = bat.getFlightPath();
+            if (path != null) {
+                drawFlightPath(g2, path);
+            }
+            int imgWidth = bat.image.getWidth(this);
+            int imgHeight = bat.image.getHeight(this);
+            if (imgWidth > 0 && imgHeight > 0) {
+                g2.drawImage(bat.image, bat.x, bat.y, imgWidth, imgHeight, this);
+            }
+        }
+        g2.dispose();
+    }
+
+    private void drawFlightPath(Graphics2D g2, PlacedFlightPath path) {
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(new Color(40, 150, 210));
+        int prevX = path.getBezierX(0);
+        int prevY = path.getBezierY(0);
+        for (int i = 1; i <= 48; i++) {
+            double t = i / 48.0;
+            int x = path.getBezierX(t);
+            int y = path.getBezierY(t);
+            g2.drawLine(prevX, prevY, x, y);
+            prevX = x;
+            prevY = y;
+        }
+
+        g2.setStroke(new BasicStroke(1));
+        g2.setColor(new Color(40, 150, 210, 110));
+        g2.drawLine(path.startX, path.startY, path.controlX, path.controlY);
+        g2.drawLine(path.controlX, path.controlY, path.endX, path.endY);
+
+        drawFlightPathHandle(g2, path.startX, path.startY, new Color(35, 125, 75));
+        drawFlightPathHandle(g2, path.controlX, path.controlY, new Color(220, 130, 25));
+        drawFlightPathHandle(g2, path.endX, path.endY, new Color(150, 55, 170));
+    }
+
+    private void drawFlightPathHandle(Graphics2D g2, int x, int y, Color color) {
+        int size = 14;
+        int half = size / 2;
+        g2.setColor(color);
+        g2.fillRect(x - half, y - half, size, size);
+        g2.setColor(Color.BLACK);
+        g2.drawRect(x - half, y - half, size, size);
     }
 
     public int getTileWidth() {

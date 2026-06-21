@@ -19,6 +19,16 @@ import javax.swing.SwingUtilities;
 
 
 public class LevelEditor {
+    private static final String EDITOR_LEVELS_ROOT = "Assets/Levels/";
+    private static final String EDITOR_MOVING_COLUMN_LEVELS_ROOT = "Assets/MovingColumnLevels/";
+    private static final String EDITOR_BEASTIE_LEVEL_DATA_ROOT = "Assets/Beasties/BeastieLevelData/";
+
+    private static final String LUCIAN_CAT_GAME_ASSETS_PATH = "/home/luciantisdale/AndroidStudioProjects/cat_game/Proto/app/src/main/assets/";
+    private static final String WALLY_CAT_GAME_ASSETS_PATH = "/absolute/path/to/cat_game/Proto/app/src/main/assets/";
+
+    // Change this to WALLY_CAT_GAME_ASSETS_PATH when Wally uses the editor.
+    private static final String SECOND_COPY_CAT_GAME_ASSETS_PATH = LUCIAN_CAT_GAME_ASSETS_PATH;
+
     private final int scaledTileWidth = 32;
     private final int scaledTileHeight = 32;
     private ArrayList<TileSet> fgTileSetArr = new ArrayList<>();
@@ -62,6 +72,8 @@ public class LevelEditor {
     // private int curMovingColumn = -1;
     private PlacedMovingColumn curPlacedMovingColumn = null;
     private int curMovingColumnBorderBox = -1;
+    private int curBat = -1;
+    private PlacedBat curPlacedBat = null;
     // Beastie constants
     public static final int ANEMONE_FLOOR = 0;
     public static final int ANEMONE_LEFT_WALL = 1;
@@ -117,10 +129,23 @@ public class LevelEditor {
     public static final int MOVING_COLUMN_UP_BORDER = 51;
     public static final int MOVING_COLUMN_DOWN_BORDER = 52;
     public static final int DEPTH_BORDER_BOX = 53;
+    public static final int SCORPION_FLOOR_RIGHT = 54;
+    public static final int SCORPION_FLOOR_LEFT = 55;
+    public static final int SCORPION_CEILING_RIGHT = 56;
+    public static final int SCORPION_CEILING_LEFT = 57;
+    public static final int SCORPION_LEFT_WALL_UP = 58;
+    public static final int SCORPION_LEFT_WALL_DOWN = 59;
+    public static final int SCORPION_RIGHT_WALL_UP = 60;
+    public static final int SCORPION_RIGHT_WALL_DOWN = 61;
+    public static final int SCORPION_BORDER_BOX = 62;
+    public static final int FLIGHT_PATH = 63;
+    public static final int BAT_LEFT = 64;
+    public static final int BAT_RIGHT = 65;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
-        DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT, DEPTH_BORDER_BOX));
+        DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT, DEPTH_BORDER_BOX, SCORPION_FLOOR_RIGHT, SCORPION_FLOOR_LEFT, SCORPION_CEILING_RIGHT, SCORPION_CEILING_LEFT,
+        SCORPION_LEFT_WALL_UP, SCORPION_LEFT_WALL_DOWN, SCORPION_RIGHT_WALL_UP, SCORPION_RIGHT_WALL_DOWN, SCORPION_BORDER_BOX));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
@@ -132,6 +157,8 @@ public class LevelEditor {
     public static final ArrayList<Integer> movingPlatformBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_BORDER_BOX_TILE));
     public static final ArrayList<Integer> movingColumnBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_COLUMN_LEFT_BORDER, MOVING_COLUMN_RIGHT_BORDER,
         MOVING_COLUMN_UP_BORDER, MOVING_COLUMN_DOWN_BORDER));
+    public static final ArrayList<Integer> flightPathBeasties = new ArrayList<>(Arrays.asList(FLIGHT_PATH));
+    public static final ArrayList<Integer> batBeasties = new ArrayList<>(Arrays.asList(BAT_LEFT, BAT_RIGHT));
     public LevelEditor() {
         createTileSetArrays();
         createMovingColumnTileSetArrays();
@@ -140,6 +167,37 @@ public class LevelEditor {
         createBackGroundSet();
         createMovingColumnSet();
         createBeastieSet();
+    }
+
+    private static String withTrailingSeparator(String path) {
+        if (path == null || path.isEmpty()) {
+            return "";
+        }
+        return path.endsWith(File.separator) || path.endsWith("/") ? path : path + File.separator;
+    }
+
+    private String getEditorLevelPath() {
+        return EDITOR_LEVELS_ROOT + this.tileSetName + "/";
+    }
+
+    private String getEditorMovingColumnLevelPath() {
+        return EDITOR_MOVING_COLUMN_LEVELS_ROOT + this.tileSetName + "/";
+    }
+
+    private String getCatGameAssetsRoot() {
+        return withTrailingSeparator(SECOND_COPY_CAT_GAME_ASSETS_PATH);
+    }
+
+    private String getCatGameLevelPath() {
+        return getCatGameAssetsRoot();
+    }
+
+    private String getCatGameMovingColumnLevelPath() {
+        return getCatGameAssetsRoot() + "MovingColumnLevels/" + this.tileSetName + "/";
+    }
+
+    private String getCatGameBeastiePath() {
+        return getCatGameAssetsRoot() + "Beasties/";
     }
 
     private void createBeastieTileSetArrays() {
@@ -276,6 +334,34 @@ public class LevelEditor {
         // Depth border boxes
         BeastieTileSet beastieTileSet54 = createBeastieTileSet("Assets/Beasties/SpriteSheets/black_arrow_down_tile.png", 1, 1, 450, 450, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet54);
+        // Scorpions
+        BeastieTileSet beastieTileSet55 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet55);
+        BeastieTileSet beastieTileSet56 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet56);
+        BeastieTileSet beastieTileSet57 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_ceiling_right_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet57);
+        BeastieTileSet beastieTileSet58 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_ceiling_left_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet58);
+        BeastieTileSet beastieTileSet59 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_wall_up_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet59);
+        BeastieTileSet beastieTileSet60 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_left_wall_down_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet60);
+        BeastieTileSet beastieTileSet61 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_wall_up_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet61);
+        BeastieTileSet beastieTileSet62 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_right_wall_down_tile.png", 1, 1, 90, 90, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet62);
+        // Scorpion border box
+        BeastieTileSet beastieTileSet63 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_border_tile.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet63);
+        // Flight paths
+        BeastieTileSet beastieTileSet64 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bezier_upside_down_tile.png", 1, 1, 800, 800, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet64);
+        // Bats
+        BeastieTileSet beastieTileSet65 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bat_left_tile.png", 1, 1, 210, 210, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet65);
+        BeastieTileSet beastieTileSet66 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bat_right_tile.png", 1, 1, 210, 210, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet66);
     }
 
     private void createTileSetArrays() {
@@ -557,8 +643,8 @@ public class LevelEditor {
 
     private void loadContent() {
         System.out.println("Content loaded!");
-        String filePath = "Assets/Levels/" + this.tileSetName + "/";
-        String mcFilePath = "Assets/MovingColumnLevels/" + this.tileSetName + "/";
+        String filePath = getEditorLevelPath();
+        String mcFilePath = getEditorMovingColumnLevelPath();
         String fileName = this.curSelectedLevel;
         if (fileName == null || fileName == "") {
             return;
@@ -573,15 +659,17 @@ public class LevelEditor {
             this.rowTextField.setText(Integer.toString(this.levelNumRows));
             this.colTextField.setText(Integer.toString(this.levelNumCols));
         }
-        String beastieFilepath = "Assets/Beasties/BeastieLevelData/";
+        String beastieFilepath = EDITOR_BEASTIE_LEVEL_DATA_ROOT;
         this.levelTileGridPanel.loadBeastiesFromFiles(beastieFilepath, fileName);
         this.curPlacedWaterSpoutTile = null;
         this.curPlacedMovingPlatform = null;
         this.curPlacedMovingColumn = null;
+        this.curPlacedBat = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadSandTilesFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadMovingPlatformsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadMovingColumnsFromFile(beastieFilepath, fileName);
+        this.levelTileGridPanel.loadBatsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -603,7 +691,7 @@ public class LevelEditor {
         comboBox.setEditable(true);
 
         // Populate the JComboBox with file names from "Assets/Levels/tilsSetName"
-        File directory = new File("Assets/Levels/" + this.tileSetName);
+        File directory = new File(getEditorLevelPath());
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles((dir, name) -> name.endsWith(".lvl")); // Only add .lvl files
             if (files != null) {
@@ -631,8 +719,8 @@ public class LevelEditor {
                 if (!comboBoxInput.endsWith(".lvl")) {
                     comboBoxInput = comboBoxInput + ".lvl";
                 }
-                String filePath = "Assets/Levels/" + LevelEditor.this.tileSetName + "/";
-                String mcFilePath = "Assets/MovingColumnLevels/" + LevelEditor.this.tileSetName + "/";
+                String filePath = LevelEditor.this.getEditorLevelPath();
+                String mcFilePath = LevelEditor.this.getEditorMovingColumnLevelPath();
                 LevelEditor.this.checkLevelNameForSaving(filePath, mcFilePath, comboBoxInput, LevelEditor.this.tileSetName);
 
                 // Close the pop-up window
@@ -720,13 +808,13 @@ public class LevelEditor {
         System.out.println("fileName: " + fileName);
         System.out.println("tileSetFolderName: " + tileSetFolderName);
         System.out.println("============================");
-        this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
-        this.levelTileGridPanel.saveMovingColumnTilesToLevel(mcFilePath, fileName, tileSetFolderName);
-        this.levelTileGridPanel.saveBeastiesToLevel(fileName);
-        this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName);
-        this.levelTileGridPanel.saveSandTilesToLevel(fileName);
-        this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName);
-        this.levelTileGridPanel.saveMovingColumnsToLevel(fileName);
+        saveContentToDestination(filePath, mcFilePath, EDITOR_BEASTIE_LEVEL_DATA_ROOT, fileName, tileSetFolderName);
+
+        String catGameAssetsRoot = getCatGameAssetsRoot();
+        if (!catGameAssetsRoot.isEmpty()) {
+            saveContentToDestination(getCatGameLevelPath(), getCatGameMovingColumnLevelPath(), getCatGameBeastiePath(), fileName, tileSetFolderName);
+        }
+
         // Refresh levelSelector so it has new saved level
         // Directory where .lvl files are stored
 
@@ -746,6 +834,17 @@ public class LevelEditor {
                 levelSelector.addItem(level);
             }
         }
+    }
+
+    private void saveContentToDestination(String filePath, String mcFilePath, String beastieFilePath, String fileName, String tileSetFolderName) {
+        this.levelTileGridPanel.saveGridAsLevel(filePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveMovingColumnTilesToLevel(mcFilePath, fileName, tileSetFolderName);
+        this.levelTileGridPanel.saveBeastiesToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveWaterSpoutsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveSandTilesToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveMovingColumnsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveBatsToLevel(fileName, beastieFilePath);
     }
 
     private JPanel createLabeledPanel(String title, JScrollPane scrollPane, int x, int y, int w, int h) {
@@ -1130,6 +1229,8 @@ public class LevelEditor {
             this.curMovingPlatformBorderBox = tileId;
         } else if (actualId == MOVING_COLUMN_LEFT_BORDER || actualId == MOVING_COLUMN_RIGHT_BORDER || actualId == MOVING_COLUMN_UP_BORDER || actualId == MOVING_COLUMN_DOWN_BORDER) {
             this.curMovingColumnBorderBox = tileId;
+        } else if (batBeasties.contains(actualId)) {
+            this.curBat = tileId;
         }
         dragOverlay.setDraggedImage(img);
         dragOverlay.setMousePoint(start);
@@ -1315,6 +1416,26 @@ public class LevelEditor {
                 }
                 cancelDragging();
                 return;
+            } else if (batBeasties.contains(beastieConstantId)) {
+                if (this.curBat != -1) {
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    PlacedBat placedBat = new PlacedBat(gridX, gridY, curBeastieTileId, curBeastieImage);
+                    this.curPlacedBat = placedBat;
+                    this.levelTileGridPanel.placeBat(placedBat);
+                }
+                cancelDragging();
+                return;
+            } else if (flightPathBeasties.contains(beastieConstantId)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                if (this.curPlacedBat != null) {
+                    this.levelTileGridPanel.attachFlightPathToBat(this.curPlacedBat, gridX, gridY, curBeastieTileId, curBeastieImage);
+                } else {
+                    this.levelTileGridPanel.placeFlightPath(gridX, gridY, curBeastieTileId, curBeastieImage);
+                }
+                cancelDragging();
+                return;
             } else {
                 int imageWidth = curBeastieImage.getWidth(null);
                 int imageHeight = curBeastieImage.getHeight(null);
@@ -1398,6 +1519,16 @@ public class LevelEditor {
         if (this.curMovingColumnBorderBox != -1) {
             this.curMovingColumnBorderBox = -1;
             this.curPlacedMovingColumn = null;
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasEndedBatSetup(int x, int y) {
+        if (this.curBat != -1) {
+            this.curBat = -1;
+            this.curPlacedBat = null;
 
             return true;
         }

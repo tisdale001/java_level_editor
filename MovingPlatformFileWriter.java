@@ -15,14 +15,15 @@ public class MovingPlatformFileWriter {
         String fileName,
         String beastieName,
         int tileWidth,
-        int tileHeight) {
+        int tileHeight,
+        String beastieFilePath) {
 
         // Remove the ".lvl" extension if present
         fileName = fileName.replaceFirst("\\.lvl$", "");
         fileName += beastieName + ".txt";
 
         // Construct the output directory
-        String filePath = "Assets/Beasties/BeastieLevelData/" + beastieName + "/";
+        String filePath = beastieFilePath + beastieName + "/";
         File directory = new File(filePath);
         if (!directory.exists() && !directory.mkdirs()) {
             System.err.println("Failed to create directories: " + filePath);
