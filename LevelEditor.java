@@ -72,6 +72,8 @@ public class LevelEditor {
     // private int curMovingColumn = -1;
     private PlacedMovingColumn curPlacedMovingColumn = null;
     private int curMovingColumnBorderBox = -1;
+    private int curBat = -1;
+    private PlacedBat curPlacedBat = null;
     // Beastie constants
     public static final int ANEMONE_FLOOR = 0;
     public static final int ANEMONE_LEFT_WALL = 1;
@@ -136,6 +138,9 @@ public class LevelEditor {
     public static final int SCORPION_RIGHT_WALL_UP = 60;
     public static final int SCORPION_RIGHT_WALL_DOWN = 61;
     public static final int SCORPION_BORDER_BOX = 62;
+    public static final int FLIGHT_PATH = 63;
+    public static final int BAT_LEFT = 64;
+    public static final int BAT_RIGHT = 65;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
@@ -152,6 +157,8 @@ public class LevelEditor {
     public static final ArrayList<Integer> movingPlatformBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_PLATFORM_BORDER_BOX_TILE));
     public static final ArrayList<Integer> movingColumnBorderBoxBeasties = new ArrayList<>(Arrays.asList(MOVING_COLUMN_LEFT_BORDER, MOVING_COLUMN_RIGHT_BORDER,
         MOVING_COLUMN_UP_BORDER, MOVING_COLUMN_DOWN_BORDER));
+    public static final ArrayList<Integer> flightPathBeasties = new ArrayList<>(Arrays.asList(FLIGHT_PATH));
+    public static final ArrayList<Integer> batBeasties = new ArrayList<>(Arrays.asList(BAT_LEFT, BAT_RIGHT));
     public LevelEditor() {
         createTileSetArrays();
         createMovingColumnTileSetArrays();
@@ -347,6 +354,14 @@ public class LevelEditor {
         // Scorpion border box
         BeastieTileSet beastieTileSet63 = createBeastieTileSet("Assets/Beasties/SpriteSheets/scorpion_border_tile.png", 1, 1, 360, 360, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet63);
+        // Flight paths
+        BeastieTileSet beastieTileSet64 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bezier_upside_down_tile.png", 1, 1, 800, 800, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet64);
+        // Bats
+        BeastieTileSet beastieTileSet65 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bat_left_tile.png", 1, 1, 210, 210, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet65);
+        BeastieTileSet beastieTileSet66 = createBeastieTileSet("Assets/Beasties/SpriteSheets/bat_right_tile.png", 1, 1, 210, 210, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet66);
     }
 
     private void createTileSetArrays() {
@@ -649,10 +664,12 @@ public class LevelEditor {
         this.curPlacedWaterSpoutTile = null;
         this.curPlacedMovingPlatform = null;
         this.curPlacedMovingColumn = null;
+        this.curPlacedBat = null;
         this.levelTileGridPanel.loadWaterSpoutsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadSandTilesFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadMovingPlatformsFromFile(beastieFilepath, fileName);
         this.levelTileGridPanel.loadMovingColumnsFromFile(beastieFilepath, fileName);
+        this.levelTileGridPanel.loadBatsFromFile(beastieFilepath, fileName);
         this.refreshContent("Bottom", "Right", this.rowTextField.getText(), this.colTextField.getText());
     }
 
@@ -827,6 +844,7 @@ public class LevelEditor {
         this.levelTileGridPanel.saveSandTilesToLevel(fileName, beastieFilePath);
         this.levelTileGridPanel.saveMovingPlatformsToLevel(fileName, beastieFilePath);
         this.levelTileGridPanel.saveMovingColumnsToLevel(fileName, beastieFilePath);
+        this.levelTileGridPanel.saveBatsToLevel(fileName, beastieFilePath);
     }
 
     private JPanel createLabeledPanel(String title, JScrollPane scrollPane, int x, int y, int w, int h) {
@@ -1211,6 +1229,8 @@ public class LevelEditor {
             this.curMovingPlatformBorderBox = tileId;
         } else if (actualId == MOVING_COLUMN_LEFT_BORDER || actualId == MOVING_COLUMN_RIGHT_BORDER || actualId == MOVING_COLUMN_UP_BORDER || actualId == MOVING_COLUMN_DOWN_BORDER) {
             this.curMovingColumnBorderBox = tileId;
+        } else if (batBeasties.contains(actualId)) {
+            this.curBat = tileId;
         }
         dragOverlay.setDraggedImage(img);
         dragOverlay.setMousePoint(start);
@@ -1396,6 +1416,26 @@ public class LevelEditor {
                 }
                 cancelDragging();
                 return;
+            } else if (batBeasties.contains(beastieConstantId)) {
+                if (this.curBat != -1) {
+                    gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                    gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                    PlacedBat placedBat = new PlacedBat(gridX, gridY, curBeastieTileId, curBeastieImage);
+                    this.curPlacedBat = placedBat;
+                    this.levelTileGridPanel.placeBat(placedBat);
+                }
+                cancelDragging();
+                return;
+            } else if (flightPathBeasties.contains(beastieConstantId)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                if (this.curPlacedBat != null) {
+                    this.levelTileGridPanel.attachFlightPathToBat(this.curPlacedBat, gridX, gridY, curBeastieTileId, curBeastieImage);
+                } else {
+                    this.levelTileGridPanel.placeFlightPath(gridX, gridY, curBeastieTileId, curBeastieImage);
+                }
+                cancelDragging();
+                return;
             } else {
                 int imageWidth = curBeastieImage.getWidth(null);
                 int imageHeight = curBeastieImage.getHeight(null);
@@ -1479,6 +1519,16 @@ public class LevelEditor {
         if (this.curMovingColumnBorderBox != -1) {
             this.curMovingColumnBorderBox = -1;
             this.curPlacedMovingColumn = null;
+
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasEndedBatSetup(int x, int y) {
+        if (this.curBat != -1) {
+            this.curBat = -1;
+            this.curPlacedBat = null;
 
             return true;
         }
