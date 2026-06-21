@@ -24,10 +24,10 @@ public class LevelEditor {
     private static final String EDITOR_BEASTIE_LEVEL_DATA_ROOT = "Assets/Beasties/BeastieLevelData/";
 
     private static final String LUCIAN_CAT_GAME_ASSETS_PATH = "/home/luciantisdale/AndroidStudioProjects/cat_game/Proto/app/src/main/assets/";
-    private static final String WALLY_CAT_GAME_ASSETS_PATH = "/absolute/path/to/cat_game/Proto/app/src/main/assets/";
+    private static final String WALLY_CAT_GAME_ASSETS_PATH = "C:\\cat_game\\Proto\\app\\src\\main\\assets";
 
     // Change this to WALLY_CAT_GAME_ASSETS_PATH when Wally uses the editor.
-    private static final String SECOND_COPY_CAT_GAME_ASSETS_PATH = LUCIAN_CAT_GAME_ASSETS_PATH;
+    private static final String SECOND_COPY_CAT_GAME_ASSETS_PATH = WALLY_CAT_GAME_ASSETS_PATH;
 
     private final int scaledTileWidth = 32;
     private final int scaledTileHeight = 32;
