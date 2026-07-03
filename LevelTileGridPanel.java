@@ -227,6 +227,10 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("MovingPlatforms", movingPlatformArr);
         ArrayList<Integer> dogArr = new ArrayList<>(Arrays.asList(levelEditor.DOG_RIGHT, levelEditor.DOG_LEFT));
         this.beastieNamesToConstantsMap.put("Dogs", dogArr);
+        ArrayList<Integer> birdArr = new ArrayList<>(Arrays.asList(levelEditor.BIRD_LEFT, levelEditor.BIRD_RIGHT));
+        this.beastieNamesToConstantsMap.put("Birds", birdArr);
+        ArrayList<Integer> waterfallArr = new ArrayList<>(Arrays.asList(levelEditor.WATERFALL));
+        this.beastieNamesToConstantsMap.put("Waterfalls", waterfallArr);
         ArrayList<Integer> dogBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.DOG_BORDER_BOX_LEFT, levelEditor.DOG_BORDER_BOX_RIGHT));
         this.beastieNamesToConstantsMap.put("DogBorderBoxes", dogBorderBoxArr);
         ArrayList<Integer> movingColumnArr = new ArrayList<>(Arrays.asList(levelEditor.MOVING_COLUMN_LEFT_BORDER, levelEditor.MOVING_COLUMN_RIGHT_BORDER,
@@ -1095,10 +1099,17 @@ public class LevelTileGridPanel extends JPanel {
         for (HashMap.Entry<String, ArrayList<Integer>> entry : beastieNamesToConstantsMap.entrySet()) {
             String key = entry.getKey();
             ArrayList<Integer> value = entry.getValue();
-            if ((key != "WaterSpouts") && (key != "WaterCurrents") && (key != "MovingPlatforms" && (key != "MovingColumns"))) {
+            if (!key.equals("WaterSpouts") && !key.equals("WaterCurrents") && (!key.equals("MovingPlatforms") && !key.equals("MovingColumns")) && !key.equals("Waterfalls")) {
                 bfw.saveBeastiesToFile(placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
             }
         }
+    }
+
+    public void saveWaterfallsToLevel(String fileName, String beastieFilePath) {
+        WaterfallFileWriter wfw = new WaterfallFileWriter();
+        String key = "Waterfalls";
+        ArrayList<Integer> value = this.beastieNamesToConstantsMap.get(key);
+        wfw.saveWaterfallsToFile(this.placedBeastieTileArr, fileName, key, tileWidth, tileHeight, value, beastieFilePath);
     }
 
     public void saveWaterSpoutsToLevel(String fileName, String beastieFilePath) {
@@ -1156,7 +1167,7 @@ public class LevelTileGridPanel extends JPanel {
         System.out.println("loadBeastiesFromFile");
         this.placedBeastieTileArr.clear();
         for (String key : this.beastieNamesToConstantsMap.keySet()) {
-            if (key != "WaterSpouts" && key != "WaterCurrents" && key != "MovingPlatforms") {
+            if (!key.equals("WaterSpouts") && !key.equals("WaterCurrents") && !key.equals("MovingPlatforms") && !key.equals("Waterfalls")) {
                 this.loadBeastiesFromFile(filePath, fileName, key);
             }
         }
@@ -1245,6 +1256,18 @@ public class LevelTileGridPanel extends JPanel {
 
                     // Replace the current image with the scaled one
                     image = scaledBuffered;
+                } else if (levelEditor.enlargeToTwoByFiveVerticallyBeasties.contains(beastieType)) {
+                    int scaledWidth = this.tileWidth * 2;
+                    int scaledHeight = this.tileHeight * 5;
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    image = scaledBuffered;
                 } else if (levelEditor.enlargeToFourByOneHorizontallyBeasties.contains(beastieType)) {
                     int scaledWidth = this.tileWidth * 4;
                     int scaledHeight = this.tileHeight;
@@ -1269,6 +1292,53 @@ public class LevelTileGridPanel extends JPanel {
         } catch (IOException e) {
             System.err.println("An error occurred while loading the beasties from file: " + e.getMessage());
             return;
+        }
+    }
+
+    public void loadWaterfallsFromFile(String filePath, String fileName) {
+        String beastieNamePlural = "Waterfalls";
+        filePath += beastieNamePlural + "/";
+        fileName = fileName.replaceFirst("\\.lvl$", "");
+        fileName += beastieNamePlural + ".txt";
+        File file = new File(filePath + fileName);
+        if (!file.exists()) {
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String metadataLine = reader.readLine();
+            if (metadataLine == null || metadataLine.isEmpty()) {
+                throw new IOException("Invalid waterfall file: metadata missing");
+            }
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty()) continue;
+
+                String[] parts = line.split("\\s+");
+                if (parts.length != 5) {
+                    throw new IOException("Invalid waterfall line format: " + line);
+                }
+
+                int xPos = Integer.parseInt(parts[0]);
+                int yPos = Integer.parseInt(parts[1]);
+                int width = Integer.parseInt(parts[2]);
+                int height = Integer.parseInt(parts[3]);
+                int beastieType = Integer.parseInt(parts[4]);
+
+                Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                BufferedImage scaledBuffered = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(tileImage, 0, 0, width, height, null);
+                g2.dispose();
+
+                this.placedBeastieTileArr.add(new PlacedBeastieTile(xPos, yPos, beastieType, scaledBuffered));
+            }
+        } catch (Exception e) {
+            System.err.println("An error occurred while loading waterfalls from file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
