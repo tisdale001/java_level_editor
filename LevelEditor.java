@@ -144,11 +144,13 @@ public class LevelEditor {
     public static final int BIRD_LEFT = 66;
     public static final int BIRD_RIGHT = 67;
     public static final int WATERFALL = 68;
+    public static final int FALLING_ROCK = 69;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
         DOG_BORDER_BOX_LEFT, DOG_BORDER_BOX_RIGHT, DEPTH_BORDER_BOX, SCORPION_FLOOR_RIGHT, SCORPION_FLOOR_LEFT, SCORPION_CEILING_RIGHT, SCORPION_CEILING_LEFT,
-        SCORPION_LEFT_WALL_UP, SCORPION_LEFT_WALL_DOWN, SCORPION_RIGHT_WALL_UP, SCORPION_RIGHT_WALL_DOWN, SCORPION_BORDER_BOX, BIRD_LEFT, BIRD_RIGHT));
+        SCORPION_LEFT_WALL_UP, SCORPION_LEFT_WALL_DOWN, SCORPION_RIGHT_WALL_UP, SCORPION_RIGHT_WALL_DOWN, SCORPION_BORDER_BOX, BIRD_LEFT, BIRD_RIGHT,
+        FALLING_ROCK));
     public static final ArrayList<Integer> enlargeToFourByFourBeasties = new ArrayList<>(Arrays.asList(PUFFERFISH));
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
@@ -374,6 +376,9 @@ public class LevelEditor {
         // Waterfalls
         BeastieTileSet beastieTileSet69 = createBeastieTileSet("Assets/Beasties/SpriteSheets/waterfall_tile.png", 1, 1, 200, 175, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet69);
+        // Falling rocks
+        BeastieTileSet beastieTileSet70 = createBeastieTileSet("Assets/Beasties/SpriteSheets/rock_tile.png", 1, 1, 59, 59, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet70);
     }
 
     private void createTileSetArrays() {
