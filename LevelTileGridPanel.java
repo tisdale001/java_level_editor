@@ -233,6 +233,8 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("Waterfalls", waterfallArr);
         ArrayList<Integer> fallingRockArr = new ArrayList<>(Arrays.asList(levelEditor.FALLING_ROCK));
         this.beastieNamesToConstantsMap.put("FallingRocks", fallingRockArr);
+        ArrayList<Integer> sandPlatformArr = new ArrayList<>(Arrays.asList(levelEditor.SAND_PLATFORM));
+        this.beastieNamesToConstantsMap.put("SandPlatforms", sandPlatformArr);
         ArrayList<Integer> dogBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.DOG_BORDER_BOX_LEFT, levelEditor.DOG_BORDER_BOX_RIGHT));
         this.beastieNamesToConstantsMap.put("DogBorderBoxes", dogBorderBoxArr);
         ArrayList<Integer> movingColumnArr = new ArrayList<>(Arrays.asList(levelEditor.MOVING_COLUMN_LEFT_BORDER, levelEditor.MOVING_COLUMN_RIGHT_BORDER,
@@ -1261,6 +1263,18 @@ public class LevelTileGridPanel extends JPanel {
                 } else if (levelEditor.enlargeToTwoByFiveVerticallyBeasties.contains(beastieType)) {
                     int scaledWidth = this.tileWidth * 2;
                     int scaledHeight = this.tileHeight * 5;
+                    Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
+                    BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g2 = scaledBuffered.createGraphics();
+
+                    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                    g2.drawImage(tileImage, 0, 0, scaledWidth, scaledHeight, null);
+                    g2.dispose();
+
+                    image = scaledBuffered;
+                } else if (levelEditor.enlargeToThreeByTwoBeasties.contains(beastieType)) {
+                    int scaledWidth = this.tileWidth * 3;
+                    int scaledHeight = this.tileHeight * 2;
                     Image tileImage = levelEditor.beastieGridPanel.tileArr.get(beastieType).getImage();
                     BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
                     Graphics2D g2 = scaledBuffered.createGraphics();

@@ -145,6 +145,7 @@ public class LevelEditor {
     public static final int BIRD_RIGHT = 67;
     public static final int WATERFALL = 68;
     public static final int FALLING_ROCK = 69;
+    public static final int SAND_PLATFORM = 70;
     public static final ArrayList<Integer> snapIntoPlaceBeasties = new ArrayList<>(Arrays.asList(ANEMONE_FLOOR, ANEMONE_LEFT_WALL, ANEMONE_CEILING, ANEMONE_RIGHT_WALL,
         SPIDER_FLOOR_RIGHT, SPIDER_FLOOR_LEFT, SPIDER_CEILING_RIGHT, SPIDER_CEILING_LEFT, SPIDER_LEFT_WALL_UP, SPIDER_LEFT_WALL_DOWN, SPIDER_RIGHT_WALL_UP,
         SPIDER_RIGHT_WALL_DOWN, SPIDER_BORDER_BOX, RAT_RIGHT, RAT_LEFT, RAT_BORDER_BOX_RIGHT, RAT_BORDER_BOX_LEFT, SPIKES_UP, SPIKES_DOWN, DOG_RIGHT, DOG_LEFT,
@@ -155,6 +156,7 @@ public class LevelEditor {
     public static final ArrayList<Integer> enlargeByOnePointTwentyFiveBeasties = new ArrayList<>(Arrays.asList(SWITCH_ON, SWITCH_OFF));
     public static final ArrayList<Integer> enlargeToOneByFourVerticallyBeasties = new ArrayList<>(Arrays.asList(TOGGLE_DOOR_OPEN, TOGGLE_DOOR_CLOSED));
     public static final ArrayList<Integer> enlargeToTwoByFiveVerticallyBeasties = new ArrayList<>(Arrays.asList(WATERFALL));
+    public static final ArrayList<Integer> enlargeToThreeByTwoBeasties = new ArrayList<>(Arrays.asList(SAND_PLATFORM));
     public static final ArrayList<Integer> waterSpoutBeasties = new ArrayList<>(Arrays.asList(WATER_SPOUT_RIGHT, WATER_SPOUT_LEFT, WATER_SPOUT_UP, WATER_SPOUT_DOWN));
     public static final ArrayList<Integer> waterCurrentBeasties = new ArrayList<>(Arrays.asList(WATER_CURRENT_RIGHT, WATER_CURRENT_LEFT, WATER_CURRENT_UP, WATER_CURRENT_DOWN));
     public static final ArrayList<Integer> enlargeToFourByOneHorizontallyBeasties = new ArrayList<>(Arrays.asList(BEE_POT));
@@ -379,6 +381,9 @@ public class LevelEditor {
         // Falling rocks
         BeastieTileSet beastieTileSet70 = createBeastieTileSet("Assets/Beasties/SpriteSheets/rock_tile.png", 1, 1, 59, 59, scaledTileWidth, scaledTileHeight, 0, 0);
         beastieTileSetArr.add(beastieTileSet70);
+        // Sand platforms
+        BeastieTileSet beastieTileSet71 = createBeastieTileSet("Assets/Beasties/SpriteSheets/sand_platform_tile.png", 1, 1, 122, 122, scaledTileWidth, scaledTileHeight, 0, 0);
+        beastieTileSetArr.add(beastieTileSet71);
     }
 
     private void createTileSetArrays() {
@@ -1343,6 +1348,19 @@ public class LevelEditor {
                 BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2 = scaledBuffered.createGraphics();
 
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+                g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
+                g2.dispose();
+
+                curBeastieImage = scaledBuffered;
+            } else if (enlargeToThreeByTwoBeasties.contains(beastieConstantId)) {
+                gridX = (releasePoint.x / levelTileGridPanel.getTileWidth()) * levelTileGridPanel.getTileWidth();
+                gridY = (releasePoint.y / levelTileGridPanel.getTileHeight()) * levelTileGridPanel.getTileHeight();
+                int scaledWidth = this.scaledTileWidth * 3;
+                int scaledHeight = this.scaledTileHeight * 2;
+
+                BufferedImage scaledBuffered = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = scaledBuffered.createGraphics();
                 g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
                 g2.drawImage(curBeastieImage, 0, 0, scaledWidth, scaledHeight, null);
                 g2.dispose();
