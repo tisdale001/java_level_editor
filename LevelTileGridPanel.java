@@ -227,6 +227,10 @@ public class LevelTileGridPanel extends JPanel {
         this.beastieNamesToConstantsMap.put("MovingPlatforms", movingPlatformArr);
         ArrayList<Integer> dogArr = new ArrayList<>(Arrays.asList(levelEditor.DOG_RIGHT, levelEditor.DOG_LEFT));
         this.beastieNamesToConstantsMap.put("Dogs", dogArr);
+        ArrayList<Integer> armadilloArr = new ArrayList<>(Arrays.asList(levelEditor.ARMADILLO_RIGHT, levelEditor.ARMADILLO_LEFT));
+        this.beastieNamesToConstantsMap.put("Armadillos", armadilloArr);
+        ArrayList<Integer> armadilloBorderBoxArr = new ArrayList<>(Arrays.asList(levelEditor.ARMADILLO_BORDER_BOX));
+        this.beastieNamesToConstantsMap.put("ArmadilloBorderBoxes", armadilloBorderBoxArr);
         ArrayList<Integer> birdArr = new ArrayList<>(Arrays.asList(levelEditor.BIRD_LEFT, levelEditor.BIRD_RIGHT));
         this.beastieNamesToConstantsMap.put("Birds", birdArr);
         ArrayList<Integer> waterfallArr = new ArrayList<>(Arrays.asList(levelEditor.WATERFALL));
