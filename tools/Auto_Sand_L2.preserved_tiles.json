@@ -1,0 +1,180 @@
+{
+  "description": "Existing divider-bottom rock tiles preserved from saved level before jump audit.",
+  "tiles": [
+    {
+      "column": 57,
+      "row": 125,
+      "id": 107
+    },
+    {
+      "column": 58,
+      "row": 125,
+      "id": 119
+    },
+    {
+      "column": 65,
+      "row": 125,
+      "id": 119
+    },
+    {
+      "column": 66,
+      "row": 125,
+      "id": 107
+    },
+    {
+      "column": 67,
+      "row": 125,
+      "id": 101
+    },
+    {
+      "column": 55,
+      "row": 126,
+      "id": 101
+    },
+    {
+      "column": 56,
+      "row": 126,
+      "id": 103
+    },
+    {
+      "column": 57,
+      "row": 126,
+      "id": 103
+    },
+    {
+      "column": 58,
+      "row": 126,
+      "id": 107
+    },
+    {
+      "column": 59,
+      "row": 126,
+      "id": 102
+    },
+    {
+      "column": 60,
+      "row": 126,
+      "id": 119
+    },
+    {
+      "column": 61,
+      "row": 126,
+      "id": 101
+    },
+    {
+      "column": 62,
+      "row": 126,
+      "id": 103
+    },
+    {
+      "column": 63,
+      "row": 126,
+      "id": 119
+    },
+    {
+      "column": 64,
+      "row": 126,
+      "id": 103
+    },
+    {
+      "column": 65,
+      "row": 126,
+      "id": 107
+    },
+    {
+      "column": 66,
+      "row": 126,
+      "id": 101
+    },
+    {
+      "column": 67,
+      "row": 126,
+      "id": 102
+    },
+    {
+      "column": 68,
+      "row": 126,
+      "id": 119
+    },
+    {
+      "column": 69,
+      "row": 126,
+      "id": 103
+    },
+    {
+      "column": 55,
+      "row": 127,
+      "id": 103
+    },
+    {
+      "column": 56,
+      "row": 127,
+      "id": 102
+    },
+    {
+      "column": 57,
+      "row": 127,
+      "id": 119
+    },
+    {
+      "column": 58,
+      "row": 127,
+      "id": 101
+    },
+    {
+      "column": 59,
+      "row": 127,
+      "id": 103
+    },
+    {
+      "column": 60,
+      "row": 127,
+      "id": 103
+    },
+    {
+      "column": 61,
+      "row": 127,
+      "id": 107
+    },
+    {
+      "column": 62,
+      "row": 127,
+      "id": 102
+    },
+    {
+      "column": 63,
+      "row": 127,
+      "id": 101
+    },
+    {
+      "column": 64,
+      "row": 127,
+      "id": 119
+    },
+    {
+      "column": 65,
+      "row": 127,
+      "id": 102
+    },
+    {
+      "column": 66,
+      "row": 127,
+      "id": 103
+    },
+    {
+      "column": 67,
+      "row": 127,
+      "id": 103
+    },
+    {
+      "column": 68,
+      "row": 127,
+      "id": 101
+    },
+    {
+      "column": 69,
+      "row": 127,
+      "id": 103
+    }
+  ]
+}

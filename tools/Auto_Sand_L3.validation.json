@@ -1,0 +1,5536 @@
+{
+  "image4Open": [
+    [
+      98,
+      22,
+      127,
+      29
+    ],
+    [
+      98,
+      39,
+      127,
+      47
+    ],
+    [
+      43,
+      39,
+      58,
+      55
+    ]
+  ],
+  "image4Mapping": {
+    "tilePixels": 8,
+    "originPixelX": 5,
+    "originPixelY": 9
+  },
+  "screenshotMapping": {
+    "tilePixels": 8,
+    "xOffsetPixels": 4,
+    "yOffsetPixels": 436
+  },
+  "boxEdits": {
+    "open": [
+      [
+        38,
+        59,
+        74,
+        69
+      ],
+      [
+        101,
+        59,
+        127,
+        68
+      ],
+      [
+        95,
+        79,
+        106,
+        120
+      ],
+      [
+        104,
+        80,
+        127,
+        90
+      ],
+      [
+        66,
+        89,
+        86,
+        94
+      ],
+      [
+        72,
+        94,
+        86,
+        136
+      ],
+      [
+        30,
+        99,
+        49,
+        106
+      ],
+      [
+        111,
+        107,
+        128,
+        115
+      ],
+      [
+        93,
+        121,
+        127,
+        130
+      ],
+      [
+        35,
+        131,
+        47,
+        145
+      ],
+      [
+        48,
+        136,
+        112,
+        145
+      ]
+    ],
+    "close": [
+      [
+        47,
+        95,
+        66,
+        98
+      ],
+      [
+        30,
+        121,
+        32,
+        130
+      ],
+      [
+        126,
+        116,
+        138,
+        120
+      ]
+    ]
+  },
+  "lift": {
+    "x0": 128,
+    "x1": 137,
+    "width": 10,
+    "topStop": 16,
+    "bottomStop": 114,
+    "upperMarkerRow": 15,
+    "lowerMarkerRow": 115
+  },
+  "mainPoints": [
+    [
+      9,
+      16
+    ],
+    [
+      50,
+      16
+    ],
+    [
+      50,
+      39
+    ],
+    [
+      22,
+      39
+    ],
+    [
+      22,
+      62
+    ],
+    [
+      22,
+      85
+    ],
+    [
+      22,
+      108
+    ],
+    [
+      22,
+      131
+    ],
+    [
+      58,
+      131
+    ],
+    [
+      58,
+      108
+    ],
+    [
+      58,
+      85
+    ],
+    [
+      82,
+      85
+    ],
+    [
+      82,
+      62
+    ],
+    [
+      82,
+      39
+    ],
+    [
+      82,
+      16
+    ],
+    [
+      128,
+      16
+    ],
+    [
+      128,
+      131
+    ],
+    [
+      134,
+      131
+    ]
+  ],
+  "branchSpecs": [],
+  "spacingExceptions": [
+    {
+      "center": 50,
+      "upperFloor": 16,
+      "lowerFloor": 20,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 22,
+      "upperFloor": 39,
+      "lowerFloor": 43,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 22,
+      "upperFloor": 62,
+      "lowerFloor": 66,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 22,
+      "upperFloor": 85,
+      "lowerFloor": 89,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 22,
+      "upperFloor": 108,
+      "lowerFloor": 112,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 58,
+      "upperFloor": 108,
+      "lowerFloor": 112,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 58,
+      "upperFloor": 85,
+      "lowerFloor": 89,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 82,
+      "upperFloor": 62,
+      "lowerFloor": 66,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 82,
+      "upperFloor": 39,
+      "lowerFloor": 43,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    },
+    {
+      "center": 82,
+      "upperFloor": 16,
+      "lowerFloor": 20,
+      "reason": "Shaft-mouth lip; exact3x2 traversal independently audited"
+    }
+  ],
+  "name": "Auto_Sand_L3",
+  "component": "Wally_Sand_Components",
+  "rows": 150,
+  "columns": 150,
+  "entry": {
+    "edge": "left",
+    "rows": [
+      10,
+      15
+    ],
+    "floor": 16
+  },
+  "exit": {
+    "edge": "right",
+    "rows": [
+      125,
+      130
+    ],
+    "floor": 131
+  },
+  "spawn": {
+    "column": 9,
+    "row": 13
+  },
+  "nodes": [
+    {
+      "id": 0,
+      "x": 9,
+      "floor": 16,
+      "row": 16
+    },
+    {
+      "id": 1,
+      "x": 50,
+      "floor": 16,
+      "row": 16
+    },
+    {
+      "id": 2,
+      "x": 50,
+      "floor": 39,
+      "row": 39
+    },
+    {
+      "id": 3,
+      "x": 22,
+      "floor": 39,
+      "row": 39
+    },
+    {
+      "id": 4,
+      "x": 22,
+      "floor": 62,
+      "row": 62
+    },
+    {
+      "id": 5,
+      "x": 22,
+      "floor": 85,
+      "row": 85
+    },
+    {
+      "id": 6,
+      "x": 22,
+      "floor": 108,
+      "row": 108
+    },
+    {
+      "id": 7,
+      "x": 22,
+      "floor": 131,
+      "row": 131
+    },
+    {
+      "id": 8,
+      "x": 58,
+      "floor": 131,
+      "row": 131
+    },
+    {
+      "id": 9,
+      "x": 58,
+      "floor": 108,
+      "row": 108
+    },
+    {
+      "id": 10,
+      "x": 58,
+      "floor": 85,
+      "row": 85
+    },
+    {
+      "id": 11,
+      "x": 82,
+      "floor": 85,
+      "row": 85
+    },
+    {
+      "id": 12,
+      "x": 82,
+      "floor": 62,
+      "row": 62
+    },
+    {
+      "id": 13,
+      "x": 82,
+      "floor": 39,
+      "row": 39
+    },
+    {
+      "id": 14,
+      "x": 82,
+      "floor": 16,
+      "row": 16
+    },
+    {
+      "id": 15,
+      "x": 128,
+      "floor": 16,
+      "row": 16
+    },
+    {
+      "id": 16,
+      "x": 128,
+      "floor": 131,
+      "row": 131
+    },
+    {
+      "id": 17,
+      "x": 134,
+      "floor": 131,
+      "row": 131
+    }
+  ],
+  "edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      16,
+      17
+    ]
+  ],
+  "intersections": [],
+  "deadEnds": [],
+  "shafts": [
+    {
+      "center": 50,
+      "upperFloor": 16,
+      "lowerFloor": 39,
+      "upperNode": 1,
+      "lowerNode": 2
+    },
+    {
+      "center": 22,
+      "upperFloor": 39,
+      "lowerFloor": 62,
+      "upperNode": 3,
+      "lowerNode": 4
+    },
+    {
+      "center": 22,
+      "upperFloor": 62,
+      "lowerFloor": 85,
+      "upperNode": 4,
+      "lowerNode": 5
+    },
+    {
+      "center": 22,
+      "upperFloor": 85,
+      "lowerFloor": 108,
+      "upperNode": 5,
+      "lowerNode": 6
+    },
+    {
+      "center": 22,
+      "upperFloor": 108,
+      "lowerFloor": 131,
+      "upperNode": 6,
+      "lowerNode": 7
+    },
+    {
+      "center": 58,
+      "upperFloor": 108,
+      "lowerFloor": 131,
+      "upperNode": 9,
+      "lowerNode": 8
+    },
+    {
+      "center": 58,
+      "upperFloor": 85,
+      "lowerFloor": 108,
+      "upperNode": 10,
+      "lowerNode": 9
+    },
+    {
+      "center": 82,
+      "upperFloor": 62,
+      "lowerFloor": 85,
+      "upperNode": 12,
+      "lowerNode": 11
+    },
+    {
+      "center": 82,
+      "upperFloor": 39,
+      "lowerFloor": 62,
+      "upperNode": 13,
+      "lowerNode": 12
+    },
+    {
+      "center": 82,
+      "upperFloor": 16,
+      "lowerFloor": 39,
+      "upperNode": 14,
+      "lowerNode": 13
+    }
+  ],
+  "formations": [
+    {
+      "x0": 43,
+      "x1": 47,
+      "floor": 16,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 53,
+      "x1": 57,
+      "floor": 16,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 43,
+      "x1": 47,
+      "floor": 34,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 29,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 43,
+      "x1": 47,
+      "floor": 24,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 20,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 39,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 25,
+      "x1": 29,
+      "floor": 39,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 57,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 52,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 47,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 43,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 62,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 25,
+      "x1": 29,
+      "floor": 62,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 80,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 75,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 70,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 66,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 85,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 25,
+      "x1": 29,
+      "floor": 85,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 103,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 98,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 93,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 89,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 108,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 25,
+      "x1": 29,
+      "floor": 108,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 126,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 121,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 15,
+      "x1": 19,
+      "floor": 116,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 23,
+      "x1": 27,
+      "floor": 112,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 108,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 61,
+      "x1": 65,
+      "floor": 108,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 126,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 59,
+      "x1": 63,
+      "floor": 121,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 116,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 59,
+      "x1": 63,
+      "floor": 112,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 85,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 61,
+      "x1": 65,
+      "floor": 85,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 103,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 59,
+      "x1": 63,
+      "floor": 98,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 93,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 59,
+      "x1": 63,
+      "floor": 89,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 62,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 85,
+      "x1": 89,
+      "floor": 62,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 80,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 75,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 70,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 66,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 39,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 85,
+      "x1": 89,
+      "floor": 39,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 57,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 52,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 47,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 43,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 16,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 85,
+      "x1": 89,
+      "floor": 16,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 34,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 29,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 75,
+      "x1": 79,
+      "floor": 24,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 83,
+      "x1": 87,
+      "floor": 20,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 94,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 82,
+      "x1": 86,
+      "floor": 94,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 80,
+      "x1": 84,
+      "floor": 98,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 103,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 80,
+      "x1": 84,
+      "floor": 108,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 113,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 80,
+      "x1": 84,
+      "floor": 118,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 123,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 80,
+      "x1": 84,
+      "floor": 128,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 133,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 80,
+      "x1": 84,
+      "floor": 138,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 72,
+      "x1": 76,
+      "floor": 143,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 95,
+      "x1": 99,
+      "floor": 90,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 105,
+      "x1": 109,
+      "floor": 90,
+      "style": "flat",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 103,
+      "x1": 107,
+      "floor": 94,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 95,
+      "x1": 99,
+      "floor": 99,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 103,
+      "x1": 107,
+      "floor": 104,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 95,
+      "x1": 99,
+      "floor": 109,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 103,
+      "x1": 107,
+      "floor": 114,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 95,
+      "x1": 99,
+      "floor": 119,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 103,
+      "x1": 107,
+      "floor": 124,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 95,
+      "x1": 99,
+      "floor": 129,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 2
+    },
+    {
+      "x0": 35,
+      "x1": 39,
+      "floor": 136,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 43,
+      "x1": 47,
+      "floor": 141,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 40,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 43,
+      "x1": 47,
+      "floor": 45,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    },
+    {
+      "x0": 51,
+      "x1": 55,
+      "floor": 50,
+      "style": "V",
+      "minimumThickness": 2,
+      "maximumThickness": 3
+    }
+  ],
+  "surfaces": [
+    {
+      "id": 0,
+      "x0": 0,
+      "x1": 47,
+      "floor": 16
+    },
+    {
+      "id": 1,
+      "x0": 53,
+      "x1": 58,
+      "floor": 16
+    },
+    {
+      "id": 2,
+      "x0": 74,
+      "x1": 79,
+      "floor": 16
+    },
+    {
+      "id": 3,
+      "x0": 85,
+      "x1": 127,
+      "floor": 16
+    },
+    {
+      "id": 4,
+      "x0": 51,
+      "x1": 55,
+      "floor": 20
+    },
+    {
+      "id": 5,
+      "x0": 83,
+      "x1": 87,
+      "floor": 20
+    },
+    {
+      "id": 6,
+      "x0": 43,
+      "x1": 47,
+      "floor": 24
+    },
+    {
+      "id": 7,
+      "x0": 75,
+      "x1": 79,
+      "floor": 24
+    },
+    {
+      "id": 8,
+      "x0": 51,
+      "x1": 55,
+      "floor": 29
+    },
+    {
+      "id": 9,
+      "x0": 83,
+      "x1": 87,
+      "floor": 29
+    },
+    {
+      "id": 10,
+      "x0": 98,
+      "x1": 127,
+      "floor": 30
+    },
+    {
+      "id": 11,
+      "x0": 43,
+      "x1": 47,
+      "floor": 34
+    },
+    {
+      "id": 12,
+      "x0": 75,
+      "x1": 79,
+      "floor": 34
+    },
+    {
+      "id": 13,
+      "x0": 14,
+      "x1": 19,
+      "floor": 39
+    },
+    {
+      "id": 14,
+      "x0": 25,
+      "x1": 42,
+      "floor": 39
+    },
+    {
+      "id": 15,
+      "x0": 74,
+      "x1": 79,
+      "floor": 39
+    },
+    {
+      "id": 16,
+      "x0": 85,
+      "x1": 90,
+      "floor": 39
+    },
+    {
+      "id": 17,
+      "x0": 51,
+      "x1": 55,
+      "floor": 40
+    },
+    {
+      "id": 18,
+      "x0": 23,
+      "x1": 27,
+      "floor": 43
+    },
+    {
+      "id": 19,
+      "x0": 83,
+      "x1": 87,
+      "floor": 43
+    },
+    {
+      "id": 20,
+      "x0": 43,
+      "x1": 47,
+      "floor": 45
+    },
+    {
+      "id": 21,
+      "x0": 15,
+      "x1": 19,
+      "floor": 47
+    },
+    {
+      "id": 22,
+      "x0": 75,
+      "x1": 79,
+      "floor": 47
+    },
+    {
+      "id": 23,
+      "x0": 98,
+      "x1": 127,
+      "floor": 48
+    },
+    {
+      "id": 24,
+      "x0": 51,
+      "x1": 55,
+      "floor": 50
+    },
+    {
+      "id": 25,
+      "x0": 23,
+      "x1": 27,
+      "floor": 52
+    },
+    {
+      "id": 26,
+      "x0": 83,
+      "x1": 87,
+      "floor": 52
+    },
+    {
+      "id": 27,
+      "x0": 43,
+      "x1": 58,
+      "floor": 56
+    },
+    {
+      "id": 28,
+      "x0": 15,
+      "x1": 19,
+      "floor": 57
+    },
+    {
+      "id": 29,
+      "x0": 75,
+      "x1": 79,
+      "floor": 57
+    },
+    {
+      "id": 30,
+      "x0": 14,
+      "x1": 19,
+      "floor": 62
+    },
+    {
+      "id": 31,
+      "x0": 25,
+      "x1": 30,
+      "floor": 62
+    },
+    {
+      "id": 32,
+      "x0": 75,
+      "x1": 79,
+      "floor": 62
+    },
+    {
+      "id": 33,
+      "x0": 85,
+      "x1": 90,
+      "floor": 62
+    },
+    {
+      "id": 34,
+      "x0": 23,
+      "x1": 27,
+      "floor": 66
+    },
+    {
+      "id": 35,
+      "x0": 83,
+      "x1": 87,
+      "floor": 66
+    },
+    {
+      "id": 36,
+      "x0": 101,
+      "x1": 127,
+      "floor": 69
+    },
+    {
+      "id": 37,
+      "x0": 15,
+      "x1": 19,
+      "floor": 70
+    },
+    {
+      "id": 38,
+      "x0": 38,
+      "x1": 79,
+      "floor": 70
+    },
+    {
+      "id": 39,
+      "x0": 23,
+      "x1": 27,
+      "floor": 75
+    },
+    {
+      "id": 40,
+      "x0": 83,
+      "x1": 87,
+      "floor": 75
+    },
+    {
+      "id": 41,
+      "x0": 15,
+      "x1": 19,
+      "floor": 80
+    },
+    {
+      "id": 42,
+      "x0": 75,
+      "x1": 79,
+      "floor": 80
+    },
+    {
+      "id": 43,
+      "x0": 14,
+      "x1": 19,
+      "floor": 85
+    },
+    {
+      "id": 44,
+      "x0": 25,
+      "x1": 30,
+      "floor": 85
+    },
+    {
+      "id": 45,
+      "x0": 50,
+      "x1": 55,
+      "floor": 85
+    },
+    {
+      "id": 46,
+      "x0": 61,
+      "x1": 90,
+      "floor": 85
+    },
+    {
+      "id": 47,
+      "x0": 23,
+      "x1": 27,
+      "floor": 89
+    },
+    {
+      "id": 48,
+      "x0": 59,
+      "x1": 63,
+      "floor": 89
+    },
+    {
+      "id": 49,
+      "x0": 95,
+      "x1": 99,
+      "floor": 90
+    },
+    {
+      "id": 50,
+      "x0": 105,
+      "x1": 109,
+      "floor": 90
+    },
+    {
+      "id": 51,
+      "x0": 110,
+      "x1": 127,
+      "floor": 91
+    },
+    {
+      "id": 52,
+      "x0": 15,
+      "x1": 19,
+      "floor": 93
+    },
+    {
+      "id": 53,
+      "x0": 51,
+      "x1": 55,
+      "floor": 93
+    },
+    {
+      "id": 54,
+      "x0": 72,
+      "x1": 76,
+      "floor": 94
+    },
+    {
+      "id": 55,
+      "x0": 82,
+      "x1": 86,
+      "floor": 94
+    },
+    {
+      "id": 56,
+      "x0": 103,
+      "x1": 107,
+      "floor": 94
+    },
+    {
+      "id": 57,
+      "x0": 56,
+      "x1": 71,
+      "floor": 95
+    },
+    {
+      "id": 58,
+      "x0": 23,
+      "x1": 27,
+      "floor": 98
+    },
+    {
+      "id": 59,
+      "x0": 80,
+      "x1": 84,
+      "floor": 98
+    },
+    {
+      "id": 60,
+      "x0": 95,
+      "x1": 99,
+      "floor": 99
+    },
+    {
+      "id": 61,
+      "x0": 15,
+      "x1": 19,
+      "floor": 103
+    },
+    {
+      "id": 62,
+      "x0": 51,
+      "x1": 55,
+      "floor": 103
+    },
+    {
+      "id": 63,
+      "x0": 72,
+      "x1": 76,
+      "floor": 103
+    },
+    {
+      "id": 64,
+      "x0": 103,
+      "x1": 107,
+      "floor": 104
+    },
+    {
+      "id": 65,
+      "x0": 31,
+      "x1": 49,
+      "floor": 107
+    },
+    {
+      "id": 66,
+      "x0": 14,
+      "x1": 19,
+      "floor": 108
+    },
+    {
+      "id": 67,
+      "x0": 25,
+      "x1": 30,
+      "floor": 108
+    },
+    {
+      "id": 68,
+      "x0": 50,
+      "x1": 55,
+      "floor": 108
+    },
+    {
+      "id": 69,
+      "x0": 61,
+      "x1": 66,
+      "floor": 108
+    },
+    {
+      "id": 70,
+      "x0": 80,
+      "x1": 84,
+      "floor": 108
+    },
+    {
+      "id": 71,
+      "x0": 95,
+      "x1": 99,
+      "floor": 109
+    },
+    {
+      "id": 72,
+      "x0": 23,
+      "x1": 27,
+      "floor": 112
+    },
+    {
+      "id": 73,
+      "x0": 59,
+      "x1": 63,
+      "floor": 112
+    },
+    {
+      "id": 74,
+      "x0": 72,
+      "x1": 76,
+      "floor": 113
+    },
+    {
+      "id": 75,
+      "x0": 103,
+      "x1": 107,
+      "floor": 114
+    },
+    {
+      "id": 76,
+      "x0": 15,
+      "x1": 19,
+      "floor": 116
+    },
+    {
+      "id": 77,
+      "x0": 51,
+      "x1": 55,
+      "floor": 116
+    },
+    {
+      "id": 78,
+      "x0": 111,
+      "x1": 137,
+      "floor": 116
+    },
+    {
+      "id": 79,
+      "x0": 80,
+      "x1": 84,
+      "floor": 118
+    },
+    {
+      "id": 80,
+      "x0": 95,
+      "x1": 99,
+      "floor": 119
+    },
+    {
+      "id": 81,
+      "x0": 23,
+      "x1": 27,
+      "floor": 121
+    },
+    {
+      "id": 82,
+      "x0": 59,
+      "x1": 63,
+      "floor": 121
+    },
+    {
+      "id": 83,
+      "x0": 72,
+      "x1": 76,
+      "floor": 123
+    },
+    {
+      "id": 84,
+      "x0": 103,
+      "x1": 107,
+      "floor": 124
+    },
+    {
+      "id": 85,
+      "x0": 15,
+      "x1": 19,
+      "floor": 126
+    },
+    {
+      "id": 86,
+      "x0": 51,
+      "x1": 55,
+      "floor": 126
+    },
+    {
+      "id": 87,
+      "x0": 80,
+      "x1": 84,
+      "floor": 128
+    },
+    {
+      "id": 88,
+      "x0": 95,
+      "x1": 99,
+      "floor": 129
+    },
+    {
+      "id": 89,
+      "x0": 14,
+      "x1": 29,
+      "floor": 131
+    },
+    {
+      "id": 90,
+      "x0": 48,
+      "x1": 66,
+      "floor": 131
+    },
+    {
+      "id": 91,
+      "x0": 100,
+      "x1": 127,
+      "floor": 131
+    },
+    {
+      "id": 92,
+      "x0": 138,
+      "x1": 149,
+      "floor": 131
+    },
+    {
+      "id": 93,
+      "x0": 72,
+      "x1": 76,
+      "floor": 133
+    },
+    {
+      "id": 94,
+      "x0": 35,
+      "x1": 39,
+      "floor": 136
+    },
+    {
+      "id": 95,
+      "x0": 80,
+      "x1": 84,
+      "floor": 138
+    },
+    {
+      "id": 96,
+      "x0": 43,
+      "x1": 47,
+      "floor": 141
+    },
+    {
+      "id": 97,
+      "x0": 72,
+      "x1": 76,
+      "floor": 143
+    },
+    {
+      "id": 98,
+      "x0": 35,
+      "x1": 71,
+      "floor": 146
+    },
+    {
+      "id": 99,
+      "x0": 77,
+      "x1": 112,
+      "floor": 146
+    },
+    {
+      "id": 100,
+      "x0": 128,
+      "x1": 137,
+      "floor": 16,
+      "virtualLift": true
+    },
+    {
+      "id": 101,
+      "x0": 128,
+      "x1": 137,
+      "floor": 30,
+      "virtualLift": true
+    },
+    {
+      "id": 102,
+      "x0": 128,
+      "x1": 137,
+      "floor": 48,
+      "virtualLift": true
+    },
+    {
+      "id": 103,
+      "x0": 128,
+      "x1": 137,
+      "floor": 69,
+      "virtualLift": true
+    },
+    {
+      "id": 104,
+      "x0": 128,
+      "x1": 137,
+      "floor": 90,
+      "virtualLift": true
+    },
+    {
+      "id": 105,
+      "x0": 128,
+      "x1": 137,
+      "floor": 114,
+      "virtualLift": true
+    }
+  ],
+  "movement": [
+    {
+      "from": 100,
+      "to": 101,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 100,
+      "to": 102,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 100,
+      "to": 103,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 100,
+      "to": 104,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 100,
+      "to": 105,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 101,
+      "to": 100,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 101,
+      "to": 102,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 101,
+      "to": 103,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 101,
+      "to": 104,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 101,
+      "to": 105,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 102,
+      "to": 100,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 102,
+      "to": 101,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 102,
+      "to": 103,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 102,
+      "to": 104,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 102,
+      "to": 105,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 103,
+      "to": 100,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 103,
+      "to": 101,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 103,
+      "to": 102,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 103,
+      "to": 104,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 103,
+      "to": 105,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 104,
+      "to": 100,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 104,
+      "to": 101,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 104,
+      "to": 102,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 104,
+      "to": 103,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 104,
+      "to": 105,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 105,
+      "to": 100,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 105,
+      "to": 101,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 105,
+      "to": 102,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 105,
+      "to": 103,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 105,
+      "to": 104,
+      "pass": true,
+      "mode": "vertical moving-platform ride",
+      "sweep": [
+        16,
+        114
+      ],
+      "body": [
+        3,
+        2
+      ]
+    },
+    {
+      "from": 0,
+      "to": 1,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 39.5,
+      "landingLeft": 50.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 0,
+      "to": 4,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 37,
+      "landingLeft": 49.395,
+      "horizontalGain": 12.395,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 1,
+      "to": 0,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 50.5,
+      "landingLeft": 39.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 1,
+      "to": 4,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 50.5,
+      "landingLeft": 48.5,
+      "horizontalGain": 2,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 208,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 74,
+      "landingLeft": 85,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 2,
+      "to": 5,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 74,
+      "landingLeft": 82,
+      "horizontalGain": 8,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 88,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 3,
+      "to": 2,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 82.5,
+      "landingLeft": 74,
+      "horizontalGain": 8.5,
+      "arcTime": 1,
+      "horizontalHoldSteps": 50,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 3,
+      "to": 5,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 82.5,
+      "landingLeft": 80.5,
+      "horizontalGain": 2,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 208,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 3,
+      "to": 100,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 114.5,
+      "landingLeft": 125.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 4,
+      "to": 0,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 48.5,
+      "landingLeft": 40.799,
+      "horizontalGain": 7.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 28,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 4,
+      "to": 1,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 48.5,
+      "landingLeft": 56,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 4,
+      "to": 6,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 48.5,
+      "landingLeft": 46.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 5,
+      "to": 2,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 74,
+      "horizontalGain": 6.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 53,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 5,
+      "to": 3,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 89.201,
+      "horizontalGain": 8.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 8,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 5,
+      "to": 7,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 78.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 6,
+      "to": 4,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 46.25,
+      "landingLeft": 50,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 6,
+      "to": 8,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 46.25,
+      "landingLeft": 49.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 7,
+      "to": 5,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 78.25,
+      "landingLeft": 82,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 7,
+      "to": 9,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 78.25,
+      "landingLeft": 81.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 8,
+      "to": 6,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 48.5,
+      "landingLeft": 43,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 8,
+      "to": 11,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 48.5,
+      "landingLeft": 45.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 9,
+      "to": 7,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 75,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 9,
+      "to": 12,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 77.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 10,
+      "to": 101,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 124.75,
+      "landingLeft": 135,
+      "horizontalGain": 10.25,
+      "arcTime": 1,
+      "horizontalHoldSteps": 15,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 11,
+      "to": 8,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 44.75,
+      "landingLeft": 53.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 11,
+      "to": 14,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 40.5,
+      "landingLeft": 33.278,
+      "horizontalGain": 7.222,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 11,
+      "to": 17,
+      "pass": true,
+      "rise": -6,
+      "takeoffLeft": 44.75,
+      "landingLeft": 50.395,
+      "horizontalGain": 5.645,
+      "arcTime": 1.1814,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 12,
+      "to": 9,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 76.75,
+      "landingLeft": 85.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 12,
+      "to": 16,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -5,
+      "takeoffLeft": 80,
+      "landingLeft": 82.53546276418555,
+      "horizontalSpeed": 6,
+      "ceilingHits": 0
+    },
+    {
+      "from": 13,
+      "to": 14,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 14,
+      "landingLeft": 25,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 13,
+      "to": 18,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 14,
+      "landingLeft": 22,
+      "horizontalGain": 8,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 88,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 14,
+      "to": 11,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 32.25,
+      "landingLeft": 40.69,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 14,
+      "to": 13,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 22.5,
+      "landingLeft": 14,
+      "horizontalGain": 8.5,
+      "arcTime": 1,
+      "horizontalHoldSteps": 50,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 14,
+      "to": 18,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 22.5,
+      "landingLeft": 20.5,
+      "horizontalGain": 2,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 208,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 14,
+      "to": 20,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -6,
+      "takeoffLeft": 43,
+      "landingLeft": 43,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 15,
+      "to": 19,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 80,
+      "landingLeft": 80.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 16,
+      "to": 12,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 82.5,
+      "landingLeft": 74.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 16,
+      "to": 19,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 82,
+      "landingLeft": 82,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 17,
+      "to": 11,
+      "pass": true,
+      "rise": 6,
+      "takeoffLeft": 48.5,
+      "landingLeft": 43.821,
+      "horizontalGain": 4.679,
+      "arcTime": 0.689,
+      "horizontalHoldSteps": 58,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 17,
+      "to": 20,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 48.5,
+      "landingLeft": 45.449,
+      "horizontalGain": 3.051,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 193,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 18,
+      "to": 13,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 14,
+      "horizontalGain": 6.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 53,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 18,
+      "to": 14,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 29.201,
+      "horizontalGain": 8.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 8,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 18,
+      "to": 21,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 18.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 19,
+      "to": 15,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 79.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 19,
+      "to": 16,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 88,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 19,
+      "to": 22,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 78.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 20,
+      "to": 17,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 43.75,
+      "landingLeft": 52.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 20,
+      "to": 24,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 43.75,
+      "landingLeft": 50.101,
+      "horizontalGain": 6.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 127,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 21,
+      "to": 18,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 18.25,
+      "landingLeft": 22,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 21,
+      "to": 25,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 18.25,
+      "landingLeft": 21.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 22,
+      "to": 19,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 78.25,
+      "landingLeft": 82,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 22,
+      "to": 26,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 78.25,
+      "landingLeft": 81.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 23,
+      "to": 102,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 114.5,
+      "landingLeft": 125.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 24,
+      "to": 20,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 48.5,
+      "landingLeft": 43,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 24,
+      "to": 27,
+      "pass": true,
+      "rise": -6,
+      "takeoffLeft": 48.5,
+      "landingLeft": 45.605,
+      "horizontalGain": 2.895,
+      "arcTime": 1.1814,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 25,
+      "to": 21,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 15,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 25,
+      "to": 28,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 17.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 26,
+      "to": 22,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 75,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 26,
+      "to": 29,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 77.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 27,
+      "to": 24,
+      "pass": true,
+      "rise": 6,
+      "takeoffLeft": 43.75,
+      "landingLeft": 51.329,
+      "horizontalGain": 7.579,
+      "arcTime": 0.689,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 28,
+      "to": 25,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 16.75,
+      "landingLeft": 25.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 28,
+      "to": 31,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -5,
+      "takeoffLeft": 20,
+      "landingLeft": 22.53546276418555,
+      "horizontalSpeed": 6,
+      "ceilingHits": 0
+    },
+    {
+      "from": 29,
+      "to": 26,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 76.75,
+      "landingLeft": 85.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 29,
+      "to": 33,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -5,
+      "takeoffLeft": 80,
+      "landingLeft": 82.53546276418555,
+      "horizontalSpeed": 6,
+      "ceilingHits": 0
+    },
+    {
+      "from": 30,
+      "to": 34,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 20,
+      "landingLeft": 20.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 31,
+      "to": 28,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 22.5,
+      "landingLeft": 14.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 31,
+      "to": 34,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 22,
+      "landingLeft": 22,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 32,
+      "to": 35,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 80,
+      "landingLeft": 80.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 33,
+      "to": 29,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 82.5,
+      "landingLeft": 74.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 33,
+      "to": 35,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 82,
+      "landingLeft": 82,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 34,
+      "to": 30,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 19.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 34,
+      "to": 31,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 28,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 34,
+      "to": 37,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 18.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 35,
+      "to": 32,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 79.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 35,
+      "to": 33,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 88,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 35,
+      "to": 38,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 80.5,
+      "landingLeft": 78.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 36,
+      "to": 103,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 114.5,
+      "landingLeft": 125.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 37,
+      "to": 34,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 18.25,
+      "landingLeft": 22,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 37,
+      "to": 39,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 18.25,
+      "landingLeft": 21.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 38,
+      "to": 35,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 78.25,
+      "landingLeft": 82,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 38,
+      "to": 40,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 78.25,
+      "landingLeft": 81.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 39,
+      "to": 37,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 15,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 39,
+      "to": 41,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 17.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 40,
+      "to": 38,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 74.11,
+      "horizontalGain": 6.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 41,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 40,
+      "to": 42,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 80.5,
+      "landingLeft": 77.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 41,
+      "to": 39,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 16.75,
+      "landingLeft": 25.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 41,
+      "to": 44,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -5,
+      "takeoffLeft": 20,
+      "landingLeft": 22.53546276418555,
+      "horizontalSpeed": 6,
+      "ceilingHits": 0
+    },
+    {
+      "from": 42,
+      "to": 40,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 76.75,
+      "landingLeft": 85.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 42,
+      "to": 46,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 72.5,
+      "landingLeft": 65.278,
+      "horizontalGain": 7.222,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 43,
+      "to": 47,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 20,
+      "landingLeft": 20.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 44,
+      "to": 41,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 22.5,
+      "landingLeft": 14.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 44,
+      "to": 47,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 22,
+      "landingLeft": 22,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 45,
+      "to": 46,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 50,
+      "landingLeft": 61,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 45,
+      "to": 48,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 50,
+      "landingLeft": 58,
+      "horizontalGain": 8,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 88,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 46,
+      "to": 42,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 64.25,
+      "landingLeft": 72.69,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 46,
+      "to": 45,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 58.5,
+      "landingLeft": 50,
+      "horizontalGain": 8.5,
+      "arcTime": 1,
+      "horizontalHoldSteps": 50,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 46,
+      "to": 48,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 58.5,
+      "landingLeft": 56.5,
+      "horizontalGain": 2,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 208,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 47,
+      "to": 43,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 19.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 47,
+      "to": 44,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 28,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 47,
+      "to": 52,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 18.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 48,
+      "to": 45,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 50,
+      "horizontalGain": 6.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 53,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 48,
+      "to": 46,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 65.201,
+      "horizontalGain": 8.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 8,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 48,
+      "to": 53,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 54.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 48,
+      "to": 57,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -6,
+      "takeoffLeft": 56,
+      "landingLeft": 56,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 49,
+      "to": 50,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 95,
+      "landingLeft": 106,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 49,
+      "to": 51,
+      "pass": true,
+      "rise": -1,
+      "takeoffLeft": 99,
+      "landingLeft": 110.38,
+      "horizontalGain": 11.38,
+      "arcTime": 1.0345,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 49,
+      "to": 56,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 95,
+      "landingLeft": 102,
+      "horizontalGain": 7,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 50,
+      "to": 49,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 102.5,
+      "landingLeft": 95,
+      "horizontalGain": 7.5,
+      "arcTime": 1,
+      "horizontalHoldSteps": 70,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 50,
+      "to": 51,
+      "pass": true,
+      "rise": -1,
+      "takeoffLeft": 102.5,
+      "landingLeft": 113.88,
+      "horizontalGain": 11.38,
+      "arcTime": 1.0345,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 50,
+      "to": 56,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 102.5,
+      "landingLeft": 100.5,
+      "horizontalGain": 2,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 208,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 51,
+      "to": 50,
+      "pass": true,
+      "rise": 1,
+      "takeoffLeft": 110,
+      "landingLeft": 102.5,
+      "horizontalGain": 7.5,
+      "arcTime": 0.9629,
+      "horizontalHoldSteps": 62,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 51,
+      "to": 56,
+      "pass": true,
+      "rise": -3,
+      "takeoffLeft": 110,
+      "landingLeft": 100.5,
+      "horizontalGain": 9.5,
+      "arcTime": 1.0976,
+      "horizontalHoldSteps": 52,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 51,
+      "to": 104,
+      "pass": true,
+      "rise": 1,
+      "takeoffLeft": 115,
+      "landingLeft": 125.592,
+      "horizontalGain": 10.592,
+      "arcTime": 0.9629,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 52,
+      "to": 47,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 18.25,
+      "landingLeft": 22,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 52,
+      "to": 58,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 18.25,
+      "landingLeft": 21.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 53,
+      "to": 48,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 54.25,
+      "landingLeft": 58,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 53,
+      "to": 57,
+      "pass": true,
+      "rise": -2,
+      "takeoffLeft": 54.25,
+      "landingLeft": 56.736,
+      "horizontalGain": 2.486,
+      "arcTime": 1.0669,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 54,
+      "to": 55,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 76.5,
+      "landingLeft": 81.443,
+      "horizontalGain": 4.943,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 2.443,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 54,
+      "to": 57,
+      "pass": true,
+      "rise": -1,
+      "takeoffLeft": 69.5,
+      "landingLeft": 64,
+      "horizontalGain": 5.5,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 54,
+      "to": 59,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 77,
+      "landingLeft": 77.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 55,
+      "to": 54,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 79.5,
+      "landingLeft": 74.557,
+      "horizontalGain": 4.943,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 2.443,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 55,
+      "to": 59,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 79,
+      "landingLeft": 79,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 56,
+      "to": 49,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 100.5,
+      "landingLeft": 95,
+      "horizontalGain": 5.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 73,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 56,
+      "to": 50,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 100.5,
+      "landingLeft": 109.201,
+      "horizontalGain": 8.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 8,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 56,
+      "to": 60,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 98.299,
+      "horizontalGain": 2.201,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 57,
+      "to": 53,
+      "pass": true,
+      "rise": 2,
+      "takeoffLeft": 56,
+      "landingLeft": 53.452,
+      "horizontalGain": 2.548,
+      "arcTime": 0.9226,
+      "horizontalHoldSteps": 152,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 57,
+      "to": 54,
+      "pass": true,
+      "rise": 1,
+      "takeoffLeft": 66.5,
+      "landingLeft": 72,
+      "horizontalGain": 5.5,
+      "ceilingHits": 1,
+      "clippedApex": 4,
+      "headHitTime": 0.1727,
+      "sameHeightRangeAfterHeadHit": 6.057,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 58,
+      "to": 52,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 15,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 58,
+      "to": 61,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 17.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 59,
+      "to": 54,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 77.5,
+      "landingLeft": 69.799,
+      "horizontalGain": 7.701,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 28,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 59,
+      "to": 55,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 77.5,
+      "landingLeft": 84,
+      "horizontalGain": 6.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 53,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 59,
+      "to": 63,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 75.299,
+      "horizontalGain": 2.201,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 60,
+      "to": 56,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 97.5,
+      "landingLeft": 102,
+      "horizontalGain": 4.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 79,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 60,
+      "to": 64,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 97.5,
+      "landingLeft": 102.101,
+      "horizontalGain": 4.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 162,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 61,
+      "to": 58,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 16.75,
+      "landingLeft": 25.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 61,
+      "to": 67,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -5,
+      "takeoffLeft": 20,
+      "landingLeft": 22.53546276418555,
+      "horizontalSpeed": 6,
+      "ceilingHits": 0
+    },
+    {
+      "from": 62,
+      "to": 65,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 48.5,
+      "landingLeft": 42.556,
+      "horizontalGain": 5.944,
+      "ceilingHits": 1,
+      "clippedApex": 2,
+      "headHitTime": 0.0774,
+      "sameHeightRangeAfterHeadHit": 3.792,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 62,
+      "to": 69,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 53,
+      "landingLeft": 59.352,
+      "horizontalGain": 6.352,
+      "ceilingHits": 1,
+      "clippedApex": 2,
+      "headHitTime": 0.0774,
+      "sameHeightRangeAfterHeadHit": 3.792,
+      "landingSupport": 1.352,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 63,
+      "to": 59,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 74.5,
+      "landingLeft": 79,
+      "horizontalGain": 4.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 79,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 63,
+      "to": 70,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 74.5,
+      "landingLeft": 79.101,
+      "horizontalGain": 4.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 162,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 64,
+      "to": 60,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 95,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 64,
+      "to": 71,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 97.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 65,
+      "to": 62,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 44.75,
+      "landingLeft": 51.111,
+      "horizontalGain": 6.361,
+      "ceilingHits": 1,
+      "clippedApex": 6,
+      "headHitTime": 0.311,
+      "sameHeightRangeAfterHeadHit": 8.513,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 65,
+      "to": 67,
+      "pass": true,
+      "rise": -1,
+      "takeoffLeft": 28.5,
+      "landingLeft": 25.07,
+      "horizontalGain": 3.43,
+      "arcTime": 1.0345,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 66,
+      "to": 72,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 20,
+      "landingLeft": 20.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 67,
+      "to": 61,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 22.5,
+      "landingLeft": 14.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 67,
+      "to": 65,
+      "pass": true,
+      "rise": 1,
+      "takeoffLeft": 24.75,
+      "landingLeft": 35.342,
+      "horizontalGain": 10.592,
+      "arcTime": 0.9629,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 67,
+      "to": 72,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 22,
+      "landingLeft": 22,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 68,
+      "to": 73,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 56,
+      "landingLeft": 56.56694670951384,
+      "horizontalSpeed": 1.5,
+      "ceilingHits": 0
+    },
+    {
+      "from": 69,
+      "to": 62,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 58.5,
+      "landingLeft": 50.11,
+      "horizontalGain": 8.39,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 1,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 69,
+      "to": 73,
+      "pass": true,
+      "mode": "walk-off gravity drop",
+      "rise": -4,
+      "takeoffLeft": 58,
+      "landingLeft": 58,
+      "horizontalSpeed": 0,
+      "ceilingHits": 0
+    },
+    {
+      "from": 70,
+      "to": 63,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 72,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 70,
+      "to": 74,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 74.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 71,
+      "to": 64,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 96.75,
+      "landingLeft": 105,
+      "horizontalGain": 8.25,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 4,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 71,
+      "to": 75,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 96.75,
+      "landingLeft": 102.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 72,
+      "to": 65,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 28.54,
+      "horizontalGain": 8.04,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 8,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 72,
+      "to": 66,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 19.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 72,
+      "to": 67,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 28,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 72,
+      "to": 76,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 20.5,
+      "landingLeft": 18.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 73,
+      "to": 68,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 55.349,
+      "horizontalGain": 1.151,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 159,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 73,
+      "to": 69,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 64,
+      "horizontalGain": 7.5,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 33,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 73,
+      "to": 77,
+      "pass": true,
+      "rise": -4,
+      "takeoffLeft": 56.5,
+      "landingLeft": 54.605,
+      "horizontalGain": 1.895,
+      "arcTime": 1.1268,
+      "horizontalHoldSteps": 210,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 74,
+      "to": 70,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 82.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 74,
+      "to": 79,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 79.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 75,
+      "to": 71,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 95,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 75,
+      "to": 80,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 97.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 76,
+      "to": 72,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 18.25,
+      "landingLeft": 22,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 76,
+      "to": 81,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 18.25,
+      "landingLeft": 21.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 77,
+      "to": 73,
+      "pass": true,
+      "rise": 4,
+      "takeoffLeft": 54.25,
+      "landingLeft": 58,
+      "horizontalGain": 3.75,
+      "arcTime": 0.8273,
+      "horizontalHoldSteps": 108,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 77,
+      "to": 82,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 54.25,
+      "landingLeft": 57.701,
+      "horizontalGain": 3.451,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 185,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 78,
+      "to": 105,
+      "pass": true,
+      "rise": 2,
+      "takeoffLeft": 115.5,
+      "landingLeft": 125.648,
+      "horizontalGain": 10.148,
+      "arcTime": 0.9226,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 79,
+      "to": 74,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 72,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 79,
+      "to": 83,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 74.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 80,
+      "to": 75,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 96.75,
+      "landingLeft": 105,
+      "horizontalGain": 8.25,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 4,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 80,
+      "to": 84,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 96.75,
+      "landingLeft": 102.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 81,
+      "to": 76,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 15,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 81,
+      "to": 85,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 20.5,
+      "landingLeft": 17.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 82,
+      "to": 77,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 56.5,
+      "landingLeft": 51,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 82,
+      "to": 86,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 56.5,
+      "landingLeft": 53.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 83,
+      "to": 79,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 82.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 83,
+      "to": 87,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 79.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 84,
+      "to": 80,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 95,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 84,
+      "to": 88,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 100.5,
+      "landingLeft": 97.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 85,
+      "to": 81,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 16.75,
+      "landingLeft": 25.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 85,
+      "to": 89,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 16.75,
+      "landingLeft": 22.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 86,
+      "to": 82,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 52.75,
+      "landingLeft": 61.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 86,
+      "to": 90,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 52.75,
+      "landingLeft": 58.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 87,
+      "to": 83,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 72,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 87,
+      "to": 93,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 74.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 88,
+      "to": 84,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 96.75,
+      "landingLeft": 105.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 88,
+      "to": 91,
+      "pass": true,
+      "rise": -2,
+      "takeoffLeft": 96.75,
+      "landingLeft": 101.136,
+      "horizontalGain": 4.386,
+      "arcTime": 1.0669,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 89,
+      "to": 85,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 20,
+      "landingLeft": 14.11,
+      "horizontalGain": 5.89,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 51,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 90,
+      "to": 86,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 56,
+      "landingLeft": 50.11,
+      "horizontalGain": 5.89,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 51,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 90,
+      "to": 94,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 45.5,
+      "landingLeft": 35,
+      "horizontalGain": 10.5,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 45,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 91,
+      "to": 88,
+      "pass": true,
+      "rise": 2,
+      "takeoffLeft": 100,
+      "landingLeft": 93,
+      "horizontalGain": 7,
+      "arcTime": 0.9226,
+      "horizontalHoldSteps": 63,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 91,
+      "to": 92,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 124.5,
+      "landingLeft": 135.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 92,
+      "to": 91,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 135.5,
+      "landingLeft": 124.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 93,
+      "to": 87,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 82.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 93,
+      "to": 95,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 79.101,
+      "horizontalGain": 5.351,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 94,
+      "to": 90,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 37.25,
+      "landingLeft": 45.69,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 94,
+      "to": 96,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 35,
+      "landingLeft": 45.951,
+      "horizontalGain": 10.951,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 35,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 95,
+      "to": 93,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 72,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 95,
+      "to": 97,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 77.5,
+      "landingLeft": 74.899,
+      "horizontalGain": 2.601,
+      "arcTime": 1.1547,
+      "horizontalHoldSteps": 202,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 96,
+      "to": 94,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 40.5,
+      "landingLeft": 35,
+      "horizontalGain": 5.5,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 59,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 96,
+      "to": 98,
+      "pass": true,
+      "rise": -5,
+      "takeoffLeft": 43.75,
+      "landingLeft": 50.972,
+      "horizontalGain": 7.222,
+      "ceilingHits": 1,
+      "clippedApex": 3,
+      "headHitTime": 0.122,
+      "sameHeightRangeAfterHeadHit": 4.943,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 97,
+      "to": 95,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 73.75,
+      "landingLeft": 82.19,
+      "horizontalGain": 8.44,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 97,
+      "to": 98,
+      "pass": true,
+      "rise": -3,
+      "takeoffLeft": 72.25,
+      "landingLeft": 63.81,
+      "horizontalGain": 8.44,
+      "ceilingHits": 1,
+      "clippedApex": 5,
+      "headHitTime": 0.2327,
+      "sameHeightRangeAfterHeadHit": 7.208,
+      "landingSupport": 3,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 97,
+      "to": 99,
+      "pass": true,
+      "rise": -3,
+      "takeoffLeft": 73.75,
+      "landingLeft": 78.474,
+      "horizontalGain": 4.724,
+      "arcTime": 1.0976,
+      "horizontalHoldSteps": 147,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 98,
+      "to": 96,
+      "pass": true,
+      "rise": 5,
+      "takeoffLeft": 48,
+      "landingLeft": 42.11,
+      "horizontalGain": 5.89,
+      "arcTime": 0.7673,
+      "horizontalHoldSteps": 51,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 98,
+      "to": 97,
+      "pass": true,
+      "rise": 3,
+      "takeoffLeft": 60,
+      "landingLeft": 69.658,
+      "horizontalGain": 9.658,
+      "arcTime": 0.878,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 98,
+      "to": 99,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 67.5,
+      "landingLeft": 78.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 99,
+      "to": 97,
+      "pass": true,
+      "rise": 3,
+      "takeoffLeft": 77,
+      "landingLeft": 69.5,
+      "horizontalGain": 7.5,
+      "arcTime": 0.878,
+      "horizontalHoldSteps": 44,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 99,
+      "to": 98,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 77,
+      "landingLeft": 67.35,
+      "horizontalGain": 9.65,
+      "arcTime": 1,
+      "horizontalHoldSteps": 27,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 100,
+      "to": 3,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 125.5,
+      "landingLeft": 114.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 101,
+      "to": 10,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 128,
+      "landingLeft": 124.6,
+      "horizontalGain": 3.4,
+      "arcTime": 1,
+      "horizontalHoldSteps": 152,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 102,
+      "to": 23,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 125.5,
+      "landingLeft": 114.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 103,
+      "to": 36,
+      "pass": true,
+      "rise": 0,
+      "takeoffLeft": 125.5,
+      "landingLeft": 114.5,
+      "horizontalGain": 11,
+      "arcTime": 1,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 104,
+      "to": 51,
+      "pass": true,
+      "rise": -1,
+      "takeoffLeft": 125.5,
+      "landingLeft": 114.12,
+      "horizontalGain": 11.38,
+      "arcTime": 1.0345,
+      "horizontalHoldSteps": 0,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    },
+    {
+      "from": 105,
+      "to": 78,
+      "pass": true,
+      "rise": -2,
+      "takeoffLeft": 128,
+      "landingLeft": 124.714,
+      "horizontalGain": 3.286,
+      "arcTime": 1.0669,
+      "horizontalHoldSteps": 169,
+      "stepSecondsNormalized": 0.004545454545454545,
+      "ceilingHits": 0,
+      "minimumLaunchAndLandingSupport": 0.5
+    }
+  ],
+  "route": [
+    0,
+    4,
+    6,
+    8,
+    11,
+    14,
+    18,
+    21,
+    25,
+    28,
+    31,
+    34,
+    37,
+    39,
+    41,
+    44,
+    47,
+    52,
+    58,
+    61,
+    67,
+    65,
+    62,
+    69,
+    73,
+    77,
+    82,
+    86,
+    90,
+    94,
+    96,
+    98,
+    97,
+    95,
+    93,
+    87,
+    83,
+    79,
+    74,
+    70,
+    63,
+    59,
+    54,
+    57,
+    53,
+    48,
+    46,
+    42,
+    40,
+    38,
+    35,
+    33,
+    29,
+    26,
+    22,
+    19,
+    16,
+    12,
+    9,
+    7,
+    5,
+    3,
+    100,
+    104,
+    51,
+    56,
+    60,
+    64,
+    71,
+    75,
+    80,
+    84,
+    88,
+    91,
+    92
+  ],
+  "patrols": [
+    {
+      "type": "Dogs",
+      "columns": [
+        98,
+        127
+      ],
+      "floor": 30,
+      "fullPatrolSupport": true
+    },
+    {
+      "type": "Scorpions",
+      "columns": [
+        98,
+        127
+      ],
+      "floor": 48,
+      "fullPatrolSupport": true
+    },
+    {
+      "type": "Scorpions",
+      "columns": [
+        43,
+        58
+      ],
+      "floor": 56,
+      "fullPatrolSupport": true
+    }
+  ],
+  "objects": {
+    "Dogs": [
+      [
+        112,
+        29,
+        45
+      ]
+    ],
+    "DogBorderBoxes": [
+      [
+        97,
+        29,
+        47
+      ],
+      [
+        128,
+        29,
+        48
+      ]
+    ],
+    "Scorpions": [
+      [
+        112,
+        47,
+        54
+      ],
+      [
+        50,
+        55,
+        54
+      ]
+    ],
+    "ScorpionBorderBoxes": [
+      [
+        97,
+        47,
+        62
+      ],
+      [
+        128,
+        47,
+        62
+      ],
+      [
+        42,
+        55,
+        62
+      ],
+      [
+        59,
+        55,
+        62
+      ]
+    ],
+    "SandTiles": [
+      [
+        54,
+        146,
+        0,
+        5
+      ],
+      [
+        100,
+        146,
+        1,
+        5
+      ]
+    ],
+    "MovingPlatforms": [
+      [
+        128,
+        16,
+        10,
+        43,
+        128,
+        15,
+        128,
+        115,
+        44
+      ]
+    ]
+  },
+  "validation": {
+    "dimensions": "150x150 PASS",
+    "topology": "Maze Image3 retained plus three Image4 openings; full terrain movement graph validated",
+    "image4RedOpenBoxes": 3,
+    "corridorEnemies": 3,
+    "sandWormRuns": 2,
+    "redOpenBoxes": 11,
+    "yellowCloseBoxes": 3,
+    "movingPlatforms": 1,
+    "liftSweep": "columns128–137, top16–114; full platform and rider clearance PASS",
+    "boundary": "PASS",
+    "paletteAndNoClimbableIds": "PASS",
+    "fullBodyJumpArc": "7 high /11 horizontal, ceiling-hit reduction PASS",
+    "supportedSurfaces": 106,
+    "reachableSurfaces": 106,
+    "returnableSurfaces": 106,
+    "validatedTransitions": 249,
+    "routeSurfaceCount": 75
+  },
+  "limitations": [
+    "Ballistic geometry audit is not Android gameplay simulation.",
+    "Jump audit permits horizontal release and at least0.5tile of launch/landing support.",
+    "Enemy behavior and maze pacing require playtesting."
+  ]
+}

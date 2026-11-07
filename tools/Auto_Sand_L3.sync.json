@@ -1,0 +1,151 @@
+{
+  "files": 29,
+  "byteEquality": "PASS",
+  "hashes": [
+    {
+      "editor": "Assets/Levels/Sewer/Auto_Sand_L3.lvl",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Auto_Sand_L3.lvl",
+      "sha256": "e01a73597d2d01554d89bad7089292e4d96eed5e653a90bf26dc093263ffd11b"
+    },
+    {
+      "editor": "Assets/MovingColumnLevels/Sewer/Auto_Sand_L3.lvl",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\MovingColumnLevels\\Sewer\\Auto_Sand_L3.lvl",
+      "sha256": "c2bb8733ad0b6ed3f6133bb806986498d9a7e0f5d62593108d9d3d302bb14d5a"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Alligators/Auto_Sand_L3Alligators.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Alligators\\Auto_Sand_L3Alligators.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Anemones/Auto_Sand_L3Anemones.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Anemones\\Auto_Sand_L3Anemones.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Bats/Auto_Sand_L3Bats.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Bats\\Auto_Sand_L3Bats.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/BeePots/Auto_Sand_L3BeePots.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\BeePots\\Auto_Sand_L3BeePots.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Birds/Auto_Sand_L3Birds.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Birds\\Auto_Sand_L3Birds.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/DepthBorderBoxes/Auto_Sand_L3DepthBorderBoxes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\DepthBorderBoxes\\Auto_Sand_L3DepthBorderBoxes.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/DogBorderBoxes/Auto_Sand_L3DogBorderBoxes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\DogBorderBoxes\\Auto_Sand_L3DogBorderBoxes.txt",
+      "sha256": "9e27bc7a65242ad17b8bd1464f78514ac783f654ac63c8ff8509ad094f398092"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Dogs/Auto_Sand_L3Dogs.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Dogs\\Auto_Sand_L3Dogs.txt",
+      "sha256": "337d640508d2d4da3ff14bc2f56fe35e9d7b25f8bfc42722ec3dd01c51a55e38"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/FallingRocks/Auto_Sand_L3FallingRocks.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\FallingRocks\\Auto_Sand_L3FallingRocks.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/MagicFish/Auto_Sand_L3MagicFish.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\MagicFish\\Auto_Sand_L3MagicFish.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/MovingColumns/Auto_Sand_L3MovingColumns.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\MovingColumns\\Auto_Sand_L3MovingColumns.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/MovingPlatforms/Auto_Sand_L3MovingPlatforms.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\MovingPlatforms\\Auto_Sand_L3MovingPlatforms.txt",
+      "sha256": "6764dc31c322187f61e421e74969aec00a965aeb4807bcb846e10b7bc79ae3e0"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Piranha/Auto_Sand_L3Piranha.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Piranha\\Auto_Sand_L3Piranha.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Pufferfish/Auto_Sand_L3Pufferfish.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Pufferfish\\Auto_Sand_L3Pufferfish.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/RatBorderBoxes/Auto_Sand_L3RatBorderBoxes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\RatBorderBoxes\\Auto_Sand_L3RatBorderBoxes.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Rats/Auto_Sand_L3Rats.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Rats\\Auto_Sand_L3Rats.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/SandPlatforms/Auto_Sand_L3SandPlatforms.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\SandPlatforms\\Auto_Sand_L3SandPlatforms.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/SandTiles/Auto_Sand_L3SandTiles.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\SandTiles\\Auto_Sand_L3SandTiles.txt",
+      "sha256": "c3651a0af41a4f942f123f694f411f2eef7a5e890c69870e2454aba7ec9bc60f"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/ScorpionBorderBoxes/Auto_Sand_L3ScorpionBorderBoxes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\ScorpionBorderBoxes\\Auto_Sand_L3ScorpionBorderBoxes.txt",
+      "sha256": "081c6735d8c6dfb7f735afc4556cd04f9f29765d7737c5b4b3cac58c4f1d16e0"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Scorpions/Auto_Sand_L3Scorpions.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Scorpions\\Auto_Sand_L3Scorpions.txt",
+      "sha256": "21269a9153fa00a82c30afbe44babefd9be615826ec8b278e01a36a872950deb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/SpiderBorderBoxes/Auto_Sand_L3SpiderBorderBoxes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\SpiderBorderBoxes\\Auto_Sand_L3SpiderBorderBoxes.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Spiders/Auto_Sand_L3Spiders.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Spiders\\Auto_Sand_L3Spiders.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Spikes/Auto_Sand_L3Spikes.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Spikes\\Auto_Sand_L3Spikes.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Switches/Auto_Sand_L3Switches.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Switches\\Auto_Sand_L3Switches.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/ToggleDoors/Auto_Sand_L3ToggleDoors.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\ToggleDoors\\Auto_Sand_L3ToggleDoors.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/Waterfalls/Auto_Sand_L3Waterfalls.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\Waterfalls\\Auto_Sand_L3Waterfalls.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    },
+    {
+      "editor": "Assets/Beasties/BeastieLevelData/WaterSpouts/Auto_Sand_L3WaterSpouts.txt",
+      "game": "C:\\cat_game\\Proto\\app\\src\\main\\assets\\Beasties\\WaterSpouts\\Auto_Sand_L3WaterSpouts.txt",
+      "sha256": "9230e492e8df3bf134d4981a7fd237763890e76c828fc989af946f0740975bcb"
+    }
+  ]
+}

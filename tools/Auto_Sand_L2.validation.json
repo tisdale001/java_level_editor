@@ -1,0 +1,2630 @@
+{
+  "name": "Auto_Sand_L2",
+  "component": "Wally_Sand_Components",
+  "rows": 150,
+  "columns": 125,
+  "entry": {
+    "edge": "left",
+    "rows": [
+      22,
+      27
+    ],
+    "floor": 28
+  },
+  "exit": {
+    "edge": "right",
+    "rows": [
+      12,
+      17
+    ],
+    "floor": 18
+  },
+  "spawn": {
+    "column": 9,
+    "row": 25
+  },
+  "bottomCrossing": {
+    "floor": 138,
+    "dividerColumns": [
+      55,
+      69
+    ],
+    "ceiling": 128
+  },
+  "preservedManualTiles": {
+    "row": 33,
+    "columns": [
+      44,
+      54
+    ],
+    "addedSupportRow": 34
+  },
+  "jumpClearanceRepairs": [
+    {
+      "overheadFloor": 88,
+      "columns": [
+        24,
+        30
+      ],
+      "removedRows": [
+        90,
+        91
+      ],
+      "sourceFloor": 98,
+      "targetFloor": 93
+    },
+    {
+      "overheadFloor": 103,
+      "columns": [
+        30,
+        36
+      ],
+      "removedRows": [
+        105,
+        106
+      ],
+      "sourceFloor": 113,
+      "targetFloor": 108
+    },
+    {
+      "overheadFloor": 118,
+      "columns": [
+        24,
+        30
+      ],
+      "removedRows": [
+        120,
+        121
+      ],
+      "sourceFloor": 128,
+      "targetFloor": 123
+    }
+  ],
+  "jumpAudit": {
+    "model": {
+      "apexHeight": 7,
+      "fullSpeedApexHorizontal": 5.5,
+      "fullSpeedSameHeightRange": 11,
+      "body": [
+        3,
+        2
+      ],
+      "horizontalControl": "full speed or release; no horizontal overspeed",
+      "headCollisionPolicy": "upward velocity becomes zero at contact; gravity starts the falling arc at the clipped height",
+      "halfHeightHeadHitSameHeightRange": 5.5
+    },
+    "transitions": [
+      {
+        "side": "left",
+        "sourceFloor": 133,
+        "targetFloor": 128,
+        "sourceColumns": [
+          34,
+          46
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 23.06,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 128,
+        "targetFloor": 123,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          34,
+          42
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 26.5,
+        "landingLeft": 32,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 123,
+        "targetFloor": 118,
+        "sourceColumns": [
+          34,
+          42
+        ],
+        "targetColumns": [
+          7,
+          30
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 25.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 118,
+        "targetFloor": 113,
+        "sourceColumns": [
+          7,
+          30
+        ],
+        "targetColumns": [
+          34,
+          46
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 23.75,
+        "landingLeft": 32.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 113,
+        "targetFloor": 108,
+        "sourceColumns": [
+          34,
+          46
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 26,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 108,
+        "targetFloor": 103,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          30,
+          54
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 23.75,
+        "landingLeft": 32.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 103,
+        "targetFloor": 98,
+        "sourceColumns": [
+          30,
+          54
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 27.5,
+        "landingLeft": 21.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 98,
+        "targetFloor": 93,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          34,
+          46
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 26.5,
+        "landingLeft": 32,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 93,
+        "targetFloor": 88,
+        "sourceColumns": [
+          34,
+          46
+        ],
+        "targetColumns": [
+          7,
+          30
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 25.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 88,
+        "targetFloor": 83,
+        "sourceColumns": [
+          7,
+          30
+        ],
+        "targetColumns": [
+          34,
+          46
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 23.75,
+        "landingLeft": 32.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 83,
+        "targetFloor": 78,
+        "sourceColumns": [
+          34,
+          46
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 23.06,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 78,
+        "targetFloor": 73,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          34,
+          42
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 23.75,
+        "landingLeft": 32.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 73,
+        "targetFloor": 68,
+        "sourceColumns": [
+          34,
+          42
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 26,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 68,
+        "targetFloor": 63,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          30,
+          54
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 25.25,
+        "landingLeft": 32.89,
+        "horizontalGain": 7.64,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 16,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 63,
+        "targetFloor": 58,
+        "sourceColumns": [
+          30,
+          54
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 27.5,
+        "landingLeft": 21.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 58,
+        "targetFloor": 53,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          34,
+          46
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 26.5,
+        "landingLeft": 32,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 53,
+        "targetFloor": 48,
+        "sourceColumns": [
+          34,
+          46
+        ],
+        "targetColumns": [
+          7,
+          30
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 25.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 48,
+        "targetFloor": 43,
+        "sourceColumns": [
+          7,
+          30
+        ],
+        "targetColumns": [
+          34,
+          42
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 23.75,
+        "landingLeft": 32.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 43,
+        "targetFloor": 38,
+        "sourceColumns": [
+          34,
+          42
+        ],
+        "targetColumns": [
+          14,
+          26
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 31.5,
+        "landingLeft": 26,
+        "horizontalGain": 5.5,
+        "ceilingHits": 1,
+        "clippedApex": 6,
+        "headHitTime": 0.311,
+        "sameHeightRangeAfterHeadHit": 8.513,
+        "landingSupport": 1,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 38,
+        "targetFloor": 33,
+        "sourceColumns": [
+          14,
+          26
+        ],
+        "targetColumns": [
+          31,
+          54
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 26.25,
+        "landingLeft": 33.89,
+        "horizontalGain": 7.64,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 16,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "left",
+        "sourceFloor": 33,
+        "targetFloor": 28,
+        "sourceColumns": [
+          31,
+          54
+        ],
+        "targetColumns": [
+          7,
+          27
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 28.5,
+        "landingLeft": 22.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 133,
+        "targetFloor": 128,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          117
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 128,
+        "targetFloor": 123,
+        "sourceColumns": [
+          93,
+          117
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 123,
+        "targetFloor": 118,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 118,
+        "targetFloor": 113,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          70,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 113,
+        "targetFloor": 108,
+        "sourceColumns": [
+          70,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 108,
+        "targetFloor": 103,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 103,
+        "targetFloor": 98,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          117
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 98,
+        "targetFloor": 93,
+        "sourceColumns": [
+          93,
+          117
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 93,
+        "targetFloor": 88,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 88,
+        "targetFloor": 83,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          70,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 83,
+        "targetFloor": 78,
+        "sourceColumns": [
+          70,
+          89
+        ],
+        "targetColumns": [
+          93,
+          101
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 78,
+        "targetFloor": 73,
+        "sourceColumns": [
+          93,
+          101
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 73,
+        "targetFloor": 68,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          117
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 68,
+        "targetFloor": 63,
+        "sourceColumns": [
+          93,
+          117
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 63,
+        "targetFloor": 58,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 58,
+        "targetFloor": 53,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          70,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 53,
+        "targetFloor": 48,
+        "sourceColumns": [
+          70,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 48,
+        "targetFloor": 43,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          77,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 43,
+        "targetFloor": 38,
+        "sourceColumns": [
+          77,
+          89
+        ],
+        "targetColumns": [
+          93,
+          117
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 38,
+        "targetFloor": 33,
+        "sourceColumns": [
+          93,
+          117
+        ],
+        "targetColumns": [
+          81,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 33,
+        "targetFloor": 28,
+        "sourceColumns": [
+          81,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 86.75,
+        "landingLeft": 95.19,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 28,
+        "targetFloor": 23,
+        "sourceColumns": [
+          93,
+          105
+        ],
+        "targetColumns": [
+          70,
+          89
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 90.5,
+        "landingLeft": 84.11,
+        "horizontalGain": 6.39,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 41,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      },
+      {
+        "side": "right",
+        "sourceFloor": 23,
+        "targetFloor": 18,
+        "sourceColumns": [
+          70,
+          89
+        ],
+        "targetColumns": [
+          93,
+          105
+        ],
+        "pass": true,
+        "rise": 5,
+        "takeoffLeft": 82.25,
+        "landingLeft": 90.69,
+        "horizontalGain": 8.44,
+        "arcTime": 0.7673,
+        "horizontalHoldSteps": 0,
+        "stepSecondsNormalized": 0.004545454545454545,
+        "ceilingHits": 0,
+        "minimumLaunchAndLandingSupport": 0.5
+      }
+    ]
+  },
+  "connectors": [
+    {
+      "side": "left",
+      "wall": "divider",
+      "floor": 33,
+      "columns": [
+        31,
+        54
+      ]
+    },
+    {
+      "side": "left",
+      "wall": "outer",
+      "floor": 48,
+      "columns": [
+        7,
+        30
+      ]
+    },
+    {
+      "side": "left",
+      "wall": "divider",
+      "floor": 63,
+      "columns": [
+        30,
+        54
+      ]
+    },
+    {
+      "side": "left",
+      "wall": "outer",
+      "floor": 88,
+      "columns": [
+        7,
+        30
+      ]
+    },
+    {
+      "side": "left",
+      "wall": "divider",
+      "floor": 103,
+      "columns": [
+        30,
+        54
+      ]
+    },
+    {
+      "side": "left",
+      "wall": "outer",
+      "floor": 118,
+      "columns": [
+        7,
+        30
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "outer",
+      "floor": 128,
+      "columns": [
+        93,
+        117
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "divider",
+      "floor": 113,
+      "columns": [
+        70,
+        89
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "outer",
+      "floor": 98,
+      "columns": [
+        93,
+        117
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "divider",
+      "floor": 83,
+      "columns": [
+        70,
+        89
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "outer",
+      "floor": 68,
+      "columns": [
+        93,
+        117
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "divider",
+      "floor": 53,
+      "columns": [
+        70,
+        89
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "outer",
+      "floor": 38,
+      "columns": [
+        93,
+        117
+      ]
+    },
+    {
+      "side": "right",
+      "wall": "divider",
+      "floor": 23,
+      "columns": [
+        70,
+        89
+      ]
+    }
+  ],
+  "ceilingProfile": [
+    {
+      "column": 7,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 8,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 9,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 10,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 11,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 12,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 13,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 14,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 15,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 16,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 17,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 18,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 19,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 20,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 21,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 22,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 23,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 24,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 25,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 26,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 27,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 28,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 29,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 30,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 31,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 32,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 33,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 34,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 35,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 36,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 37,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 38,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 39,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 40,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 41,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 42,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 43,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 44,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 45,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 46,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 47,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 48,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 49,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 50,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 51,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 52,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 53,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 54,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 70,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 71,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 72,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 73,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 74,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 75,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 76,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 77,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 78,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 79,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 80,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 81,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 82,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 83,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 84,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 85,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 86,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 87,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 88,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 89,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 90,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 91,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 92,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 93,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 94,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 95,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 96,
+      "additionalDepth": 5,
+      "totalFilledDepth": 9
+    },
+    {
+      "column": 97,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 98,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 99,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 100,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 101,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 102,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 103,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 104,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 105,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 106,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 107,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 108,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 109,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 110,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 111,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 112,
+      "additionalDepth": 4,
+      "totalFilledDepth": 8
+    },
+    {
+      "column": 113,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 114,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 115,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 116,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    },
+    {
+      "column": 117,
+      "additionalDepth": 3,
+      "totalFilledDepth": 7
+    }
+  ],
+  "smallPlatformFloors": {
+    "left": [
+      43,
+      73,
+      123
+    ],
+    "right": [
+      113,
+      78,
+      33
+    ]
+  },
+  "patrols": [
+    {
+      "type": "Dogs",
+      "floor": 83,
+      "platformColumns": [
+        34,
+        46
+      ],
+      "borderColumns": [
+        33,
+        47
+      ],
+      "spriteLeftEdgeRange": [
+        34,
+        43.4285
+      ]
+    },
+    {
+      "type": "Dogs",
+      "floor": 88,
+      "platformColumns": [
+        93,
+        105
+      ],
+      "borderColumns": [
+        92,
+        106
+      ],
+      "spriteLeftEdgeRange": [
+        93,
+        102.4285
+      ]
+    },
+    {
+      "type": "Scorpions",
+      "floor": 58,
+      "platformColumns": [
+        14,
+        26
+      ],
+      "borderColumns": [
+        13,
+        27
+      ],
+      "spriteLeftEdgeRange": [
+        14,
+        24.1428
+      ]
+    },
+    {
+      "type": "Scorpions",
+      "floor": 108,
+      "platformColumns": [
+        14,
+        26
+      ],
+      "borderColumns": [
+        13,
+        27
+      ],
+      "spriteLeftEdgeRange": [
+        14,
+        24.1428
+      ]
+    },
+    {
+      "type": "Scorpions",
+      "floor": 48,
+      "platformColumns": [
+        93,
+        105
+      ],
+      "borderColumns": [
+        92,
+        106
+      ],
+      "spriteLeftEdgeRange": [
+        93,
+        103.1428
+      ]
+    }
+  ],
+  "platforms": [
+    {
+      "x0": 7,
+      "x1": 27,
+      "floor": 28,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 31,
+      "x1": 54,
+      "floor": 33,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 38,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 42,
+      "floor": 43,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 7,
+      "x1": 30,
+      "floor": 48,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 46,
+      "floor": 53,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 58,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 30,
+      "x1": 54,
+      "floor": 63,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 68,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 42,
+      "floor": 73,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 78,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 46,
+      "floor": 83,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 7,
+      "x1": 30,
+      "floor": 88,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 34,
+      "x1": 46,
+      "floor": 93,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 98,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 30,
+      "x1": 54,
+      "floor": 103,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 108,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 46,
+      "floor": 113,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 7,
+      "x1": 30,
+      "floor": 118,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 34,
+      "x1": 42,
+      "floor": 123,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 14,
+      "x1": 26,
+      "floor": 128,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 34,
+      "x1": 46,
+      "floor": 133,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "U"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 133,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 117,
+      "floor": 128,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 123,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 118,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 70,
+      "x1": 89,
+      "floor": 113,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 108,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 103,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 117,
+      "floor": 98,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 93,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 88,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 70,
+      "x1": 89,
+      "floor": 83,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 101,
+      "floor": 78,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 73,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 117,
+      "floor": 68,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 63,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 58,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 70,
+      "x1": 89,
+      "floor": 53,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 48,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 77,
+      "x1": 89,
+      "floor": 43,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 117,
+      "floor": 38,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 81,
+      "x1": 89,
+      "floor": 33,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 28,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 70,
+      "x1": 89,
+      "floor": 23,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    },
+    {
+      "x0": 93,
+      "x1": 105,
+      "floor": 18,
+      "minimumThickness": 2,
+      "maximumThickness": 4,
+      "style": "V"
+    }
+  ],
+  "objects": {
+    "Dogs": [
+      [
+        36,
+        82,
+        45
+      ],
+      [
+        98,
+        87,
+        46
+      ]
+    ],
+    "DogBorderBoxes": [
+      [
+        33,
+        82,
+        47
+      ],
+      [
+        47,
+        82,
+        48
+      ],
+      [
+        92,
+        87,
+        47
+      ],
+      [
+        106,
+        87,
+        48
+      ]
+    ],
+    "Scorpions": [
+      [
+        20,
+        57,
+        55
+      ],
+      [
+        20,
+        107,
+        54
+      ],
+      [
+        98,
+        47,
+        55
+      ]
+    ],
+    "ScorpionBorderBoxes": [
+      [
+        13,
+        57,
+        62
+      ],
+      [
+        27,
+        57,
+        62
+      ],
+      [
+        13,
+        107,
+        62
+      ],
+      [
+        27,
+        107,
+        62
+      ],
+      [
+        92,
+        47,
+        62
+      ],
+      [
+        106,
+        47,
+        62
+      ]
+    ],
+    "SandTiles": [
+      [
+        56,
+        138,
+        0,
+        5
+      ],
+      [
+        64,
+        138,
+        1,
+        5
+      ]
+    ],
+    "MovingPlatforms": [
+      [
+        48,
+        61,
+        4,
+        43,
+        49,
+        44,
+        49,
+        63,
+        44
+      ],
+      [
+        72,
+        108,
+        4,
+        43,
+        73,
+        91,
+        73,
+        110,
+        44
+      ],
+      [
+        56,
+        133,
+        4,
+        43,
+        50,
+        133,
+        75,
+        133,
+        44
+      ]
+    ]
+  },
+  "validation": {
+    "dimensions": "150 rows x125 columns PASS",
+    "componentPalette": "PASS",
+    "noClimbableIds": "PASS",
+    "boundary": "PASS",
+    "jumpArcAudit": "44 adjacent upward jumps PASS (7-high/11-wide arc, full3x2body, clipped head-hit falls)",
+    "barelyReference": "floor38 to33 unchanged PASS",
+    "manualPlatform1": "eleven original row33 tiles preserved; row34 support PASS",
+    "wallConnections": "six left, eight right; intervals2–5 platforms PASS",
+    "noStraightDescentLane": "every3-wide vertical lane meets a left baffle PASS",
+    "ceilingProfile": "4-row cap plus mostly3, some4, central5 rows PASS",
+    "shorterPlatforms": "five empty9-tile ledges PASS",
+    "fullLengthEnemyPatrols": "all five enemies on13-tile platforms PASS",
+    "noIncidentalWallLedges": "PASS",
+    "stationaryThickness": "2–4 tiles PASS",
+    "stationarySpacing": ">=3 horizontal empty columns OR>=4 vertical empty rows PASS",
+    "enemySupport": "PASS",
+    "movingPlatformSweepAndRider": "PASS",
+    "fullBodyRoute": "PASS",
+    "body": [
+      3,
+      2
+    ],
+    "maxJumpRise": 5,
+    "maxHorizontalDisplacement": 10,
+    "maxDrop": 5,
+    "reachableStandingPositions": 753,
+    "routeEdges": 66
+  },
+  "route": [
+    {
+      "x": 9,
+      "f": 28
+    },
+    {
+      "x": 11,
+      "f": 28
+    },
+    {
+      "x": 21,
+      "f": 28
+    },
+    {
+      "x": 31,
+      "f": 33
+    },
+    {
+      "x": 24,
+      "f": 38
+    },
+    {
+      "x": 34,
+      "f": 43
+    },
+    {
+      "x": 24,
+      "f": 48
+    },
+    {
+      "x": 34,
+      "f": 53
+    },
+    {
+      "x": 24,
+      "f": 58
+    },
+    {
+      "x": 30,
+      "f": 63
+    },
+    {
+      "x": 24,
+      "f": 68
+    },
+    {
+      "x": 34,
+      "f": 73
+    },
+    {
+      "x": 24,
+      "f": 78
+    },
+    {
+      "x": 34,
+      "f": 83
+    },
+    {
+      "x": 24,
+      "f": 88
+    },
+    {
+      "x": 34,
+      "f": 93
+    },
+    {
+      "x": 24,
+      "f": 98
+    },
+    {
+      "x": 30,
+      "f": 103
+    },
+    {
+      "x": 24,
+      "f": 108
+    },
+    {
+      "x": 34,
+      "f": 113
+    },
+    {
+      "x": 24,
+      "f": 118
+    },
+    {
+      "x": 34,
+      "f": 123
+    },
+    {
+      "x": 24,
+      "f": 128
+    },
+    {
+      "x": 34,
+      "f": 133
+    },
+    {
+      "x": 26,
+      "f": 138
+    },
+    {
+      "x": 36,
+      "f": 133
+    },
+    {
+      "x": 37,
+      "f": 133
+    },
+    {
+      "x": 47,
+      "f": 138
+    },
+    {
+      "x": 49,
+      "f": 138
+    },
+    {
+      "x": 59,
+      "f": 138
+    },
+    {
+      "x": 69,
+      "f": 138
+    },
+    {
+      "x": 79,
+      "f": 133
+    },
+    {
+      "x": 80,
+      "f": 133
+    },
+    {
+      "x": 81,
+      "f": 133
+    },
+    {
+      "x": 82,
+      "f": 133
+    },
+    {
+      "x": 83,
+      "f": 133
+    },
+    {
+      "x": 93,
+      "f": 128
+    },
+    {
+      "x": 86,
+      "f": 123
+    },
+    {
+      "x": 93,
+      "f": 118
+    },
+    {
+      "x": 86,
+      "f": 113
+    },
+    {
+      "x": 93,
+      "f": 108
+    },
+    {
+      "x": 86,
+      "f": 103
+    },
+    {
+      "x": 93,
+      "f": 98
+    },
+    {
+      "x": 86,
+      "f": 93
+    },
+    {
+      "x": 93,
+      "f": 88
+    },
+    {
+      "x": 86,
+      "f": 83
+    },
+    {
+      "x": 93,
+      "f": 78
+    },
+    {
+      "x": 86,
+      "f": 73
+    },
+    {
+      "x": 93,
+      "f": 68
+    },
+    {
+      "x": 86,
+      "f": 63
+    },
+    {
+      "x": 93,
+      "f": 58
+    },
+    {
+      "x": 86,
+      "f": 53
+    },
+    {
+      "x": 93,
+      "f": 48
+    },
+    {
+      "x": 86,
+      "f": 43
+    },
+    {
+      "x": 94,
+      "f": 38
+    },
+    {
+      "x": 85,
+      "f": 33
+    },
+    {
+      "x": 93,
+      "f": 28
+    },
+    {
+      "x": 86,
+      "f": 23
+    },
+    {
+      "x": 93,
+      "f": 18
+    },
+    {
+      "x": 97,
+      "f": 18
+    },
+    {
+      "x": 107,
+      "f": 18
+    },
+    {
+      "x": 117,
+      "f": 18
+    },
+    {
+      "x": 118,
+      "f": 18
+    },
+    {
+      "x": 119,
+      "f": 18
+    },
+    {
+      "x": 120,
+      "f": 18
+    },
+    {
+      "x": 121,
+      "f": 18
+    },
+    {
+      "x": 122,
+      "f": 18
+    }
+  ],
+  "limitations": [
+    "Sampled geometry validation is not Android physics simulation.",
+    "Jump audit allows edge launch/landing with at least0.5tile support and horizontal release; head hits zero vertical velocity and shorten the arc.",
+    "Moving platforms are optional alternatives; fixed ledges provide the validated route.",
+    "Worm attacks, enemy behavior, lift boarding and pacing require playtesting."
+  ]
+}
